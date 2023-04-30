@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUT 50 | BKPM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('./navbar.ejs')  %>
+
+    <br>
+    <div class="container">
+        <h3>Peserta Internal</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">No Peserta</th>
+                    <th scope="col">NIP/NIK</th>
+                    <th scope="col"> Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < peserta.length; i++){ %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= peserta[i].nama%></td>
+                    <td><%= peserta[i].no_peserta%></td>
+                    <td><%= peserta[i].no_identitas %></td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm">detail</button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
