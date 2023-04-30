@@ -10,9 +10,19 @@ const Peserta = sequelize.define(
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
+    no_peserta: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+    },
     nama: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    no_whatsapp: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -23,39 +33,48 @@ const Peserta = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    ukuran: {
+      type: DataTypes.CHAR,
+      allowNull: false,
+    },
+    event: {
+      type: DataTypes.CHAR,
+      allowNull: false,
+    },
     no_identitas: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      allowNull: true,
+    },
+    departement: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     alamat: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
-    no_whatsapp: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    no_peserta: {
+    umur: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
+      allowNull: true,
     },
     flag_internal: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
     },
-    status: {
-      type: DataTypes.ENUM,
-      values: ["aktif", "tidak aktif"],
+    qr_code: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "aktif",
     },
-    add_info: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    flag_racepack: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    flag_checkin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
@@ -102,7 +121,7 @@ Peserta.beforeCreate(async (peserta, options) => {
   if (lastPeserta) {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
   } else {
-    peserta.no_peserta = 1001;
+    peserta.no_peserta = 100;
   }
 
   peserta.password = await bcrypt.hash(peserta.password, 12);
