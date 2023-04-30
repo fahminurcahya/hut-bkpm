@@ -1,5 +1,4 @@
 const Peserta = require("../../models/Peserta");
-const Tiket = require("../../models/Tiket");
 const {
   responseReject,
   responseSukses,
@@ -9,19 +8,8 @@ const {
 const getData = async (req, res) => {
   const { qr_code } = req.params;
   try {
-    const tiket = await Tiket.findOne({
-      where: { qr_code },
-    });
-
-    if (!tiket) {
-      return res.status(200).json(responseReject("Data tidak ditemukan"));
-    }
-
     const peserta = await Peserta.findOne({
-      where: { id: tiket.id_peserta },
-      attributes: {
-        exclude: ["password"],
-      },
+      where: { qr_code },
     });
 
     if (!peserta) {
@@ -30,8 +18,8 @@ const getData = async (req, res) => {
 
     let result = {
       peserta: peserta,
-      tiket: tiket,
     };
+
     res.status(200).json(responseSukses(result));
   } catch (err) {
     console.log(err);
@@ -43,16 +31,16 @@ const claimRacePack = async (req, res) => {
   const { qr_code } = req.params;
 
   try {
-    const tiket = await Tiket.findOne({
+    const peserta = await Peserta.findOne({
       where: { qr_code },
     });
 
-    if (!tiket) {
+    if (!peserta) {
       return res.status(200).json(responseReject("Data tidak ditemukan"));
     }
 
-    await Tiket.update(
-      { flag_racepack: true, racepack_updated: new Date() },
+    await Peserta.update(
+      { flag_racepack: true },
       {
         where: {
           qr_code,
@@ -71,16 +59,16 @@ const checkin = async (req, res) => {
   const { qr_code } = req.params;
 
   try {
-    const tiket = await Tiket.findOne({
+    const peserta = await Peserta.findOne({
       where: { qr_code },
     });
 
-    if (!tiket) {
+    if (!peserta) {
       return res.status(200).json(responseReject("Data tidak ditemukan"));
     }
 
-    await Tiket.update(
-      { flag_checkin: true, checkin_updated: new Date() },
+    await Peserta.update(
+      { flag_checkin: true },
       {
         where: {
           qr_code,

@@ -12,7 +12,6 @@ const adminRouter = require("./routes/admin");
 var app = express();
 require("./configs/db");
 require("./models/Peserta");
-require("./models/Tiket");
 require("./models/Users");
 
 // view engine setup

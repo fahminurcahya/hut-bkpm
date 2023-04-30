@@ -41,7 +41,7 @@ const Peserta = sequelize.define(
       type: DataTypes.CHAR,
       allowNull: false,
     },
-    no_identitas: {
+    nip: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -92,19 +92,15 @@ const Peserta = sequelize.define(
 // Peserta.hasOne(Tiket, { as: "tiket", foreignKey: "id_peserta" });
 
 Peserta.beforeCreate(async (peserta, options) => {
+  // validasi email
   const existingEmail = await Peserta.findOne({
     where: { email: peserta.email },
   });
   if (existingEmail) {
     throw new Error("Email sudah terdaftar.");
   }
-  const existingIdentitas = await Peserta.findOne({
-    where: { no_identitas: peserta.no_identitas },
-  });
-  if (existingIdentitas) {
-    throw new Error("NIK/NIP sudah terdaftar.");
-  }
 
+  // validasi no_whatsapp
   const existingWa = await Peserta.findOne({
     where: { no_whatsapp: peserta.no_whatsapp },
   });
@@ -112,11 +108,11 @@ Peserta.beforeCreate(async (peserta, options) => {
     throw new Error("No WA sudah terdaftar.");
   }
 
+  // generate seq no peserta
   const lastPeserta = await Peserta.findOne({
     order: [["no_peserta", "DESC"]],
     attributes: ["no_peserta"],
   });
-  // console.log(lastPeserta.no_peserta);
 
   if (lastPeserta) {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
@@ -125,6 +121,18 @@ Peserta.beforeCreate(async (peserta, options) => {
   }
 
   peserta.password = await bcrypt.hash(peserta.password, 12);
+
+  //generate qr code
+  const keyLength = 10;
+  const possibleChars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let qrCode = "";
+  for (let i = 0; i < keyLength; i++) {
+    qrCode += possibleChars.charAt(
+      Math.floor(Math.random() * possibleChars.length)
+    );
+  }
+  peserta.qr_code = qrCode;
 });
 
 module.exports = Peserta;

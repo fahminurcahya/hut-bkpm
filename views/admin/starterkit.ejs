@@ -44,9 +44,9 @@
                 .then(response => response.json())
                 .then(data => {
                     // Menampilkan hasil response dari API ke dalam elemen HTML.
-                    if (data.error) {
-                        alert(data.message)
-                    }
+                    // if (data.error) {
+                    alert(data.message)
+                    // }
                     // Menutup akses kamera.
                 })
                 .catch(error => {
