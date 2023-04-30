@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUT 50 TH | BKPM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <%- include('./navbar.ejs')  %>
+
+    <br>
+    <div class="container">
+        <div id="reader" width="600px"></div>
+
+    </div>
+    <script src="/qrcode/html5-qrcode.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // html5QrcodeScanner.stop();
+            // html5QrcodeScanner.clear()
+            // document.getElementById('reader').remove();
+
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+            const options = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            };
+            fetch(`/api/v1/checkin/${decodedText}`, options)
+                .then(response => response.json())
+                .then(resp => {
+                    // Menampilkan hasil response dari API ke dalam elemen HTML.
+                    html5QrcodeScanner.clear()
+
+                    if (resp.error) {
+                        if (resp.data != null && resp.data.flag_racepack) {
+                            Swal.fire({
+                                title: resp.message,
+                                icon: 'info',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Kembali',
+                                allowOutsideClick: false,
+                                text: resp.data.nama + ' | ' + resp.data.no_peserta,
+
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    window.location.reload(true);
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                title: resp.message,
+                                icon: 'info',
+                                confirmButtonText: 'Kembali',
+                                allowOutsideClick: false,
+
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    window.location.reload(true);
+                                }
+                            })
+                        }
+                        // Menutup akses kamera.
+                    } else {
+                        Swal.fire({
+                            title: resp.message,
+                            icon: 'success',
+                            confirmButtonText: 'Kembali',
+                            allowOutsideClick: false,
+                            text: resp.data.nama + ' | ' + resp.data.no_peserta,
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                window.location.reload(true);
+                            }
+                        })
+                    }
+                })
+                .catch(error => {
+                    html5QrcodeScanner.clear()
+                    Swal.fire({
+                        title: "Terjadi Kesalahan",
+                        icon: 'danger',
+                        confirmButtonText: 'Kembali',
+                        allowOutsideClick: false,
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
+                });
+        }
+
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning.
+            // for example:
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            {
+                fps: 10, qrbox: { width: 500, height: 500 },
+            },
+
+  /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);    </script>
+</body>
+
+
+
+</html>

@@ -27,8 +27,10 @@ const register = async (req, res) => {
     flag_internal,
   } = req.body;
   try {
+    // password != password_confirmation && new Error("password tidak sama");
+
     let dataPeserta = {
-      no_peserta: 1001,
+      no_peserta: "",
       event,
       nama,
       no_whatsapp,
@@ -41,6 +43,7 @@ const register = async (req, res) => {
       departement,
       alamat,
       flag_internal,
+      qr_code: "",
     };
 
     const peserta = await Peserta.create(dataPeserta);
@@ -61,17 +64,18 @@ const register = async (req, res) => {
 
     res.status(200).json(responseSukses(result));
   } catch (err) {
-    // console.log(email);
-    const peserta = await Peserta.findOne({
-      where: { email },
-    });
+    if (err.name !== "validation") {
+      await Peserta.findOne({
+        where: { email },
+      });
 
-    await Peserta.destroy({
-      where: {
-        email,
-      },
-      force: true,
-    });
+      await Peserta.destroy({
+        where: {
+          email,
+        },
+        force: true,
+      });
+    }
 
     console.log(err);
     res.status(500).json(responseException(err.message));
@@ -98,18 +102,15 @@ const getDetail = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  const { flag_racepack, flag_checkin } = req.body;
+  const { flag_internal } = req.body;
 
   try {
-    let condition = {
-      id,
-    };
+    let condition = {};
 
-    if (flag_racepack != undefined) {
-      condition.flag_racepack = true;
-    } else if (flag_checkin != undefined) {
-      condition.flag_checkin = true;
+    if (flag_internal != undefined) {
+      condition.flag_internal = flag_internal;
     }
+
     const peserta = await Peserta.findAll({
       where: condition,
     });

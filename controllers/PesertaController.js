@@ -1,4 +1,5 @@
 const sequelize = require("../configs/db");
+const Peserta = require("../models/Peserta");
 
 const viewPeserta = async (req, res) => {
   try {

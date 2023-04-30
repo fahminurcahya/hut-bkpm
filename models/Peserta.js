@@ -97,7 +97,7 @@ Peserta.beforeCreate(async (peserta, options) => {
     where: { email: peserta.email },
   });
   if (existingEmail) {
-    throw new Error("Email sudah terdaftar.");
+    throw new UserException("Email sudah terdaftar.");
   }
 
   // validasi no_whatsapp
@@ -105,7 +105,7 @@ Peserta.beforeCreate(async (peserta, options) => {
     where: { no_whatsapp: peserta.no_whatsapp },
   });
   if (existingWa) {
-    throw new Error("No WA sudah terdaftar.");
+    throw new UserException("No WA sudah terdaftar.");
   }
 
   // generate seq no peserta
@@ -117,7 +117,7 @@ Peserta.beforeCreate(async (peserta, options) => {
   if (lastPeserta) {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
   } else {
-    peserta.no_peserta = 100;
+    peserta.no_peserta = 101;
   }
 
   peserta.password = await bcrypt.hash(peserta.password, 12);
@@ -134,5 +134,10 @@ Peserta.beforeCreate(async (peserta, options) => {
   }
   peserta.qr_code = qrCode;
 });
+
+function UserException(message) {
+  this.message = message;
+  this.name = "validation";
+}
 
 module.exports = Peserta;

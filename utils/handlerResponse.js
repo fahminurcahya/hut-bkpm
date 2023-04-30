@@ -6,10 +6,11 @@ const responseSukses = (result) => {
   };
 };
 
-const responseReject = (message) => {
+const responseReject = (message, data) => {
   return {
     error: true,
     message: message,
+    data: data,
   };
 };
 

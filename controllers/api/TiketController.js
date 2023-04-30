@@ -39,6 +39,12 @@ const claimRacePack = async (req, res) => {
       return res.status(200).json(responseReject("Data tidak ditemukan"));
     }
 
+    if (peserta.flag_racepack) {
+      return res
+        .status(200)
+        .json(responseReject("Peserta telah mengambil starterkit", peserta));
+    }
+
     await Peserta.update(
       { flag_racepack: true },
       {
@@ -48,7 +54,7 @@ const claimRacePack = async (req, res) => {
       }
     );
 
-    res.status(200).json(responseSukses());
+    res.status(200).json(responseSukses(peserta));
   } catch (err) {
     console.log(err);
     res.status(500).json(responseException(err.message));
@@ -67,6 +73,12 @@ const checkin = async (req, res) => {
       return res.status(200).json(responseReject("Data tidak ditemukan"));
     }
 
+    if (peserta.flag_checkin) {
+      return res
+        .status(200)
+        .json(responseReject("Peserta telah checkin sebelumnya", peserta));
+    }
+
     await Peserta.update(
       { flag_checkin: true },
       {
@@ -76,7 +88,7 @@ const checkin = async (req, res) => {
       }
     );
 
-    res.status(200).json(responseSukses());
+    res.status(200).json(responseSukses(peserta));
   } catch (err) {
     console.log(err);
     res.status(500).json(responseException(err.message));
