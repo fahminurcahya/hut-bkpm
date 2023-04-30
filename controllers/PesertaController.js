@@ -1,4 +1,3 @@
-const sequelize = require("../configs/db");
 const Peserta = require("../models/Peserta");
 
 const viewPeserta = async (req, res) => {
@@ -43,8 +42,12 @@ const viewInternal = async (req, res) => {
       peserta,
     });
   } catch (error) {
-    res.redirect("/admin/dashboard");
+    res.redirect("/");
   }
 };
 
-module.exports = { viewPeserta, viewExternal, viewInternal };
+module.exports = {
+  viewPeserta,
+  viewExternal,
+  viewInternal,
+};

@@ -5,16 +5,11 @@ const User = sequelize.define(
   "users",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    uuid: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
-      allowNull: false,
-      unique: true,
+      primaryKey: true,
     },
+
     nama: {
       type: DataTypes.STRING,
       allowNull: false,
