@@ -1,4 +1,5 @@
 var express = require("express");
+var pesertaController = require("../controllers/PesertaController");
 var router = express.Router();
 
 /* GET home page. */
@@ -10,8 +11,7 @@ router.get("/signin", function (req, res, next) {
   res.render("/admin/login", { title: "Login" });
 });
 
-router.get("/register", function (req, res, next) {
-  res.render("register", { title: "Register" });
-});
+router.get("/register", pesertaController.viewRegister);
+router.post("/register", pesertaController.register);
 
 module.exports = router;
