@@ -737,6 +737,26 @@ footer .all-rights {
   border-color: #01FB34;
 }
 
+.form-login textarea {
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1.5px solid #0b0f60;
+}
+.form-login textarea:focus {
+  box-shadow: none;
+  border-color: #01FB34;
+}
+
+.form-login select {
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1.5px solid #0b0f60;
+}
+.form-login select:focus {
+  box-shadow: none;
+  border-color: #01FB34;
+}
+
 
 .register {
   padding: 100px 0;
@@ -783,6 +803,14 @@ footer .all-rights {
   font-weight: 500;
 }
 .register form input.form-control {
+  padding: 13px 16px;
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  border-radius: 14px;
+  color: #FFFFFF !important;
+}
+
+.register form select.form-select {
   padding: 13px 16px;
   background-color: transparent;
   border: 1px solid #FFFFFF;
