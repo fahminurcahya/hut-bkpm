@@ -80,6 +80,7 @@ const register = async (req, res) => {
     password,
     nip,
     umur,
+    jenkel,
     departement,
     alamat,
     flag_internal,
@@ -94,7 +95,8 @@ const register = async (req, res) => {
       email,
       password,
       nip,
-      umur: umur == "" && null,
+      umur,
+      jenkel,
       departement,
       alamat,
       flag_internal,
@@ -202,12 +204,18 @@ const viewSignin = async (req, res) => {
 
 const actionSignin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email_address, password } = req.body;
 
+    // const peserta = await Peserta.findOne({
+    //   email: email_address,
+    // });
     const peserta = await Peserta.findOne({
-      email,
+      where: {
+          email : email_address
+      }
     });
-
+    // console.log(peserta);
+    // console.log(email_address);
     const isPasswordMatch = await bcrypt.compare(password, peserta.password);
     if (!isPasswordMatch) {
       req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");

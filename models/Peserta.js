@@ -57,6 +57,10 @@ const Peserta = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    jenkel: {
+      type: DataTypes.CHAR,
+      allowNull: true,
+    },
     flag_internal: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

@@ -53,30 +53,57 @@
                 <h6>Event <%=peserta.event%></h6>
                 <img src="/images/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
 
-                <div class="align-items-center  mt-3">
-                    <div>
-                        <div class="speaker-name">
-                            <%=peserta.nama%> </div>
-                        <div class="speaker-name-child">
-                            <%=peserta.email%> </div>
-                        <div class="speaker-name-child">
-                            <%=peserta.no_whatsapp%> </div>
-                        <div class="speaker-name-child">
-                            <% if(peserta.flag_internal) { %>
-                            <%=peserta.nip%>
-                            <% } else {%>
-                            <%=peserta.umur%>
-                            <% } %>
-                        </div>
-                        <div class="speaker-name-child">
-                            <% if(peserta.flag_internal) { %>
-                            <%= peserta.departement%>
-                            <% } else {%>
-                            <%= peserta.alamat%>
-                            <% } %>
-                        </div>
-                    </div>
+                <div class="align-items-center mt-3">
+                    <table class="table table-bordered border border-success text-start">
+                        <tbody>
+                            <tr>
+                                <td>Nama</td>
+                                <td><%=peserta.nama%></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><%=peserta.email%></td>
+                            </tr>
+                            <tr>
+                                <td>No HP</td>
+                                <td><%=peserta.no_whatsapp%></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <% if(peserta.flag_internal) { %>
+                                    NIP
+                                    <% } else {%>
+                                    Umur
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if(peserta.flag_internal) { %>
+                                    <%=peserta.nip%>
+                                    <% } else {%>
+                                    <%=peserta.umur%>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <% if(peserta.flag_internal) { %>
+                                    Departement
+                                    <% } else {%>
+                                    Alamat
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if(peserta.flag_internal) { %>
+                                    <%= peserta.departement%>
+                                    <% } else {%>
+                                    <%= peserta.alamat%>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div class="price my-3">No Peserta</div>
                 <div class="price my-3"><%=peserta.no_peserta%></div>
                 <hr>
                 <a href="/images/<%=peserta.no_peserta%>.png" download="<%=peserta.no_peserta%>.png"
