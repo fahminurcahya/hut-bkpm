@@ -34,7 +34,6 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">No Peserta</th>
-                        <th scope="col">NIP/NIK</th>
                         <th scope="col"> Action
                         </th>
                     </tr>
@@ -45,9 +44,9 @@
                         <td><%= i + 1 %></td>
                         <td><%= peserta[i].nama%></td>
                         <td><%= peserta[i].no_peserta%></td>
-                        <td><%= peserta[i].no_identitas %></td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm">detail</button>
+                            <a href="/pageadm/detail/<%= peserta[i].id %>" type="button"
+                                class="btn btn-primary btn-sm">detail</a>
                         </td>
                     </tr>
                     <% } %>

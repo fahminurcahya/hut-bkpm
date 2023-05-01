@@ -51,7 +51,13 @@ const actionSignin = async (req, res) => {
   }
 };
 
+const actionLogout = (req, res) => {
+  req.session.destroy();
+  res.redirect("/pageadm/signin");
+};
+
 module.exports = {
   viewSignin,
   actionSignin,
+  actionLogout,
 };

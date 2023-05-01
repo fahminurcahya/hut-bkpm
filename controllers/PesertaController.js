@@ -4,7 +4,9 @@ const { send, sendQRPNG, sendQRBase64, sendQRAttach } = require("../mail");
 
 const viewPeserta = async (req, res) => {
   try {
-    const peserta = await Peserta.findAll();
+    const peserta = await Peserta.findAll({
+      order: [["no_peserta", "ASC"]],
+    });
     res.render("admin/peserta", {
       title: "HUT 50 | BKPM",
       peserta,
@@ -21,6 +23,7 @@ const viewExternal = async (req, res) => {
       where: {
         flag_internal: false,
       },
+      order: [["no_peserta", "ASC"]],
     });
 
     res.render("admin/external", {
@@ -38,6 +41,7 @@ const viewInternal = async (req, res) => {
       where: {
         flag_internal: true,
       },
+      order: [["no_peserta", "ASC"]],
     });
     res.render("admin/internal", {
       title: "HUT 50 | BKPM",
@@ -58,7 +62,6 @@ const viewRegister = async (req, res) => {
       alert,
       title: "Register",
     });
-
   } catch (error) {
     req.flash("alertMessage", `${error.message}`);
     req.flash("alertStatus", "danger");
@@ -95,7 +98,7 @@ const register = async (req, res) => {
       departement,
       alamat,
       flag_internal,
-      qr_code: '',
+      qr_code: "",
     };
 
     const peserta = await Peserta.create(dataPeserta);
@@ -113,13 +116,13 @@ const register = async (req, res) => {
 
     // await sendQRPNG(email, peserta);
     await sendQRAttach(email, peserta);
-    
+
     req.flash("alertMessage", "Succesfully Register");
     req.flash("alertStatus", "Success");
-    res.redirect('/register');
+    res.redirect("/register");
   } catch (err) {
     // console.log(email);
-    if(err.name != 'validation'){
+    if (err.name != "validation") {
       const peserta = await Peserta.findOne({
         where: { email },
       });
@@ -133,7 +136,28 @@ const register = async (req, res) => {
     }
 
     console.log(err);
-    res.redirect('/register');
+    res.redirect("/register");
+  }
+};
+
+const getDetail = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const peserta = await Peserta.findOne({
+      where: { id },
+    });
+    const alertMessage = req.flash("alertMessage");
+    const alertStatus = req.flash("alertStatus");
+    const alert = { message: alertMessage, status: alertStatus };
+    res.render("admin/detail", {
+      title: "HUT 50th BKPM",
+      peserta,
+      alert,
+    });
+  } catch (error) {
+    req.flash("alertMessage", `${error.message}`);
+    req.flash("alertStatus", "danger");
+    res.redirect("/pageadm/signin");
   }
 };
 
@@ -142,5 +166,6 @@ module.exports = {
   viewExternal,
   viewInternal,
   register,
-  viewRegister
+  viewRegister,
+  getDetail,
 };
