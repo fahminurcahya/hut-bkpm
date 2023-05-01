@@ -19,27 +19,25 @@ const register = async (req, res) => {
     ukuran,
     email,
     password,
-    password_confirmation,
     nip,
     umur,
+    jenkel,
     departement,
     alamat,
     flag_internal,
   } = req.body;
   try {
-    // password != password_confirmation && new Error("password tidak sama");
-
     let dataPeserta = {
-      no_peserta: "",
+      no_peserta: 101,
       event,
       nama,
       no_whatsapp,
       ukuran,
       email,
       password,
-      password_confirmation,
       nip,
       umur,
+      jenkel,
       departement,
       alamat,
       flag_internal,
