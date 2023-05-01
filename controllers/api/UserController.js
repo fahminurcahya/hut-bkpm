@@ -1,41 +1,26 @@
-const { send, sendQRPNG, sendQRBase64, sendQRAttach } = require("../../mail");
-const Peserta = require("../../models/Peserta");
 const { generateQRPNG } = require("../../utils/generateQRPNG");
-// const { QueryTypes } = require("sequelize");
 
 const {
   responseSukses,
   responseReject,
   responseException,
 } = require("../../utils/handlerResponse");
-var QRCode = require("qrcode");
-const sequelize = require("../../configs/db");
+
+const User = require("../../models/Users");
 
 const register = async (req, res) => {
+  console.log * req;
   try {
-    // password != password_confirmation && new Error("password tidak sama");
-
-    let dataPeserta = {
-      no_peserta: "",
-      event,
-      nama,
-      no_whatsapp,
-      ukuran,
-      email,
-      password,
-      password_confirmation,
-      nip,
-      umur,
-      departement,
-      alamat,
-      flag_internal,
-      qr_code: "",
+    let dataUser = {
+      nama: "administrator",
+      email: "admin@gmail.com",
+      password: "admin",
     };
-
-    const peserta = await Peserta.create(dataPeserta);
+    console.log(dataUser);
+    const user = await User.create(dataUser);
 
     let result = {
-      peserta,
+      user,
     };
 
     res.status(200).json(responseSukses(result));

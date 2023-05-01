@@ -1,4 +1,5 @@
 const User = require("../models/Users");
+const bcrypt = require("bcryptjs");
 
 const viewSignin = async (req, res) => {
   try {
@@ -23,12 +24,15 @@ const viewSignin = async (req, res) => {
 const actionSignin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      req.flash("alertMessage", "User yang anda masukan tidak ada!!");
-      req.flash("alertStatus", "danger");
-      return res.redirect("/pageadm/signin");
-    }
+    console.log("email");
+
+    console.log(email);
+    const user = await User.findOne({
+      email,
+    });
+
+    console.log(user);
+
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
@@ -41,6 +45,8 @@ const actionSignin = async (req, res) => {
     };
     res.redirect("/pageadm/peserta");
   } catch (error) {
+    req.flash("alertMessage", error.message || "Internal Server");
+    req.flash("alertStatus", "danger");
     res.redirect("/pageadm/signin");
   }
 };
