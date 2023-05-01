@@ -423,18 +423,14 @@ footer .all-rights {
     padding: 180px 0 100px;
   }
 }
+
+
+
 .preview-image {
   overflow-x: hidden;
   padding: 100px 0 0;
   border: none;
-  height: 1080px;
-}
-.preview-image .img-content {
-  width: 75%;
-  max-width: 1055px;
-  border-radius: 30px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  height: 400px;
 }
 
 .details-content {
@@ -443,87 +439,16 @@ footer .all-rights {
 }
 .details-content .gap {
   -moz-column-gap: 100px;
-       column-gap: 100px;
+      column-gap: 100px;
   row-gap: 75px;
 }
-.details-content .description {
-  margin-top: 24px;
-  max-width: 596px;
-}
-.details-content .description .headline {
-  font-weight: 600;
-  font-size: 42px;
-  color: #FFFFFF;
-}
-.details-content .description .event-details {
-  margin-top: 140px;
-}
-.details-content .description h6 {
-  color: #0b0f60;
-  font-size: 20px;
-  font-weight: 600;
-}
-.details-content .description .details-paragraph, .details-content .description .keypoints {
-  color: #252837;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 34px;
-  margin-top: 20px;
-}
-.details-content .description .keypoints {
-  margin-top: 50px;
-  line-height: 26px;
-}
-.details-content .description .keypoints div {
-  margin-top: 16px;
-}
-.details-content .description .map-location {
-  margin-top: 50px;
-}
-.details-content .description .map-location h6 {
-  margin-bottom: 20px;
-}
-.details-content .description .map-location .map-placeholder {
-  padding: 8px;
-  border-radius: 18px;
-  border: 1px solid #DFDFDF;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-.details-content .description .map-location .map-placeholder .maps {
-  position: relative;
-  overflow: hidden;
-}
-.details-content .description .map-location .map-placeholder .maps img {
-  border-radius: 18px;
-  width: 442px;
-  height: 295px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.details-content .description .map-location .map-placeholder .maps .absolute {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  border-radius: 18px;
-  transition: all 0.3s;
-}
-.details-content .description .map-location .map-placeholder .maps .absolute .btn-navy {
-  padding: 8px 12px !important;
-  font-size: 10px !important;
-  opacity: 0;
-}
-.details-content .description .map-location .map-placeholder .maps .absolute .btn-navy:hover {
-  box-shadow: 0px 4px 15px rgba(19, 19, 29, 0.35);
-}
+
+
 .details-content .card-event {
   padding: 24px;
   background-color: #FFFFFF;
   border-radius: 24px;
+  width: 500px;
   border: 1px solid #DFDFDF;
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -539,6 +464,11 @@ footer .all-rights {
   color: #0b0f60;
   font-size: 16px;
   font-weight: 500;
+}
+.details-content .card-event .speaker-name-child {
+  color: #A3A5AA;
+  font-size: 16px;
+  font-weight: 400;
 }
 .details-content .card-event .occupation, .details-content .card-event .price span {
   color: #A3A5AA;
@@ -564,32 +494,26 @@ footer .all-rights {
   margin-bottom: 16px;
 }
 .details-content .card-event .btn-green {
-  margin-top: 14px;
   width: 302px;
 }
 
 @media (max-width: 1200px) {
   .preview-image {
-    height: 850px;
+    height: 400px;
   }
 }
 @media (max-width: 992px) {
   .preview-image {
-    height: 750px;
-  }
-  .preview-image .img-content {
-    width: 70%;
+    height: 400px;
   }
 
   .details-content .card-event {
     margin: 0 auto;
   }
-
-  
 }
 @media (max-width: 500px) {
   .preview-image {
-    height: 650px;
+    height: 400px;
   }
   .preview-image .img-content {
     width: 90%;
@@ -598,23 +522,9 @@ footer .all-rights {
   .details-content {
     margin-top: -280px;
   }
-  .details-content .description {
-    max-width: 100%;
-  }
-  .details-content .description .map-location {
-    margin-top: 50px;
-  }
-  .details-content .description .map-location h6 {
-    margin-bottom: 20px;
-  }
-  .details-content .description .map-location .map-placeholder {
-    width: 100%;
-  }
-  .details-content .description .map-location .map-placeholder .maps {
-    max-width: 100%;
-  }
-  
 
+  
+  
 }
 
 .checkout {

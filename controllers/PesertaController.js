@@ -1,6 +1,7 @@
 const Peserta = require("../models/Peserta");
 const { generateQRPNG } = require("../utils/generateQRPNG");
 const { send, sendQRPNG, sendQRBase64, sendQRAttach } = require("../mail");
+const bcrypt = require("bcryptjs");
 
 const viewPeserta = async (req, res) => {
   try {
@@ -70,7 +71,6 @@ const viewRegister = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  console.log(req.body);
   const {
     event,
     nama,
@@ -103,10 +103,6 @@ const register = async (req, res) => {
 
     const peserta = await Peserta.create(dataPeserta);
 
-    let result = {
-      peserta,
-    };
-
     // --- send qr dengan base 64 ---
     // const qr = await QRCode.toDataURL(peserta.qr_code);
     // peserta.qr = qr;
@@ -117,11 +113,13 @@ const register = async (req, res) => {
     // await sendQRPNG(email, peserta);
     await sendQRAttach(email, peserta);
 
-    req.flash("alertMessage", "Succesfully Register");
-    req.flash("alertStatus", "Success");
-    res.redirect("/register");
+    req.flash(
+      "alertMessage",
+      "Berhasil mendaftar, silahkan cek email atau login untuk mendapatkan barcode"
+    );
+    req.flash("alertStatus", "success");
+    res.redirect("/signin");
   } catch (err) {
-    // console.log(email);
     if (err.name != "validation") {
       const peserta = await Peserta.findOne({
         where: { email },
@@ -135,7 +133,8 @@ const register = async (req, res) => {
       });
     }
 
-    console.log(err);
+    req.flash("alertMessage", `${err.message}`);
+    req.flash("alertStatus", "danger");
     res.redirect("/register");
   }
 };
@@ -161,6 +160,80 @@ const getDetail = async (req, res) => {
   }
 };
 
+const viewDetail = async (req, res) => {
+  try {
+    let id = req.session.peserta.id;
+    const peserta = await Peserta.findOne({
+      where: { id },
+    });
+    const alertMessage = req.flash("alertMessage");
+    const alertStatus = req.flash("alertStatus");
+    const alert = { message: alertMessage, status: alertStatus };
+    res.render("peserta", {
+      title: "HUT 50th BKPM",
+      peserta,
+      alert,
+    });
+  } catch (error) {
+    req.flash("alertMessage", `${error.message}`);
+    req.flash("alertStatus", "danger");
+    res.redirect("/signin");
+  }
+};
+
+const viewSignin = async (req, res) => {
+  try {
+    const alertMessage = req.flash("alertMessage");
+    const alertStatus = req.flash("alertStatus");
+    const alert = { message: alertMessage, status: alertStatus };
+    if (req.session.peserta == null || req.session.peserta == undefined) {
+      res.render("signin", {
+        alert,
+        title: "Signin",
+      });
+    } else {
+      res.redirect("/peserta");
+    }
+  } catch (error) {
+    req.flash("alertMessage", `${error.message}`);
+    req.flash("alertStatus", "danger");
+    res.redirect("/signin");
+  }
+};
+
+const actionSignin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const peserta = await Peserta.findOne({
+      email,
+    });
+
+    console.log(peserta);
+
+    const isPasswordMatch = await bcrypt.compare(password, peserta.password);
+    if (!isPasswordMatch) {
+      req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+      req.flash("alertStatus", "danger");
+      return res.redirect("/signin");
+    }
+    req.session.peserta = {
+      id: peserta.id,
+      email: peserta.email,
+    };
+    res.redirect("/peserta");
+  } catch (error) {
+    req.flash("alertMessage", error.message || "Internal Server");
+    req.flash("alertStatus", "danger");
+    res.redirect("/signin");
+  }
+};
+
+const actionLogout = (req, res) => {
+  req.session.destroy();
+  res.redirect("/signin");
+};
+
 module.exports = {
   viewPeserta,
   viewExternal,
@@ -168,4 +241,8 @@ module.exports = {
   register,
   viewRegister,
   getDetail,
+  viewDetail,
+  viewSignin,
+  actionSignin,
+  actionLogout,
 };
