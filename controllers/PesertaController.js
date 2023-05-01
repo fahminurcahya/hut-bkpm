@@ -61,7 +61,7 @@ const viewRegister = async (req, res) => {
 
     res.render("register", {
       alert,
-      title: "Register",
+      title: "HUT 50 | BKPM",
     });
   } catch (error) {
     req.flash("alertMessage", `${error.message}`);
@@ -149,7 +149,7 @@ const getDetail = async (req, res) => {
     const alertStatus = req.flash("alertStatus");
     const alert = { message: alertMessage, status: alertStatus };
     res.render("admin/detail", {
-      title: "HUT 50th BKPM",
+      title: "HUT 50 | BKPM",
       peserta,
       alert,
     });
@@ -170,7 +170,7 @@ const viewDetail = async (req, res) => {
     const alertStatus = req.flash("alertStatus");
     const alert = { message: alertMessage, status: alertStatus };
     res.render("peserta", {
-      title: "HUT 50th BKPM",
+      title: "HUT 50 | BKPM",
       peserta,
       alert,
     });
@@ -189,7 +189,7 @@ const viewSignin = async (req, res) => {
     if (req.session.peserta == null || req.session.peserta == undefined) {
       res.render("signin", {
         alert,
-        title: "Signin",
+        title: "HUT 50 | BKPM",
       });
     } else {
       res.redirect("/peserta");

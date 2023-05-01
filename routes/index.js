@@ -5,7 +5,7 @@ const { isLoginPeserta } = require("../middlewares/auth");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.render("index", { title: "HUT 50 | BKPM" });
 });
 
 router.get("/signin", pesertaController.viewSignin);

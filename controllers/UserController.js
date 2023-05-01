@@ -9,7 +9,7 @@ const viewSignin = async (req, res) => {
     if (req.session.user == null || req.session.user == undefined) {
       res.render("admin/login", {
         alert,
-        title: "Login",
+        title: "HUT 50 | BKPM",
       });
     } else {
       res.redirect("/pageadm/peserta");
