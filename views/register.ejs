@@ -111,6 +111,8 @@
                                         <label id="lbl_jenkel1" class="form-label">
                                             <input type="radio" name="jenkel" value="L"/>
                                             Laki - Laki
+                                        </label>
+                                        <label id="lbl_jenkel2" class="form-label">
                                             <input type="radio" name="jenkel" value="P"/>
                                             Perempuan
                                         </label>
@@ -311,7 +313,7 @@
             return /^-?\d*$/.test(value);
         }, "Must be an integer");
         
-        setInputFilter(document.getElementById("departement"), function (value) {
+        setInputFilter(document.getElementById("nip"), function (value) {
             return /^-?\d*$/.test(value);
         }, "Must be an integer");
     </script>
