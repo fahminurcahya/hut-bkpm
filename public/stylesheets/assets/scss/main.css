@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins";
 }
 
-.main-btn, .btn-green, .btn-navy {
+.main-btn, .btn-green, .desc-green, .btn-navy {
   padding: 13px 35px;
   border-radius: 45px;
   font-size: 16px;
@@ -29,11 +30,18 @@
 .btn-green {
   color: #0b0f60;
   font-weight: 600;
-  background-color: #01FB34;
+  background-color: #208e4e;
   box-shadow: 0px 4px 15px rgba(1, 251, 52, 0.35);
 }
 .btn-green:hover {
   color: initial;
+}
+
+.desc-green {
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #208e4e;
+  box-shadow: 0px 4px 15px rgba(1, 251, 52, 0.35);
 }
 
 @media (max-width: 992px) {
@@ -184,9 +192,10 @@ footer .all-rights {
 .header .hero .hero-paragraph {
   margin: 30px 0;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 30px;
-  color: #A3A5AA;
+  color: #000000;
+  /* color: #A3A5AA; */
 }
 .header .header-image {
   overflow: hidden;
@@ -280,9 +289,9 @@ footer .all-rights {
 }
 
 .text-gradient-green {
-  background-color: #25ba63;
-  background-image: linear-gradient(113.4deg, #25ba63 0%, #ffff 100%);
-  background-image: conic-gradient(113.4deg, #25ba63 0%, #ffff 100%);
+  background-color: #208e4e;
+  background-image: linear-gradient(113.4deg, #208e4e 0%, #ffff 100%);
+  background-image: conic-gradient(113.4deg, #208e4e 0%, #ffff 100%);
   background-size: 100%;
   background-repeat: no-repeat;
   background-clip: text;
@@ -290,6 +299,46 @@ footer .all-rights {
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background-color: #0b0f60;
+  background-image: linear-gradient(113.4deg, #0b0f60 0%, #208e4e 100%);
+  background-image: conic-gradient(113.4deg, #0b0f60 0%, #208e4e 100%);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.text-poopins {
+  color: #0b0f60;
+}
+
+.text-rale {
+  color: #0b0f60;
+  font-family: 'raleway';
+}
+
+.text-blue {
+  color: #0b0f60;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.text-green {
+  color: #208e4e;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.text-black {
+  color: #000000;
+  font-weight: bold;
+  font-size: 25px;
 }
 
 .text-gradient-navy {
@@ -320,6 +369,15 @@ footer .all-rights {
 
 .bg-navy {
   background-color: #0b0f60;
+}
+
+.bg-img {
+  background-image: url('../images/BG-TOP.png');
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
 }
 
 .title {
