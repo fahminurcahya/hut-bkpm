@@ -1,18 +1,23 @@
 const nodemailer = require("nodemailer");
 const Mustache = require("mustache");
-const { email, password, sender_email } = require("../configs/email");
+const {
+  mail_port,
+  sender_password,
+  sender_email,
+  mail_host,
+} = require("../configs/email");
 const fs = require("fs");
 
 const transporter = nodemailer.createTransport({
-  host: "mail.hut50thkementerianinvestasibkpm.com",
-  port: 587,
+  host: mail_host,
+  port: mail_port,
   tls: {
     rejectUnauthorized: false,
   },
   // secure: true, // true for 465, false for other ports
   auth: {
-    user: email,
-    pass: password,
+    user: sender_email,
+    pass: sender_password,
   },
 });
 

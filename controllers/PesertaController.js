@@ -95,7 +95,7 @@ const register = async (req, res) => {
       email,
       password,
       nip,
-      umur,
+      umur: umur == "" ? null : umur,
       jenkel,
       departement,
       alamat,
@@ -211,8 +211,8 @@ const actionSignin = async (req, res) => {
     // });
     const peserta = await Peserta.findOne({
       where: {
-          email : email_address
-      }
+        email: email_address,
+      },
     });
     // console.log(peserta);
     // console.log(email_address);
