@@ -7,6 +7,7 @@ const generateQRPNG = async (no_peserta, qr_code) => {
     const qrCode = await QRCode.toFile(filePath, qr_code, {
       type: "png",
       margin: 1,
+      width: 500, // Lebar gambar QR yang diinginkan
       color: {
         dark: "#000", // warna QR code
         light: "#fff", // warna background QR code

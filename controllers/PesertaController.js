@@ -94,13 +94,12 @@ const register = async (req, res) => {
       email,
       password,
       nip,
-      umur,
+      umur: umur == "" && null,
       departement,
       alamat,
       flag_internal,
       qr_code: "",
     };
-
     const peserta = await Peserta.create(dataPeserta);
 
     // --- send qr dengan base 64 ---
@@ -208,8 +207,6 @@ const actionSignin = async (req, res) => {
     const peserta = await Peserta.findOne({
       email,
     });
-
-    console.log(peserta);
 
     const isPasswordMatch = await bcrypt.compare(password, peserta.password);
     if (!isPasswordMatch) {
