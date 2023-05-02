@@ -59,11 +59,14 @@ const viewRegister = async (req, res) => {
     const alertMessage = req.flash("alertMessage");
     const alertStatus = req.flash("alertStatus");
     const alert = { message: alertMessage, status: alertStatus };
-
-    res.render("register", {
-      alert,
-      title: "HUT 50 | BKPM",
-    });
+    if (req.session.peserta == null || req.session.peserta == undefined) {
+      res.render("register", {
+        alert,
+        title: "HUT 50 | BKPM",
+      });
+    } else {
+      res.redirect("/peserta");
+    }
   } catch (error) {
     req.flash("alertMessage", `${error.message}`);
     req.flash("alertStatus", "danger");
