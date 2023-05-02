@@ -2,6 +2,7 @@ const Peserta = require("../models/Peserta");
 const { generateQRPNG } = require("../utils/generateQRPNG");
 const { send, sendQRPNG, sendQRBase64, sendQRAttach } = require("../mail");
 const bcrypt = require("bcryptjs");
+const { generatePDF } = require("../utils/generatePDF");
 
 const viewPeserta = async (req, res) => {
   try {
@@ -110,6 +111,7 @@ const register = async (req, res) => {
     // await sendQRBase64(email, peserta);
 
     await generateQRPNG(peserta.no_peserta, peserta.qr_code);
+    await generatePDF(peserta.no_peserta, event);
 
     // await sendQRPNG(email, peserta);
     await sendQRAttach(email, peserta);

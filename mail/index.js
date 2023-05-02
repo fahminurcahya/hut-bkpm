@@ -63,19 +63,29 @@ const sendQRPNG = async (email, data) => {
 const sendQRAttach = async (email, data) => {
   try {
     let template = fs.readFileSync("views/email/tiket_3.html", "utf8");
-    const attachment = await fs.readFileSync(
+    const attachment1 = await fs.readFileSync(
       "public/images/" + data.no_peserta + ".png"
     );
+
+    const attachment2 = await fs.readFileSync(
+      "public/pdf/" + data.no_peserta + ".pdf"
+    );
+
+    const public_url = process.env.PUBLIC_URL;
 
     let message = {
       from: sender_email,
       to: email,
       subject: "HUT BKPM 50",
-      html: Mustache.render(template, data),
+      html: Mustache.render(template, { public_url: public_url }),
       attachments: [
         {
           filename: "QR.png",
-          content: attachment,
+          content: attachment1,
+        },
+        {
+          filename: "tiket.pdf",
+          content: attachment2,
         },
       ],
     };

@@ -8,10 +8,6 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "HUT 50 | BKPM" });
 });
 
-router.get("/tiket", function (req, res, next) {
-  res.render("pdf/tiket_fr", { title: "HUT 50 | BKPM" });
-});
-
 router.get("/signin", pesertaController.viewSignin);
 router.get("/register", pesertaController.viewRegister);
 router.post("/register", pesertaController.register);
