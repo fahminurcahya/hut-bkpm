@@ -142,7 +142,7 @@ const sendQRAttachWithGeneratePdf = async (email, no_peserta, event) => {
         from: sender_email,
         to: email,
         subject: "HUT BKPM 50",
-        html: Mustache.render(templateEmail, { public_url: public_url }),
+        html: Mustache.render(templateEmail, { public_url: public_url, nama: data.nama, no_peserta: data.no_peserta }),
         attachments: [
           {
             filename: "QR.png",
