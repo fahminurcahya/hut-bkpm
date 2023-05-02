@@ -7,9 +7,10 @@ const {
   sendQRAttach,
   sendQRAttachWithGeneratePdf,
   sendNotifAdmin,
+  generatePDF,
 } = require("../mail");
 const bcrypt = require("bcryptjs");
-const { generatePDF } = require("../utils/generatePDF");
+// const { generatePDF } = require("../utils/generatePDF");
 
 const viewPeserta = async (req, res) => {
   try {
@@ -125,7 +126,7 @@ const register = async (req, res) => {
 
     // await sendQRPNG(email, peserta);
     // await sendQRAttach(email, peserta);
-    await sendQRAttachWithGeneratePdf(email, peserta.no_peserta, event);
+    await generatePDF(email, peserta.no_peserta, event);
     await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
 
     req.flash(
