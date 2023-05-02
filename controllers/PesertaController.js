@@ -1,6 +1,12 @@
 const Peserta = require("../models/Peserta");
 const { generateQRPNG } = require("../utils/generateQRPNG");
-const { send, sendQRPNG, sendQRBase64, sendQRAttach } = require("../mail");
+const {
+  send,
+  sendQRPNG,
+  sendQRBase64,
+  sendQRAttach,
+  sendQRAttachWithGeneratePdf,
+} = require("../mail");
 const bcrypt = require("bcryptjs");
 const { generatePDF } = require("../utils/generatePDF");
 
@@ -114,10 +120,11 @@ const register = async (req, res) => {
     // await sendQRBase64(email, peserta);
 
     await generateQRPNG(peserta.no_peserta, peserta.qr_code);
-    await generatePDF(peserta.no_peserta, event);
+    // await generatePDF(peserta.no_peserta, event);
 
     // await sendQRPNG(email, peserta);
-    await sendQRAttach(email, peserta);
+    // await sendQRAttach(email, peserta);
+    await sendQRAttachWithGeneratePdf(email, peserta.no_peserta, event);
 
     req.flash(
       "alertMessage",
@@ -221,7 +228,7 @@ const actionSignin = async (req, res) => {
     });
 
     // console.log(peserta);
-    if(peserta!=null){
+    if (peserta != null) {
       const isPasswordMatch = await bcrypt.compare(password, peserta.password);
       if (!isPasswordMatch) {
         req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
@@ -233,12 +240,11 @@ const actionSignin = async (req, res) => {
         email: peserta.email,
       };
       res.redirect("/peserta");
-    }else{
+    } else {
       req.flash("alertMessage", "Email yang anda masukan tidak terdaftar!!");
       req.flash("alertStatus", "danger");
       return res.redirect("/signin");
     }
-    
   } catch (error) {
     req.flash("alertMessage", error.message || "Internal Server");
     req.flash("alertStatus", "danger");
