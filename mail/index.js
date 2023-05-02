@@ -5,6 +5,7 @@ const {
   sender_password,
   sender_email,
   mail_host,
+  admin_email,
 } = require("../configs/email");
 const fs = require("fs");
 const pdf = require("html-pdf");
@@ -163,9 +164,30 @@ const sendQRAttachWithGeneratePdf = async (email, no_peserta, event) => {
   }
 };
 
+const sendNotifAdmin = async (email, no_peserta, nama, event) => {
+  try {
+    let template = fs.readFileSync("views/email/tiket_2.html", "utf8");
+
+    const admin_email = process.env.ADMIN_GMAIL;
+
+    let message = {
+      from: sender_email,
+      to: admin_email,
+      subject: "HUT BKPM 50",
+      html: Mustache.render(template, { nama: nama, no_peserta: no_peserta, event: event }),
+    };
+
+    return await transporter.sendMail(message);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 module.exports = {
   sendQRBase64,
   sendQRPNG,
   sendQRAttach,
   sendQRAttachWithGeneratePdf,
+  sendNotifAdmin,
 };

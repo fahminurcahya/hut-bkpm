@@ -8,6 +8,11 @@ const {
   responseReject,
   responseException,
 } = require("../../utils/handlerResponse");
+
+const {
+  sendQRAttachWithGeneratePdf,
+  sendNotifAdmin,
+} = require("../../mail");
 var QRCode = require("qrcode");
 const sequelize = require("../../configs/db");
 
@@ -56,9 +61,12 @@ const register = async (req, res) => {
     // await sendQRBase64(email, peserta);
 
     await generateQRPNG(peserta.no_peserta, peserta.qr_code);
+    // await generatePDF(peserta.no_peserta, event);
 
     // await sendQRPNG(email, peserta);
-    await sendQRAttach(email, peserta);
+    // await sendQRAttach(email, peserta);
+    await sendQRAttachWithGeneratePdf(email, peserta.no_peserta, event);
+    await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
 
     res.status(200).json(responseSukses(result));
   } catch (err) {
