@@ -216,19 +216,26 @@ const actionSignin = async (req, res) => {
         email: email_address,
       },
     });
+
     // console.log(peserta);
-    // console.log(email_address);
-    const isPasswordMatch = await bcrypt.compare(password, peserta.password);
-    if (!isPasswordMatch) {
-      req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+    if(peserta!=null){
+      const isPasswordMatch = await bcrypt.compare(password, peserta.password);
+      if (!isPasswordMatch) {
+        req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+        req.flash("alertStatus", "danger");
+        return res.redirect("/signin");
+      }
+      req.session.peserta = {
+        id: peserta.id,
+        email: peserta.email,
+      };
+      res.redirect("/peserta");
+    }else{
+      req.flash("alertMessage", "Email yang anda masukan tidak terdaftar!!");
       req.flash("alertStatus", "danger");
       return res.redirect("/signin");
     }
-    req.session.peserta = {
-      id: peserta.id,
-      email: peserta.email,
-    };
-    res.redirect("/peserta");
+    
   } catch (error) {
     req.flash("alertMessage", error.message || "Internal Server");
     req.flash("alertStatus", "danger");

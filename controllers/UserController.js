@@ -23,27 +23,33 @@ const viewSignin = async (req, res) => {
 
 const actionSignin = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    console.log("email");
+    const { email_address, password } = req.body;
 
-    console.log(email);
+    console.log(email_address);
     const user = await User.findOne({
-      email,
+      where: {
+        email: email_address,
+      },
     });
 
     console.log(user);
-
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-      req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+    if(user!=null){
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch) {
+        req.flash("alertMessage", "Password yang anda masukan tidak cocok!!");
+        req.flash("alertStatus", "danger");
+        return res.redirect("/pageadm/signin");
+      }
+      req.session.user = {
+        id: user.id,
+        email: user.email,
+      };
+      res.redirect("/pageadm/peserta");
+    }else{
+      req.flash("alertMessage", "Email yang anda masukan tidak terdaftar!!");
       req.flash("alertStatus", "danger");
       return res.redirect("/pageadm/signin");
     }
-    req.session.user = {
-      id: user.id,
-      email: user.email,
-    };
-    res.redirect("/pageadm/peserta");
   } catch (error) {
     req.flash("alertMessage", error.message || "Internal Server");
     req.flash("alertStatus", "danger");

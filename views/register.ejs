@@ -18,7 +18,7 @@
         <nav class="container navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
-                    <img src="/stylesheets/assets/images/logo.svg" alt="img" height="75" width="100%" />
+                    <img src="/stylesheets/assets/images/logo.svg" alt="img" height="75" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -30,7 +30,7 @@
                     </div>
                     <div class="d-grid">
                         <a class="btn-green" href="/signin">
-                            Sign In
+                            Masuk
                         </a>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <div class="d-flex flex-column align-items-center hero gap-5">
                 <div>
                     <div class="hero-headline text-start">
-                        Register
+                        Pendaftaran Peserta
                     </div>
                 </div>
                 <form action="/register" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
@@ -70,10 +70,10 @@
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_no_whatsapp" class="form-label">
-                            No Whatsapp
+                            No HP
                         </label>
                         <input type="text" class="form-control" id="no_whatsapp" name="no_whatsapp"
-                            placeholder="Masukkan No Whatsapp" required>
+                            placeholder="Masukkan No HP" required>
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_email" class="form-label">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_password_confirm" class="form-label">
-                            Password Confirmation
+                            Konfirmasi Password
                         </label>
                         <input type="password" class="form-control" id="password_confirm" name="password_confirm"
                             placeholder="Type your password">
@@ -144,7 +144,7 @@
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_ukuran" class="form-label">
-                            Ukuran
+                            Ukuran Jersey
                         </label>
                         <select class="form-select" aria-label="Default select example" id="ukuran" name="ukuran">
                             <option value="M" selected>M</option>
@@ -162,8 +162,8 @@
                         </label>
                         <select class="form-select" aria-label="Default select example" id="flag_internal"
                             name="flag_internal" onchange="Tipe(this.value)">
-                            <option value="1" selected>Internal</option>
-                            <option value="0">Eksternal</option>
+                            <option value="1" selected>Internal Kementerian</option>
+                            <option value="0">Umum</option>
                         </select>
                     </div>
                     <div class="d-flex flex-column align-items-start">
@@ -174,10 +174,10 @@
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_departement" class="form-label">
-                            Departement
+                            Departemen
                         </label>
                         <input type="text" class="form-control" id="departement" name="departement"
-                            placeholder="Masukkan Departement">
+                            placeholder="Masukkan Departemen">
                     </div>
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_umur" class="form-label">
@@ -197,10 +197,10 @@
                         <div class="col">
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn-navy" id="submitpass" name="submitpass">
-                                    Create New Account
+                                    Daftar Peserta Baru
                                 </button>
                                 <a href="/signin" class="btn-green">
-                                    Sign In
+                                    Masuk
                                 </a>
                             </div>
                         </div>
@@ -239,10 +239,10 @@
                     $('#message').hide();
                 } else if ($('#password').val() == $('#password_confirm').val()) {
                     $('#submitpass').prop('disabled', false);
-                    $('#message').show().html('Password Match').css('color', 'green');
+                    $('#message').show().html('Password Cocok').css('color', 'green');
                 } else {
                     $('#submitpass').prop('disabled', true);
-                    $('#message').show().html('Password do not match').css('color', 'red');
+                    $('#message').show().html('Password Tidak Cocok').css('color', 'red');
                 }
             });
 
@@ -310,11 +310,15 @@
 
         setInputFilter(document.getElementById("no_whatsapp"), function (value) {
             return /^-?\d*$/.test(value);
-        }, "Must be an integer");
+        }, "Harus Angka");
 
         setInputFilter(document.getElementById("nip"), function (value) {
             return /^-?\d*$/.test(value);
-        }, "Must be an integer");
+        }, "Harus Angka");
+
+        setInputFilter(document.getElementById("umur"), function (value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus Angka");
     </script>
 </body>
 
