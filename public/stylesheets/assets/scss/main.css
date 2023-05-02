@@ -410,6 +410,7 @@ footer .all-rights {
 .race-pack {
   background-color: #FFFFFF;
   padding: 360px 0 100px;
+  margin-top: 100px;
 }
 .race-pack .gap {
   row-gap: 48px;
@@ -466,7 +467,82 @@ footer .all-rights {
   padding: 30px !important;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 800px) {
+  .navbar .navbar-nav .nav-link.active {
+    padding-bottom: 8px;
+    color: #FFFFFF;
+    border-bottom: none;
+  }
+
+
+
+  .header .header-image {
+    overflow: hidden;
+  }
+  .header .header-image .img-1 {
+    width: 362px !important;
+    height: 170px !important;
+   
+  }
+  .header .header-image .img-2 {
+    width: 738px !important;
+    height: 420px !important;
+    
+  }
+
+}
+
+@media (max-width: 600px) {
+  .navbar .navbar-nav .nav-link.active {
+    padding-bottom: 6px;
+    color: #FFFFFF;
+    border-bottom: none;
+  }
+
+  .header .header-image {
+    overflow: hidden;
+  }
+  .header .header-image .img-1 {
+    width: 342px !important;
+    height: 170px !important;
+   
+  }
+  .header .header-image .img-2 {
+    width: 638px !important;
+    height: 320px !important;
+    
+  }
+  .race-pack {
+    padding-top: 300px; 
+    margin-top: 0; }
+
+}
+
+@media (max-width: 500px) {
+  .navbar .navbar-nav .nav-link.active {
+    padding-bottom: 8px;
+    color: #FFFFFF;
+    border-bottom: none;
+  }
+
+  .header .header-image {
+    overflow: hidden;
+  }
+  .header .header-image .img-1 {
+    width: 301px !important;
+    height: 175px !important;
+  }
+  .header .header-image .img-2 {
+    width: 429px !important;
+    height: 330px !important;
+  }
+
+  .race-pack {
+padding-top: 300px; 
+margin-top: 0; }
+}
+
+@media (max-width: 400px) {
   .navbar .navbar-nav .nav-link.active {
     padding-bottom: 8px;
     color: #FFFFFF;
@@ -486,8 +562,8 @@ footer .all-rights {
   }
 
   .race-pack {
-    padding: 180px 0 100px;
-  }
+padding-top: 300px; 
+margin-top: 0; }
 }
 
 
@@ -818,6 +894,10 @@ footer .all-rights {
     font-size: 14px;
     font-weight: 350;
   }
+  .col-5 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
   
 }
 @media (max-width: 500px) {
@@ -840,3 +920,16 @@ footer .all-rights {
   }
   
 }/*# sourceMappingURL=main.css.map */
+
+
+
+
+
+/* @media screen and (min-width: 992px) {
+  .col-5 {
+    width: calc(20% - 20px);
+    margin: 0 10px;
+    float: left;
+  }
+} */
+
