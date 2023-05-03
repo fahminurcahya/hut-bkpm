@@ -126,7 +126,7 @@ const register = async (req, res) => {
 
     // await sendQRPNG(email, peserta);
     // await sendQRAttach(email, peserta);
-    await generatePDF(email, peserta.no_peserta, event);
+    await generatePDF(email, peserta.no_peserta, peserta.nama, event);
     await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
 
     req.flash(

@@ -192,20 +192,29 @@ const sendNotifAdmin = async (email, no_peserta, nama, event) => {
   }
 };
 
-async function generatePDF(email, no_peserta, event) {
-  console.log("===========");
-  console.log(process.env.PUBLIC_URL);
+async function generatePDF(email, no_peserta, nama, event) {
   try {
     let template;
     if (event == "FUN RUN 7K") {
-      template = fs.readFileSync("views/pdf/tiket_fr.html", "utf8");
+      template = fs.readFileSync("views/pdf/tiket_fr_base64.html", "utf8");
     } else {
-      template = fs.readFileSync("views/pdf/tiket_js.html", "utf8");
+      template = fs.readFileSync("views/pdf/tiket_js_base64.html", "utf8");
     }
+
+    const base64QR    = fs.readFileSync("public/images/" + no_peserta + ".png", 'base64');
+    // const base64Asean = base64_encode("public/stylesheets/assets/images/funrun.jpeg");
+    // const base64Logo  = base64_encode("public/stylesheets/assets/images/funrun.jpeg");
+    // console.log(base64QR);
     const data = {
+
       no_peserta: no_peserta,
       public_url: process.env.PUBLIC_URL,
+      base64QR: base64QR,
+      // base64Asean: base64Asean,
+      // base64Logo: base64Logo,
+
     };
+
     const html = Mustache.render(template, data);
 
     const options = {
@@ -247,7 +256,7 @@ async function generatePDF(email, no_peserta, event) {
       from: sender_email,
       to: email,
       subject: "HUT BKPM 50",
-      html: Mustache.render(templateEmail, { public_url: public_url }),
+      html: Mustache.render(templateEmail, { public_url: public_url, nama: nama, no_peserta: no_peserta, event: event }),
       attachments: [
         {
           filename: "QR.png",
