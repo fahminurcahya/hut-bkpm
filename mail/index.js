@@ -193,6 +193,8 @@ const sendNotifAdmin = async (email, no_peserta, nama, event) => {
 };
 
 async function generatePDF(email, no_peserta, event) {
+  console.log("===========");
+  console.log(process.env.PUBLIC_URL);
   try {
     let template;
     if (event == "FUN RUN 7K") {
