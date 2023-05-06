@@ -10,6 +10,7 @@ const {
   generatePDF,
 } = require("../mail");
 const bcrypt = require("bcryptjs");
+const Pendamping = require("../models/Pendamping");
 // const { generatePDF } = require("../utils/generatePDF");
 
 const viewPeserta = async (req, res) => {
@@ -96,7 +97,14 @@ const register = async (req, res) => {
     departement,
     alamat,
     flag_internal,
+    golongan_darah,
+    nama_darurat,
+    hubungan,
+    alamat_darurat,
+    no_hp_darurat,
+    nik,
   } = req.body;
+
   try {
     let dataPeserta = {
       no_peserta: 101,
@@ -113,21 +121,119 @@ const register = async (req, res) => {
       alamat,
       flag_internal,
       qr_code: "",
+      golongan_darah,
+      nik,
+      nama_darurat,
+      hubungan,
+      no_hp_darurat,
+      alamat_darurat,
     };
-    const peserta = await Peserta.create(dataPeserta);
+    const peserta = await Peserta.create(dataPeserta, { transaction: t });
+
+    if (event === "fw" && flag_internal) {
+      const {
+        nama_pendamping_1,
+        nama_pendamping_2,
+        nama_pendamping_3,
+        nama_pendamping_4,
+        nama_pendamping_5,
+        ukuran_1,
+        ukuran_2,
+        ukuran_3,
+        ukuran_4,
+        ukuran_5,
+      } = req.body;
+
+      let dataPendamping = {};
+      let namap = [];
+      for (let x = 1; x <= 5; x++) {
+        switch (x) {
+          case 1:
+            namap.push({ nama: nama_pendamping_1, ukuran: ukuran_1 });
+            break;
+          case 2:
+            namap.push({ nama: nama_pendamping_2, ukuran: ukuran_2 });
+            break;
+          case 3:
+            namap.push({ nama: nama_pendamping_3, ukuran: ukuran_3 });
+            break;
+          case 4:
+            namap.push({ nama: nama_pendamping_4, ukuran: ukuran_4 });
+            break;
+          case 5:
+            namap.push({ nama: nama_pendamping_5, ukuran: ukuran_5 });
+            break;
+        }
+      }
+
+      for (let i = 0; i < namap.length; i++) {
+        if (
+          namap[i].nama != "" &&
+          namap[i].nama != undefined &&
+          namap[i].nama != null
+        ) {
+          dataPendamping.id_peserta = peserta.id;
+          dataPendamping.id_pendamping = i + 1;
+          dataPendamping.nama = namap[i].nama;
+          dataPendamping.ukuran = namap[i].ukuran;
+          console.log(dataPendamping);
+          const pendamping = await Pendamping.create(dataPendamping, {
+            transaction: t,
+          });
+        }
+      }
+    }
+
+    await generateQRPNG(peserta.no_peserta, peserta.qr_code, peserta.event);
+    await generatePDF(email, peserta.no_peserta, peserta.nama, event);
+    await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
+
+    // if (event === "fw" && flag_internal) {
+    //   const {
+    //     nama_pendamping_1,
+    //     nama_pendamping_2,
+    //     nama_pendamping_3,
+    //     nama_pendamping_4,
+    //     nama_pendamping_5,
+    //     ukuran_1,
+    //     ukuran_2,
+    //     ukuran_3,
+    //     ukuran_4,
+    //     ukuran_5,
+    //   } = req.body;
+
+    //   let dataPendamping = {};
+
+    //   for (let i = 1; i <= 5; i++) {
+    //     if (
+    //       nama_pendamping_ + i != undefined ||
+    //       nama_pendamping_ + i != null ||
+    //       nama_pendamping_ + i != ""
+    //     ) {
+    //       dataPendamping.id_peserta = peserta.id;
+    //       dataPendamping.id_pendamping = i;
+    //       dataPendamping.nama = nama_pendamping_ + i;
+    //       dataPendamping.ukuran = ukuran_ + i;
+    //       console.log(dataPendamping);
+    //       const pendamping = await Pendamping.create(dataPendamping);
+    //     }
+    //   }
+    // }
 
     // --- send qr dengan base 64 ---
     // const qr = await QRCode.toDataURL(peserta.qr_code);
     // peserta.qr = qr;
     // await sendQRBase64(email, peserta);
 
-    await generateQRPNG(peserta.no_peserta, peserta.qr_code);
+    // await generateQRPNG(peserta.no_peserta, peserta.qr_code); here
+
     // await generatePDF(peserta.no_peserta, event);
 
     // await sendQRPNG(email, peserta);
     // await sendQRAttach(email, peserta);
-    await generatePDF(email, peserta.no_peserta, peserta.nama, event);
-    await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
+
+    // await generatePDF(email, peserta.no_peserta, peserta.nama, event); here
+    // await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event); here
 
     req.flash(
       "alertMessage",
@@ -136,18 +242,7 @@ const register = async (req, res) => {
     req.flash("alertStatus", "success");
     res.redirect("/signin");
   } catch (err) {
-    if (err.name != "validation") {
-      const peserta = await Peserta.findOne({
-        where: { email },
-      });
-
-      await Peserta.destroy({
-        where: {
-          email,
-        },
-        force: true,
-      });
-    }
+    await t.rollback();
 
     req.flash("alertMessage", `${err.message}`);
     req.flash("alertStatus", "danger");
