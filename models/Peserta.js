@@ -41,6 +41,10 @@ const Peserta = sequelize.define(
       type: DataTypes.CHAR,
       allowNull: false,
     },
+    nik: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     nip: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -53,13 +57,13 @@ const Peserta = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    umur: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
     jenkel: {
       type: DataTypes.CHAR,
       allowNull: true,
+    },
+    golongan_darah: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     flag_internal: {
       type: DataTypes.BOOLEAN,
@@ -79,6 +83,22 @@ const Peserta = sequelize.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    nama_darurat: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    hubungan: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    alamat_darurat: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    no_hp_darurat: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
