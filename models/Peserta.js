@@ -135,13 +135,20 @@ Peserta.beforeCreate(async (peserta, options) => {
   // generate seq no peserta
   const lastPeserta = await Peserta.findOne({
     order: [["no_peserta", "DESC"]],
+    where: {
+      event: peserta.event,
+    },
     attributes: ["no_peserta"],
   });
 
   if (lastPeserta) {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
   } else {
-    peserta.no_peserta = 101;
+    if (peserta.event == "fw") {
+      peserta.no_peserta = 3001;
+    } else {
+      peserta.no_peserta = 1001;
+    }
   }
 
   peserta.password = await bcrypt.hash(peserta.password, 12);
