@@ -24,6 +24,7 @@ const Pendamping = sequelize.define(
   {
     timestamps: false,
     underscored: false,
+    freezeTableName: true
   }
 );
 

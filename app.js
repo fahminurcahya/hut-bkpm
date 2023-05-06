@@ -14,6 +14,7 @@ const flash = require("connect-flash");
 var app = express();
 require("./configs/db");
 require("./models/Peserta");
+require("./models/Pendamping");
 require("./models/Users");
 
 // view engine setup
