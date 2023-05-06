@@ -39,6 +39,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="">Nik</label>
+                        <input type="text" class="form-control" value="<%=peserta.nik%>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Ukuran</label>
                         <input type="text" class="form-control" value="<%=peserta.ukuran%>" readonly>
                     </div>
@@ -71,9 +76,34 @@
 
                     <div class="form-group">
                         <label for="">Jenis Kelamin</label>
-                        <input type="text" class="form-control" value="<% if(peserta.jenkel=='L'){ %>Laki - Laki<% } else{ %>Perempuan<% } %>" readonly>
+                        <input type="text" class="form-control"
+                            value="<% if(peserta.jenkel=='L'){ %>Laki - Laki<% } else{ %>Perempuan<% } %>" readonly>
                     </div>
 
+                    <div class="form-group">
+                        <label for="">Golongan Darah</label>
+                        <input type="text" class="form-control" value="<%=peserta.golongan_darah%>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Nama Darurat</label>
+                        <input type="text" class="form-control" value="<%=peserta.nama_darurat%>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Hubungan</label>
+                        <input type="text" class="form-control" value="<%=peserta.hubungan%>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">No HP Darurat</label>
+                        <input type="text" class="form-control" value="<%=peserta.no_hp_darurat%>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Alamat Darurat</label>
+                        <input type="text" class="form-control" value="<%=peserta.alamat_darurat%>" readonly>
+                    </div>
 
 
                 </form>

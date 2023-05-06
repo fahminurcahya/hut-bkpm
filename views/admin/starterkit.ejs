@@ -83,7 +83,13 @@
                             icon: 'success',
                             confirmButtonText: 'Kembali',
                             allowOutsideClick: false,
-                            text: resp.data.nama + ' | ' + resp.data.no_peserta,
+                            html:
+                                resp.data.event + ' | <br>' +
+                                    resp.data.flag_internal ? 'Internal' : 'External' + ' | <br> ' +
+                                    resp.data.no_peserta + ' | <br>' +
+                                    resp.data.nama + ' | <br>' +
+                                    resp.data.no_whatsapp + ' | <br>' +
+                                    resp.data.ukuran + ' | <br>'
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
