@@ -107,17 +107,34 @@ const register = async (req, res) => {
       } = req.body;
 
       let dataPendamping = {};
-      let namap = "nama_pendamping_";
-      for (let i = 1; i <= 5; i++) {
-        if (
-          this["nama_pendamping_" + i] != undefined ||
-          this["nama_pendamping_" + i] != null ||
-          this["nama_pendamping_" + i] != ""
-        ) {
+      let namap = [];
+      for (let x = 1; x <= 5; x++) {
+        switch(x){
+          case 1:
+            namap.push({nama: nama_pendamping_1, ukuran: ukuran_1});
+          break;
+          case 2:
+            namap.push({nama: nama_pendamping_2, ukuran: ukuran_2});
+          break;
+          case 3:
+            namap.push({nama: nama_pendamping_3, ukuran: ukuran_3});
+          break;
+          case 4:
+            namap.push({nama: nama_pendamping_4, ukuran: ukuran_4});
+          break;
+          case 5:
+            namap.push({nama: nama_pendamping_5, ukuran: ukuran_5});
+          break;
+        }
+      }
+
+      for (let i = 0; i < namap.length; i++) {
+
+        if(namap[i].nama!='' && namap[i].nama!=undefined && namap[i].nama!=null){
           dataPendamping.id_peserta = peserta.id;
-          dataPendamping.id_pendamping = i;
-          dataPendamping.nama = `${namap}` + `${i}`;
-          dataPendamping.ukuran = this["ukuran_" + i];
+          dataPendamping.id_pendamping = i+1;
+          dataPendamping.nama = namap[i].nama;
+          dataPendamping.ukuran = namap[i].ukuran;
           console.log(dataPendamping);
           const pendamping = await Pendamping.create(dataPendamping);
         }
