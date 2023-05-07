@@ -47,7 +47,7 @@
                         Pendaftaran Peserta
                     </div>
                 </div>
-                <form action="/register" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
+                <form action="/registers" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
                     onsubmit="submitpass.disabled = true;">
                     <%- include('message.ejs') %>
 
@@ -242,13 +242,13 @@
                                         </tr>
                                         <tr>
                                             <label id="lbl_p1" class="form-label">
-                                                <input type="radio" name="pendamping" id="pendamping"
-                                                    onclick="isPendamping(this);" value="Y" required />
+                                                <input type="radio" name="pendamping" id="pendampingy"
+                                                    onclick="isPendamping(this);" value="Y" />
                                                 Ya
                                             </label>
                                             <label id="lbl_p2" class="form-label">
-                                                <input type="radio" name="pendamping" id="pendamping"
-                                                    onclick="isPendamping(this);" value="N" checked />
+                                                <input type="radio" name="pendamping" id="pendampingn"
+                                                    onclick="isPendamping(this);" value="N" checked="checked" />
                                                 Tidak
                                             </label>
                                         </tr>
@@ -436,11 +436,15 @@
         });
 
         function Event(val) {
+            $('#addpendamping').hide();
+
             if (val == '') {
                 $('#lbl_flag_internal').hide();
                 $('#flag_internal').hide();
                 $('#form_register').hide();
                 $('#submitpass').prop('disabled', true);
+
+
                 password.value = '';
                 password_confirm.value = '';
                 $('#message').hide();
@@ -579,26 +583,29 @@
         }
 
         function getPendamping(event, tipe) {
+            let rdBtnPendamping = document.getElementById("pendampingn");
+            rdBtnPendamping.checked = true
+            $('#form_pendamping').hide();
+
             if (event == 'fw' && tipe == '1') {
                 $('#lbl_p').show();
                 $('#lbl_p1').show();
                 $('#addpendamping').show();
-
                 $('#lbl_p2').show();
                 $('#pendamping').show();
             } else {
-                pendamping.value = 'N';
                 $('#addpendamping').hide();
-
                 $('#lbl_p').hide();
                 $('#lbl_p1').hide();
                 $('#lbl_p2').hide();
                 $('#pendamping').hide();
             }
+
         }
 
         function isPendamping(myRadio) {
             val = myRadio.value;
+            console.log(val)
 
             if (val == 'N') {
                 $('#form_pendamping').hide();
