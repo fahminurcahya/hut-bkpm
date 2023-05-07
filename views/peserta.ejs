@@ -44,7 +44,8 @@
         <!-- <img src="/stylesheets/assets/images/details-image.png" class="img-content" alt="semina"> -->
     </div>
 
-    <div class="details-content container">
+    <div class="details-content container" style="text-align: center;">
+
         <div class="d-flex flex-wrap justify-content-lg-center gap">
 
             <!-- Card Event -->
@@ -52,66 +53,256 @@
                 <!-- Speaker Information -->
                 <% if(peserta.event == "fr") { %>
                 <h6>FUN RUN</h6>
+                <br>
                 <img src="/images/fr/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
                 <% }else { %>
                 <h6>FUN WALK</h6>
+                <br>
                 <img src="/images/fw/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
                 <% } %>
-                <div class="align-items-center mt-3  ">
-                    <table class="table table-bordered border border-success text-start flex-wrap">
-                        <tbody>
-                            <tr>
-                                <td>Nama</td>
-                                <td><%=peserta.nama%></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><%=peserta.email%></td>
-                            </tr>
-                            <tr>
-                                <td>No HP</td>
-                                <td><%=peserta.no_whatsapp%></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <% if(peserta.flag_internal) { %>
-                                    NIP
-                                    <% } else {%>
-                                    Umur
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <% if(peserta.flag_internal) { %>
-                                    <%=peserta.nip%>
-                                    <% } else {%>
-                                    <%=peserta.umur%>
-                                    <% } %>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <% if(peserta.flag_internal) { %>
-                                    Departemen
-                                    <% } else {%>
-                                    Alamat
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <% if(peserta.flag_internal) { %>
-                                    <%= peserta.departement%>
-                                    <% } else {%>
-                                    <%= peserta.alamat%>
-                                    <% } %>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
                 <div class="price my-3">Nomor Peserta</div>
-                <div class="price my-3"><%=peserta.no_peserta%></div>
+                <div class="price my-3"><%=peserta.no_peserta%>
+                </div>
                 <hr>
-                <a href="/pdf/<%=peserta.no_peserta%>.pdf" download="<%=peserta.no_peserta%>.pdf"
+                <% if(peserta.event == "fr") { %>
+                <a href="/pdf/fr/<%=peserta.no_peserta%>.pdf" download="<%=peserta.no_peserta%>.pdf"
                     class="btn-green">Download Tiket</a>
+                <% }else { %>
+                <a href="/pdf/fw/<%=peserta.no_peserta%>.pdf" download="<%=peserta.no_peserta%>.pdf"
+                    class="btn-green">Download Tiket</a>
+                <% } %>
+
+                <hr>
+                <% if(peserta.flag_internal) { %>
+                <div id="vis_nip">
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_nip" class="form-label">
+                            Nip
+                        </label>
+                        <input readonly value="<%=peserta.nip%>" type="text" class="form-control" id="nip" name="nip"
+                            placeholder="Masukkan Nip">
+                    </div>
+                </div>
+                <% }%>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_nik" class="form-label">
+                        NIK/KTP
+                    </label>
+                    <input readonly value="<%=peserta.nik%>" type="text" class="form-control" id="nik" name="nik"
+                        placeholder="Masukkan NIK/KTP" required>
+                </div>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_alamat" class="form-label">
+                        Alamat
+                    </label>
+                    <textarea readonly class="form-control" id="alamat" name="alamat" rows="3"
+                        required><%= peserta.alamat %></textarea>
+                </div>
+                <% if(peserta.flag_internal) { %>
+
+                <div id="vis_departemen">
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_departement" class="form-label">
+                            Kedeputian
+                        </label>
+                        <input readonly value="<%=peserta.departement%>" type="text" class="form-control" required>
+                    </div>
+                </div>
+                <% }%>
+
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_email" class="form-label">
+                        Email
+                    </label>
+                    <input readonly value="<%=peserta.email%>" type="email" class="form-control" id="email" name="email"
+                        placeholder="contoh@gmail.com" required>
+                </div>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_no_whatsapp" class="form-label">
+                        No HP
+                    </label>
+                    <input readonly value="<%=peserta.no_whatsapp%>" type="text" class="form-control" id="no_whatsapp"
+                        name="no_whatsapp" placeholder="Masukkan No HP" required>
+                </div>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_jenkel" class="form-label">
+                        Jenis Kelamin
+                    </label>
+                    <% if(peserta.jenkel == "L") { %>
+                    <input readonly value="Laki-Laki" type="text" class="form-control">
+                    <% } else { %>
+                    <input readonly value="Perempuan" type="text" class="form-control">
+                    <% } %>
+                </div>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_golongan_darah" class="form-label">
+                        Golongan Darah
+                    </label>
+
+                    <input readonly value="<%=peserta.golongan_darah%>" type="text" class="form-control" required>
+
+                </div>
+                <div class="d-flex flex-column align-items-start mt-4">
+                    <label id="lbl_ukuran" class="form-label">
+                        Ukuran Jersey
+                    </label>
+                    <input readonly value="<%=peserta.ukuran%>" type="text" class="form-control" required>
+
+                </div>
+
+                <div class="field">
+                    <span id="message"></span>
+                </div>
+                <div id="addinfo">
+                    <label id="lbl_darurat" class="form-label mt-4">
+                        *Dalam Keadaan Darurat Pihak Yang Dapat Dihubungi ( Yang Tidak Serumah )
+                    </label>
+
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_nama_darurat" class="form-label">
+                            Nama Lengkap </label>
+                        <input readonly value="<%=peserta.nama_darurat%>" type="text" class="form-control"
+                            id="nama_darurat" name="nama_darurat" placeholder="Masukan Nama Lengkap" required>
+                    </div>
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_hubungan" class="form-label">
+                            Hubungan </label>
+                        <input readonly value="<%=peserta.hubungan%>" type="text" class="form-control" id="hubungan"
+                            name="hubungan" placeholder="Masukan Hubungan" required>
+                    </div>
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_no_hp_darurat" class="form-label">
+                            Nomor HP </label>
+                        <input readonly value="<%=peserta.no_darurat%>" type="text" class="form-control"
+                            id="no_hp_darurat" name="no_hp_darurat" placeholder="Masukan Nama Lengkap" required>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_alamat_darurat" class="form-label">
+                            Alamat
+                        </label>
+                        <textarea class="form-control" id="alamat_darurat" name="alamat_darurat" rows="3"
+                            readonly><%= peserta.alamat_darurat%></textarea>
+                    </div>
+                </div>
+                <div id="addpendamping">
+
+                    <!-- Pendamping -->
+                    <% if(peserta.event == "fw" && peserta.flag_internal)   { %>
+                    <div id="form_pendamping">
+                        <div class="row mt-4">
+                            <label id="lbl_pendamping_1" class="form-label">
+                                Pendamping 1
+                            </label>
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_nama_pendamping_1" class="form-label">
+                                    Nama Pendamping
+                                </label>
+                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
+                                    id="nama_pendamping_1" name="nama_pendamping_1" placeholder="Type your Name" />
+                                <label id="lbl_ukuran_pendamping_1" class="form-label">
+                                    Ukuran Jersey
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="ukuran_1"
+                                    name="ukuran_1">
+                                    <option value="" selected>Pilih Ukuran Jersey</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <label id="lbl_pendamping_2" class="form-label mt-4">
+                                Pendamping 2
+                            </label>
+                            <div class="d-flex flex-column align-items-start">
+                                <label id="lbl_nama_pendamping_2" class="form-label">
+                                    Nama Pendamping
+                                </label>
+                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
+                                    id="nama_pendamping_2" name="nama_pendamping_2" placeholder="Type your Name" />
+                                <label id="lbl_ukuran_pendamping_2" class="form-label">
+                                    Ukuran Jersey
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="ukuran_2"
+                                    name="ukuran_2">
+                                    <option value="" selected>Pilih Ukuran Jersey</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <label id="lbl_pendamping_3" class="form-label mt-4">
+                                Pendamping 3
+                            </label>
+                            <div class="d-flex flex-column align-items-start ">
+                                <label id="lbl_nama_pendamping_3" class="form-label">
+                                    Nama Pendamping
+                                </label>
+                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
+                                    id="nama_pendamping_3" name="nama_pendamping_3" placeholder="Type your Name" />
+                                <label id="lbl_ukuran_pendamping_3" class="form-label">
+                                    Ukuran Jersey
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="ukuran_3"
+                                    name="ukuran_3">
+                                    <option value="" selected>Pilih Ukuran Jersey</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <label id="lbl_pendamping_4" class="form-label mt-4">
+                                Pendamping 4
+                            </label>
+                            <div class="d-flex flex-column align-items-start">
+                                <label id="lbl_nama_pendamping_4" class="form-label">
+                                    Nama Pendamping
+                                </label>
+                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
+                                    id="nama_pendamping_4" name="nama_pendamping_4" placeholder="Type your Name" />
+                                <label id="lbl_ukuran_pendamping_4" class="form-label">
+                                    Ukuran Jersey
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="ukuran_4"
+                                    name="ukuran_4">
+                                    <option value="" selected>Pilih Ukuran Jersey</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <label id="lbl_pendamping_5" class="form-label mt-4">
+                                Pendamping 5
+                            </label>
+                            <div class="d-flex flex-column align-items-start">
+                                <label id="lbl_nama_pendamping_5" class="form-label">
+                                    Nama Pendamping
+                                </label>
+                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
+                                    id="nama_pendamping_5" name="nama_pendamping_5" placeholder="Type your Name" />
+                                <label id="lbl_ukuran_pendamping_5" class="form-label">
+                                    Ukuran Jersey
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="ukuran_5"
+                                    name="ukuran_5">
+                                    <option value="" selected>Pilih Ukuran Jersey</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                    <!-- Pendamping -->
+                </div>
+                
             </div>
         </div>
     </div>
