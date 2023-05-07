@@ -194,8 +194,8 @@ const register = async (req, res) => {
     }
 
     await generateQRPNG(peserta.no_peserta, peserta.qr_code, peserta.event);
-    await generatePDF(email, peserta.no_peserta, peserta.nama, event);
-    await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
+    generatePDF(email, peserta.no_peserta, peserta.nama, event);
+    sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
     await t.commit();
 
     // if (event === "fw" && flag_internal) {

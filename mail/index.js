@@ -10,6 +10,7 @@ const {
 const fs = require("fs");
 const pdf = require("html-pdf");
 const dotenv = require("dotenv");
+const Peserta = require("../models/Peserta");
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
@@ -187,10 +188,10 @@ const sendNotifAdmin = async (email, no_peserta, nama, event) => {
       }),
     };
 
-    return await transporter.sendMail(message);
+    await transporter.sendMail(message);
   } catch (err) {
     console.log(err);
-    throw err;
+    // throw err;
   }
 };
 
@@ -293,9 +294,18 @@ async function generatePDF(email, no_peserta, nama, event) {
       ],
     };
     console.log("PDF code berhasil dibuat pada file " + filePath); // { filename: '/app/businesscard.pdf' }
-    return await transporter.sendMail(message);
+    await transporter.sendMail(message);
+    Peserta.update(
+      { flag_email: true },
+      {
+        where: {
+          email,
+        },
+      }
+    );
   } catch (err) {
-    throw new Error(err);
+    console.log(err);
+    // throw new Error(err);
   }
 }
 

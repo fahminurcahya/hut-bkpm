@@ -100,6 +100,11 @@ const Peserta = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    flag_email: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     timestamps: true,
