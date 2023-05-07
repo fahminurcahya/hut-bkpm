@@ -266,12 +266,17 @@ const getDetail = async (req, res) => {
     const peserta = await Peserta.findOne({
       where: { id },
     });
+
+    const pendamping = await Pendamping.findOne({
+      where: { id_peserta: id },
+    });
     const alertMessage = req.flash("alertMessage");
     const alertStatus = req.flash("alertStatus");
     const alert = { message: alertMessage, status: alertStatus };
     res.render("admin/detail", {
       title: "HUT 50 | BKPM",
       peserta,
+      pendamping,
       alert,
     });
   } catch (error) {
@@ -287,12 +292,18 @@ const viewDetail = async (req, res) => {
     const peserta = await Peserta.findOne({
       where: { id },
     });
+
+    const pendamping = await Pendamping.findAll({
+      where: { id_peserta: id },
+    });
     const alertMessage = req.flash("alertMessage");
     const alertStatus = req.flash("alertStatus");
     const alert = { message: alertMessage, status: alertStatus };
+    console.log(pendamping);
     res.render("peserta", {
       title: "HUT 50 | BKPM",
       peserta,
+      pendamping,
       alert,
     });
   } catch (error) {

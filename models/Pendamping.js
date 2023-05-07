@@ -24,8 +24,9 @@ const Pendamping = sequelize.define(
   {
     timestamps: false,
     underscored: false,
-    freezeTableName: true
+    freezeTableName: true,
   }
 );
+Pendamping.removeAttribute("id");
 
 module.exports = Pendamping;

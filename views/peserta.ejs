@@ -186,123 +186,27 @@
                             readonly><%= peserta.alamat_darurat%></textarea>
                     </div>
                 </div>
-                <div id="addpendamping">
-
-                    <!-- Pendamping -->
-                    <% if(peserta.event == "fw" && peserta.flag_internal)   { %>
-                    <div id="form_pendamping">
-                        <div class="row mt-4">
-                            <label id="lbl_pendamping_1" class="form-label">
-                                Pendamping 1
-                            </label>
-                            <div class="d-flex flex-column align-items-start mt-4">
-                                <label id="lbl_nama_pendamping_1" class="form-label">
-                                    Nama Pendamping
-                                </label>
-                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
-                                    id="nama_pendamping_1" name="nama_pendamping_1" placeholder="Type your Name" />
-                                <label id="lbl_ukuran_pendamping_1" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran_1"
-                                    name="ukuran_1">
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <label id="lbl_pendamping_2" class="form-label mt-4">
-                                Pendamping 2
-                            </label>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nama_pendamping_2" class="form-label">
-                                    Nama Pendamping
-                                </label>
-                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
-                                    id="nama_pendamping_2" name="nama_pendamping_2" placeholder="Type your Name" />
-                                <label id="lbl_ukuran_pendamping_2" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran_2"
-                                    name="ukuran_2">
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <label id="lbl_pendamping_3" class="form-label mt-4">
-                                Pendamping 3
-                            </label>
-                            <div class="d-flex flex-column align-items-start ">
-                                <label id="lbl_nama_pendamping_3" class="form-label">
-                                    Nama Pendamping
-                                </label>
-                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
-                                    id="nama_pendamping_3" name="nama_pendamping_3" placeholder="Type your Name" />
-                                <label id="lbl_ukuran_pendamping_3" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran_3"
-                                    name="ukuran_3">
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <label id="lbl_pendamping_4" class="form-label mt-4">
-                                Pendamping 4
-                            </label>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nama_pendamping_4" class="form-label">
-                                    Nama Pendamping
-                                </label>
-                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
-                                    id="nama_pendamping_4" name="nama_pendamping_4" placeholder="Type your Name" />
-                                <label id="lbl_ukuran_pendamping_4" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran_4"
-                                    name="ukuran_4">
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <label id="lbl_pendamping_5" class="form-label mt-4">
-                                Pendamping 5
-                            </label>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nama_pendamping_5" class="form-label">
-                                    Nama Pendamping
-                                </label>
-                                <input readonly value="<%=peserta.no_peserta%>" type="text" class="form-control"
-                                    id="nama_pendamping_5" name="nama_pendamping_5" placeholder="Type your Name" />
-                                <label id="lbl_ukuran_pendamping_5" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran_5"
-                                    name="ukuran_5">
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                        </div>
+                <!-- Pendamping -->
+                <% if(peserta.event == "fw" && peserta.flag_internal)   { %>
+                <% for(let i = 0; i < pendamping.length; i++){ %>
+                <div class="row mt-4">
+                    <label id="lbl_pendamping_1" class="form-label">
+                        Pendamping <%= i + 1 %>
+                    </label>
+                    <div class="d-flex flex-column align-items-start mt-4">
+                        <label id="lbl_nama_pendamping_1" class="form-label">
+                            Nama Pendamping
+                        </label>
+                        <input readonly value="<%=pendamping[i].nama%>" type="text" class="form-control" />
+                        <label id="lbl_nama_pendamping_1" class="form-label">
+                            Ukuran
+                        </label>
+                        <input readonly value="<%=pendamping[i].ukuran%>" type="text" class="form-control" />
                     </div>
-                    <%}%>
-                    <!-- Pendamping -->
                 </div>
-                
+                <% } %>
+                <%}%>
+<!-- Pendamping -->
             </div>
         </div>
     </div>
