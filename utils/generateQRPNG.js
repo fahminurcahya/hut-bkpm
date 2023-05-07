@@ -1,8 +1,13 @@
 var QRCode = require("qrcode");
 
-const generateQRPNG = async (no_peserta, qr_code) => {
-  const path = "images/" + no_peserta + ".png";
+const generateQRPNG = async (no_peserta, qr_code, event) => {
+  let path = "";
+  event === "fw"
+    ? (path = "images/fw/" + no_peserta + ".png")
+    : (path = "images/fr/" + no_peserta + ".png");
+
   const filePath = "./public/" + path;
+  console.log(filePath);
   try {
     const qrCode = await QRCode.toFile(filePath, qr_code, {
       type: "png",

@@ -5,18 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:ital,wght@1,200&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            color: aquamarine;
         }
 
         body,
         html {
-            height: 100vh;
+            height: 70vh;
             width: 750px;
             padding: 20px;
             display: grid;
@@ -49,7 +53,7 @@
 
         .right {
             display: flex;
-            border-left: 1px dashed #404040;
+            /* border-left: 1px dashed #404040; */
             width: 600px;
 
         }
@@ -64,19 +68,12 @@
               align-items: center;
           } */
 
-        .barcode {
+        .gambar-kiri {
             padding-top: 10px;
-            height: 90px;
-
-
-        }
-
-        .barcode img {
-            height: 100%;
-            transform: rotate(90deg);
-
+            width: 100px;
 
         }
+
 
         .asean {
             height: 100px;
@@ -97,33 +94,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 
-    <div class="ticket">
+    <div class="ticket" style="margin-top: 20px; text-align: center;">
         <table style="width:100%">
             <tr>
-                <td style="padding: 0px 12px">
-                    <div class=" barcode">
-                        <img id="img-left" src="{{public_url}}/images/{{no_peserta}}.png" alt="QR code">
+                <td>
+                    <div class=" gambar-kiri">
+                        <img src="{{public_url}}/stylesheets/assets/images/50th.png" width="72px">
                     </div>
                 </td>
-                <th rowspan="2">
+                <th rowspan="3">
                     <div class="right">
                         <!-- <div class="ticket-info"> -->
-                        <img src="{{public_url}}/stylesheets/assets/images/jalansehat.jpeg" alt="" width="100%">
+                        <img src="{{public_url}}/stylesheets/assets/images/eticketfw.png" alt="" width="100%">
                         <!-- </div> -->
                     </div>
                 </th>
 
             </tr>
             <tr>
-                <td style="padding: 0px 0px;">
-                    <div class="asean">
-                        <img src="{{public_url}}/stylesheets/assets/images/asean.png">
+                <td>
+                    <div class="gambar-kiri">
+                        <img src="{{public_url}}/stylesheets/assets/images/asean2.png" width="95px" style="margin:0">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class=" gambar-kiri">
+                        <img id="img-left" src="{{public_url}}/images/fw/{{no_peserta}}.png" alt="QR code"
+                            width="75px"><br>
                     </div>
                 </td>
             </tr>
 
         </table>
     </div>
+
+
+
 </body>
 
 </html>

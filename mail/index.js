@@ -9,6 +9,8 @@ const {
 } = require("../configs/email");
 const fs = require("fs");
 const pdf = require("html-pdf");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   host: mail_host,
@@ -194,28 +196,41 @@ const sendNotifAdmin = async (email, no_peserta, nama, event) => {
 
 async function generatePDF(email, no_peserta, nama, event) {
   try {
+    // define path
     let template;
-    if (event == "FUN RUN 7K") {
-      template = fs.readFileSync("views/pdf/tiket_fr_base64.html", "utf8");
+    let base64QR;
+    let path;
+
+    // check event
+    if (event == "fr") {
+      template = fs.readFileSync("views/pdf/tiket_fr.html", "utf8");
+      // base64QR = fs.readFileSync(
+      //   "public/images/fr/" + no_peserta + ".png",
+      //   "base64"
+      // );
+      path = "pdf/fr/" + no_peserta + ".pdf";
     } else {
-      template = fs.readFileSync("views/pdf/tiket_js_base64.html", "utf8");
+      template = fs.readFileSync("views/pdf/tiket_js.html", "utf8");
+      // base64QR = fs.readFileSync(
+      //   "public/images/fw/" + no_peserta + ".png",
+      //   "base64"
+      // );
+      path = "pdf/fw/" + no_peserta + ".pdf";
     }
 
-    const base64QR    = fs.readFileSync("public/images/" + no_peserta + ".png", 'base64');
     // const base64Asean = base64_encode("public/stylesheets/assets/images/funrun.jpeg");
     // const base64Logo  = base64_encode("public/stylesheets/assets/images/funrun.jpeg");
     // console.log(base64QR);
     const data = {
-
       no_peserta: no_peserta,
       public_url: process.env.PUBLIC_URL,
-      base64QR: base64QR,
+      // base64QR: base64QR,
       // base64Asean: base64Asean,
       // base64Logo: base64Logo,
-
     };
 
     const html = Mustache.render(template, data);
+    // console.log(html);
 
     const options = {
       format: "A4",
@@ -228,7 +243,8 @@ async function generatePDF(email, no_peserta, nama, event) {
       },
       orientation: "landscape",
     };
-    const path = "pdf/" + no_peserta + ".pdf";
+
+    // generate pdf
     const filePath = "./public/" + path;
     const pdfPromise = await new Promise((resolve, reject) => {
       pdf.create(html, options).toFile(filePath, function (err, res) {
@@ -243,20 +259,28 @@ async function generatePDF(email, no_peserta, nama, event) {
     });
     console.log(`PDF successfully created at ${filePath}`);
 
+    // prepare send email
     let templateEmail = fs.readFileSync("views/email/tiket_3.html", "utf8");
-    const attachment1 = await fs.readFileSync(
-      "public/images/" + no_peserta + ".png"
-    );
+    let pathPNG;
+    event === "fr"
+      ? (pathPNG = "public/images/fr/" + no_peserta + ".png")
+      : (pathPNG = "public/images/fw/" + no_peserta + ".png");
 
+    const attachment1 = await fs.readFileSync(pathPNG);
     const attachment2 = await readFile(filePath);
-
     const public_url = process.env.PUBLIC_URL;
 
+    // send mail
     let message = {
       from: sender_email,
       to: email,
       subject: "HUT BKPM 50",
-      html: Mustache.render(templateEmail, { public_url: public_url, nama: nama, no_peserta: no_peserta, event: event }),
+      html: Mustache.render(templateEmail, {
+        public_url: public_url,
+        nama: nama,
+        no_peserta: no_peserta,
+        event: event,
+      }),
       attachments: [
         {
           filename: "QR.png",
