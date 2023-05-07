@@ -47,7 +47,7 @@
                         Pendaftaran Peserta
                     </div>
                 </div>
-                <form action="/registers" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
+                <form action="/register" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
                     onsubmit="submitpass.disabled = true;">
                     <%- include('message.ejs') %>
 
@@ -443,8 +443,6 @@
                 $('#flag_internal').hide();
                 $('#form_register').hide();
                 $('#submitpass').prop('disabled', true);
-
-
                 password.value = '';
                 password_confirm.value = '';
                 $('#message').hide();
@@ -466,7 +464,6 @@
 
         function Tipe(val) {
             if (val == '') {
-
                 nama.value = '';
                 nip.value = '';
                 nik.value = '';
@@ -491,6 +488,8 @@
                 $('#submitpass').prop('disabled', true);
 
             } else if (val == '1') {
+                $("#nip").attr("required", "true");
+                $("#departement").attr("required", "true");
                 $('#form_register').show();
                 $('#lbl_terms_agree').show();
                 $('#terms_agree').show();
@@ -499,12 +498,13 @@
                 password.value = '';
                 password_confirm.value = '';
                 $('#message').hide();
-
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
 
-
             } else if (val == '0') {
+
+                $("#nip").removeAttr("required");
+                $("#departement").removeAttr("required");
                 $('#form_register').show();
                 $('#lbl_terms_agree').show();
                 $('#terms_agree').show();
@@ -515,7 +515,6 @@
                 password.value = '';
                 password_confirm.value = '';
                 $('#message').hide();
-
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
 
