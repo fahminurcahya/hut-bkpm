@@ -67,7 +67,7 @@
                             Tipe Peserta
                         </label>
                         <select class="form-select" aria-label="Default select example" id="flag_internal"
-                            name="flag_internal" onchange="Tipe(this.value)">
+                            name="flag_internal" onchange="Tipe(this.value)" required>
                             <option value="" selected>Pilih Tipe Peserta</option>
                             <option value="1">Internal Kementerian/BKPM</option>
                             <option value="0">Umum</option>
@@ -83,11 +83,13 @@
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama"
                                 required>
                         </div>
-                        <div class="d-flex flex-column align-items-start mt-4" id="vis_nip">
-                            <label id="lbl_nip" class="form-label">
-                                Nip
-                            </label>
-                            <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan Nip">
+                        <div id="vis_nip">
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_nip" class="form-label">
+                                    Nip
+                                </label>
+                                <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan Nip">
+                            </div>
                         </div>
                         <div class="d-flex flex-column align-items-start mt-4">
                             <label id="lbl_nik" class="form-label">
@@ -102,30 +104,32 @@
                             </label>
                             <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
                         </div>
-                        <div class="d-flex flex-column align-items-start mt-4">
-                            <label id="lbl_departement" class="form-label">
-                                Kedeputian
-                            </label>
-                            <select class="form-select" aria-label="Default select example" id="departement"
-                                name="departement" required>
-                                <option value="" selected>Pilih Kedeputian</option>
-                                <option value="Kedeputian Pelayanan Penanaman Modal">Kedeputian Pelayanan Penanaman
-                                    Modal</option>
-                                <option value="Kedeputian Perencanaan Penanaman Modal">Kedeputian Perencanaan
-                                    Penanaman Modal</option>
-                                <option value="Kedeputian Promosi Penanaman Modal">Kedeputian Promosi Penanaman
-                                    Modal</option>
-                                <option value="Kedeputian Kerja Sama Penanaman Modal">Kedeputian Kerja Sama
-                                    Penanaman Modal</option>
-                                <option value="Kedeputian Pengembangan Iklim Penanaman Modal">Kedeputian
-                                    Pengembangan Iklim Penanaman Modal</option>
-                                <option value="Kedeputian Hilirisasi Penanaman Modal">Kedeputian Hilirisasi
-                                    Penanaman Modal</option>
-                                <option value="Kedeputian Teknologi dan Informasi Penanaman Modal">Kedeputian
-                                    Teknologi dan Informasi Penanaman Modal</option>
-                                <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian
-                                    Pengendalian dan Pelaksanaan Penanaman Modal</option>
-                            </select>
+                        <div id="vis_departemen">
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_departement" class="form-label">
+                                    Kedeputian
+                                </label>
+                                <select class="form-select" aria-label="Default select example" id="departement"
+                                    name="departement">
+                                    <option value="" selected>Pilih Kedeputian</option>
+                                    <option value="Kedeputian Pelayanan Penanaman Modal">Kedeputian Pelayanan Penanaman
+                                        Modal</option>
+                                    <option value="Kedeputian Perencanaan Penanaman Modal">Kedeputian Perencanaan
+                                        Penanaman Modal</option>
+                                    <option value="Kedeputian Promosi Penanaman Modal">Kedeputian Promosi Penanaman
+                                        Modal</option>
+                                    <option value="Kedeputian Kerja Sama Penanaman Modal">Kedeputian Kerja Sama
+                                        Penanaman Modal</option>
+                                    <option value="Kedeputian Pengembangan Iklim Penanaman Modal">Kedeputian
+                                        Pengembangan Iklim Penanaman Modal</option>
+                                    <option value="Kedeputian Hilirisasi Penanaman Modal">Kedeputian Hilirisasi
+                                        Penanaman Modal</option>
+                                    <option value="Kedeputian Teknologi dan Informasi Penanaman Modal">Kedeputian
+                                        Teknologi dan Informasi Penanaman Modal</option>
+                                    <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian
+                                        Pengendalian dan Pelaksanaan Penanaman Modal</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="d-flex flex-column align-items-start mt-4">
                             <label id="lbl_email" class="form-label">
@@ -359,16 +363,16 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
-                                    <!-- Pendamping -->
-                                    <div class="d-flex flex-column align-items-start mt-4">
-                                        <label id="lbl_terms_agree" class="form-label">
-                                            Syarat & Ketentuan
-                                        </label>
-                                        <input type="checkbox" id="terms_agree" name="terms_agree" onclick="Terms()">
-                                    </div>
-                                    <!-- General -->
                                 </div>
                             </div>
+                            <!-- Pendamping -->
+                        </div>
+                        <!-- general -->
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_terms_agree" class="form-label">
+                                Syarat & Ketentuan
+                            </label>
+                            <input type="checkbox" id="terms_agree" name="terms_agree" onclick="Terms()">
                         </div>
                     </div>
 
@@ -412,69 +416,8 @@
             $('#submitpass').prop('disabled', true);
             $('#pendamping').hide();
             $('#form_pendamping').hide();
-
-
-
             $('#lbl_flag_internal').hide();
-            $('#lbl_nama').hide();
-            $('#lbl_nip').hide();
-            $('#lbl_nik').hide();
-            $('#lbl_alamat').hide();
-            $('#lbl_departement').hide();
-            $('#lbl_email').hide();
-            $('#lbl_no_whatsapp').hide();
-            $('#lbl_jenkel').hide();
-            $('#lbl_golongan_darah').hide();
-            $('#lbl_ukuran').hide();
-            $('#lbl_password').hide();
-            $('#lbl_password_confirm').hide();
-            $('#lbl_terms_agree').hide();
-
-            // $('#lbl_pendamping_1').hide();
-            // $('#lbl_pendamping_2').hide();
-            // $('#lbl_pendamping_3').hide();
-            // $('#lbl_pendamping_4').hide();
-            // $('#lbl_pendamping_5').hide();
-            // $('#lbl_nama_pendamping_1').hide();
-            // $('#lbl_ukuran_pendamping_1').hide();
-            // $('#lbl_nama_pendamping_2').hide();
-            // $('#lbl_ukuran_pendamping_2').hide();
-            // $('#lbl_nama_pendamping_3').hide();
-            // $('#lbl_ukuran_pendamping_3').hide();
-            // $('#lbl_nama_pendamping_4').hide();
-            // $('#lbl_ukuran_pendamping_4').hide();
-            // $('#lbl_nama_pendamping_5').hide();
-            // $('#lbl_ukuran_pendamping_5').hide();
-
-            // $('#lbl_p').hide();
-            // $('#lbl_p1').hide();
-            // $('#lbl_p2').hide();
-
             $('#flag_internal').hide();
-            $('#nama').hide();
-            $('#nip').hide();
-            $('#nik').hide();
-            $('#alamat').hide();
-            $('#departement').hide();
-            $('#email').hide();
-            $('#no_whatsapp').hide();
-            $('#jenkel').hide();
-            $('#golongan_darah').hide();
-            $('#ukuran').hide();
-            $('#password').hide();
-            $('#password_confirm').hide();
-            $('#terms_agree').hide();
-
-            // $('#nama_pendamping_1').hide();
-            // $('#ukuran_1').hide();
-            // $('#nama_pendamping_2').hide();
-            // $('#ukuran_2').hide();
-            // $('#nama_pendamping_3').hide();
-            // $('#ukuran_3').hide();
-            // $('#nama_pendamping_4').hide();
-            // $('#ukuran_4').hide();
-            // $('#nama_pendamping_5').hide();
-            // $('#ukuran_5').hide();
 
 
             $('#password, #password_confirm').on('keyup', function () {
@@ -493,53 +436,32 @@
         });
 
         function Event(val) {
-            flag_internal.value = '';
+            if (val == '') {
+                $('#lbl_flag_internal').hide();
+                $('#flag_internal').hide();
+                $('#form_register').hide();
+                $('#submitpass').prop('disabled', true);
+                password.value = '';
+                password_confirm.value = '';
+                $('#message').hide();
+                document.getElementById("terms_agree").checked = false;
 
-            $('#addinfo').hide();
-            $('#addpendamping').hide();
+            } else {
+                flag_internal.value = '';
+                $('#lbl_flag_internal').show();
+                $('#flag_internal').show();
+                password.value = '';
+                password_confirm.value = '';
+                $('#message').hide();
+                $('#submitpass').prop('disabled', true);
+                document.getElementById("terms_agree").checked = false;
 
-            $('#lbl_nama').hide();
-            $('#lbl_nip').hide();
-            $('#vis_nip').hide();
+            }
 
-            $('#lbl_nik').hide();
-            $('#lbl_alamat').hide();
-            $('#lbl_departement').hide();
-            $('#lbl_email').hide();
-            $('#lbl_no_whatsapp').hide();
-            $('#lbl_jenkel').hide();
-            $('#lbl_golongan_darah').hide();
-            $('#lbl_ukuran').hide();
-            $('#lbl_password').hide();
-            $('#lbl_password_confirm').hide();
-            $('#lbl_terms_agree').hide();
-
-            $('#nama').hide();
-            $('#nip').hide();
-            $('#nik').hide();
-            $('#alamat').hide();
-            $('#departement').hide();
-            $('#email').hide();
-            $('#no_whatsapp').hide();
-            $('#jenkel').hide();
-            $('#golongan_darah').hide();
-            $('#ukuran').hide();
-            $('#password').hide();
-            $('#password_confirm').hide();
-            $('#terms_agree').hide();
-
-
-
-
-            $('#lbl_flag_internal').show();
-            $('#flag_internal').show();
         }
 
         function Tipe(val) {
             if (val == '') {
-                $('#form_register').hide();
-
-                $('#addinfo').hide();
 
                 nama.value = '';
                 nip.value = '';
@@ -557,136 +479,66 @@
                 hubungan.value = '';
                 alamat_darurat.value = '';
                 no_hp_darurat.value = '';
-
                 document.getElementById("terms_agree").checked = false;
 
-                $('#lbl_nama').hide();
-                $('#lbl_nip').hide();
-                $('#vis_nip').hide();
-
-                $('#lbl_nik').hide();
-                $('#lbl_alamat').hide();
-                $('#lbl_departement').hide();
-                $('#lbl_email').hide();
-                $('#lbl_no_whatsapp').hide();
-                $('#lbl_jenkel').hide();
-                $('#lbl_golongan_darah').hide();
-                $('#lbl_ukuran').hide();
-                $('#lbl_password').hide();
-                $('#lbl_password_confirm').hide();
+                $('#form_register').hide();
                 $('#lbl_terms_agree').hide();
-
-                $('#nama').hide();
-                $('#nip').hide();
-                $('#nik').hide();
-                $('#alamat').hide();
-                $('#departement').hide();
-                $('#email').hide();
-                $('#no_whatsapp').hide();
-                $('#jenkel').hide();
-                $('#golongan_darah').hide();
-                $('#ukuran').hide();
-                $('#password').hide();
-                $('#password_confirm').hide();
                 $('#terms_agree').hide();
+                $('#submitpass').prop('disabled', true);
+
             } else if (val == '1') {
                 $('#form_register').show();
-
-                $('#addinfo').show();
-
-                nama.value = '';
-                nip.value = '';
-                nik.value = '';
-                alamat.value = '';
-                departement.value = '';
-                email.value = '';
-                no_whatsapp.value = '';
-                jenkel.value = '';
-                golongan_darah.value = '';
-                ukuran.value = '';
+                $('#lbl_terms_agree').show();
+                $('#terms_agree').show();
+                $('#vis_nip').show();
+                $('#vis_departemen').show();
                 password.value = '';
                 password_confirm.value = '';
+                $('#message').hide();
+
+
+                // nama.value = '';
+                // nip.value = '';
+                // nik.value = '';
+                // alamat.value = '';
+                // departement.value = '';
+                // email.value = '';
+                // no_whatsapp.value = '';
+                // jenkel.value = '';
+                // golongan_darah.value = '';
+                // ukuran.value = '';
+                // password.value = '';
+                // password_confirm.value = '';
                 document.getElementById("terms_agree").checked = false;
+                $('#submitpass').prop('disabled', true);
 
-                $('#lbl_nama').show();
-                $('#lbl_nip').show();
-                $('#vis_nip').show();
 
-                $('#lbl_nik').show();
-                $('#lbl_alamat').show();
-                $('#lbl_departement').show();
-                $('#lbl_email').show();
-                $('#lbl_no_whatsapp').show();
-                $('#lbl_jenkel').show();
-                $('#lbl_golongan_darah').show();
-                $('#lbl_ukuran').show();
-                $('#lbl_password').show();
-                $('#lbl_password_confirm').show();
-                $('#lbl_terms_agree').show();
-
-                $('#nama').show();
-                $('#nip').show();
-                $('#nik').show();
-                $('#alamat').show();
-                $('#departement').show();
-                $('#email').show();
-                $('#no_whatsapp').show();
-                $('#jenkel').show();
-                $('#golongan_darah').show();
-                $('#ukuran').show();
-                $('#password').show();
-                $('#password_confirm').show();
-                $('#terms_agree').show();
             } else if (val == '0') {
                 $('#form_register').show();
-
-                $('#addinfo').show();
-
-                nama.value = '';
+                $('#lbl_terms_agree').show();
+                $('#terms_agree').show();
+                $('#vis_nip').hide();
+                $('#vis_departemen').hide();
                 nip.value = '';
-                nik.value = '';
-                alamat.value = '';
                 departement.value = '';
-                email.value = '';
-                no_whatsapp.value = '';
-                jenkel.value = '';
-                golongan_darah.value = '';
-                ukuran.value = '';
                 password.value = '';
                 password_confirm.value = '';
+                $('#message').hide();
+
+
+                // nama.value = '';
+                // nik.value = '';
+                // alamat.value = '';
+                // email.value = '';
+                // no_whatsapp.value = '';
+                // jenkel.value = '';
+                // golongan_darah.value = '';
+                // ukuran.value = '';
+
                 document.getElementById("terms_agree").checked = false;
+                $('#submitpass').prop('disabled', true);
 
-                $('#lbl_nama').show();
-                $('#lbl_nip').hide();
-                $('#vis_nip').hide();
-
-                $('#lbl_nik').show();
-                $('#lbl_alamat').show();
-                $('#lbl_departement').show();
-                $('#lbl_email').show();
-                $('#lbl_no_whatsapp').show();
-                $('#lbl_jenkel').show();
-                $('#lbl_golongan_darah').show();
-                $('#lbl_ukuran').show();
-                $('#lbl_password').show();
-                $('#lbl_password_confirm').show();
-                $('#lbl_terms_agree').show();
-
-                $('#nama').show();
-                $('#nip').hide();
-                $('#nik').show();
-                $('#alamat').show();
-                $('#departement').show();
-                $('#email').show();
-                $('#no_whatsapp').show();
-                $('#jenkel').show();
-                $('#golongan_darah').show();
-                $('#ukuran').show();
-                $('#password').show();
-                $('#password_confirm').show();
-                $('#terms_agree').show();
             }
-
 
             let event = document.getElementById("event").value;
             getPendamping(event, val);
@@ -725,7 +577,6 @@
         function Terms() {
             let terms = '';
             let id = document.getElementById("terms_agree");
-            console.log(id.checked)
 
             if (id.checked == true) {
                 terms = 'setuju';
@@ -736,11 +587,9 @@
             // If the checkbox is checked, display the output text
             if (terms == 'setuju') {
                 if ($('#password').val() == "" && $('#password_confirm').val() == "") {
-                    console.log("belom")
 
                     $('#submitpass').prop('disabled', true);
                 } else if ($('#password').val() == $('#password_confirm').val()) {
-                    console.log("kebuka")
                     $('#submitpass').prop('disabled', false);
                 } else {
                     console.log("belom")
@@ -761,6 +610,7 @@
                 $('#lbl_p2').show();
                 $('#pendamping').show();
             } else {
+                pendamping.value = 'N';
                 $('#addpendamping').hide();
 
                 $('#lbl_p').hide();
@@ -775,62 +625,8 @@
 
             if (val == 'N') {
                 $('#form_pendamping').hide();
-
-                // $('#lbl_pendamping_1').hide();
-                // $('#lbl_pendamping_2').hide();
-                // $('#lbl_pendamping_3').hide();
-                // $('#lbl_pendamping_4').hide();
-                // $('#lbl_pendamping_5').hide();
-                // $('#lbl_nama_pendamping_1').hide();
-                // $('#lbl_ukuran_pendamping_1').hide();
-                // $('#lbl_nama_pendamping_2').hide();
-                // $('#lbl_ukuran_pendamping_2').hide();
-                // $('#lbl_nama_pendamping_3').hide();
-                // $('#lbl_ukuran_pendamping_3').hide();
-                // $('#lbl_nama_pendamping_4').hide();
-                // $('#lbl_ukuran_pendamping_4').hide();
-                // $('#lbl_nama_pendamping_5').hide();
-                // $('#lbl_ukuran_pendamping_5').hide();
-
-                // $('#nama_pendamping_1').hide();
-                // $('#ukuran_1').hide();
-                // $('#nama_pendamping_2').hide();
-                // $('#ukuran_2').hide();
-                // $('#nama_pendamping_3').hide();
-                // $('#ukuran_3').hide();
-                // $('#nama_pendamping_4').hide();
-                // $('#ukuran_4').hide();
-                // $('#nama_pendamping_5').hide();
-                // $('#ukuran_5').hide();
             } else {
-                console.log('add')
                 $('#form_pendamping').show();
-                // $('#lbl_pendamping_1').show();
-                // $('#lbl_pendamping_2').show();
-                // $('#lbl_pendamping_3').show();
-                // $('#lbl_pendamping_4').show();
-                // $('#lbl_pendamping_5').show();
-                // $('#lbl_nama_pendamping_1').show();
-                // $('#lbl_ukuran_pendamping_1').show();
-                // $('#lbl_nama_pendamping_2').show();
-                // $('#lbl_ukuran_pendamping_2').show();
-                // $('#lbl_nama_pendamping_3').show();
-                // $('#lbl_ukuran_pendamping_3').show();
-                // $('#lbl_nama_pendamping_4').show();
-                // $('#lbl_ukuran_pendamping_4').show();
-                // $('#lbl_nama_pendamping_5').show();
-                // $('#lbl_ukuran_pendamping_5').show();
-
-                // $('#nama_pendamping_1').show();
-                // $('#ukuran_1').show();
-                // $('#nama_pendamping_2').show();
-                // $('#ukuran_2').show();
-                // $('#nama_pendamping_3').show();
-                // $('#ukuran_3').show();
-                // $('#nama_pendamping_4').show();
-                // $('#ukuran_4').show();
-                // $('#nama_pendamping_5').show();
-                // $('#ukuran_5').show();
             }
         }
 
