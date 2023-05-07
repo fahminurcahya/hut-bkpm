@@ -78,18 +78,30 @@
                         }
                         // Menutup akses kamera.
                     } else {
+                        if(resp.data.event=='fr'){
+                            Event = 'FUN RUN'
+                        }else{
+                            Event = 'FUN WALK'
+                        }
+                        
+                        if(resp.data.flag_racepack){
+                            Internal = 'Internal'
+                        }else{
+                            Internal = 'Umum'
+                        }
+                        
                         Swal.fire({
                             title: resp.message,
                             icon: 'success',
                             confirmButtonText: 'Kembali',
                             allowOutsideClick: false,
                             html:
-                                resp.data.event + ' | <br>' +
-                                    resp.data.flag_internal ? 'Internal' : 'External' + ' | <br> ' +
-                                    resp.data.no_peserta + ' | <br>' +
-                                    resp.data.nama + ' | <br>' +
-                                    resp.data.no_whatsapp + ' | <br>' +
-                                    resp.data.ukuran + ' | <br>'
+                                'Event | ' + Event + ' <br>' +
+                                'Tipe Peserta | ' + Internal + ' <br>' +
+                                'No Peserta | ' + resp.data.no_peserta + ' <br>' +
+                                'Nama | ' + resp.data.nama + ' <br>' +
+                                'No HP | ' + resp.data.no_whatsapp + ' <br>' +
+                                'Ukuran Jersey | ' + resp.data.ukuran
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
