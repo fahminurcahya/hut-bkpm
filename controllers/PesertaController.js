@@ -109,7 +109,7 @@ const register = async (req, res) => {
   const t = await sequelize.transaction();
 
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     let dataPeserta = {
       no_peserta: 101,
@@ -172,7 +172,7 @@ const register = async (req, res) => {
           }
         }
 
-        console.log(namap);
+        // console.log(namap);
 
         for (let i = 0; i < namap.length; i++) {
           if (

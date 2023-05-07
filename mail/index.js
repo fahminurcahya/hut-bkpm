@@ -270,6 +270,7 @@ async function generatePDF(email, no_peserta, nama, event) {
     const attachment1 = await fs.readFileSync(pathPNG);
     const attachment2 = await readFile(filePath);
     const public_url = process.env.PUBLIC_URL;
+    const dt_event = event === 'fr' ? 'FUN RUN' : 'FUN WALK';
 
     // send mail
     let message = {
@@ -280,7 +281,7 @@ async function generatePDF(email, no_peserta, nama, event) {
         public_url: public_url,
         nama: nama,
         no_peserta: no_peserta,
-        event: event,
+        event: dt_event,
       }),
       attachments: [
         {
