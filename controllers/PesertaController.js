@@ -267,7 +267,7 @@ const getDetail = async (req, res) => {
       where: { id },
     });
 
-    const pendamping = await Pendamping.findOne({
+    const pendamping = await Pendamping.findAll({
       where: { id_peserta: id },
     });
     const alertMessage = req.flash("alertMessage");

@@ -14,107 +14,131 @@
     <%- include('./navbar.ejs')  %>
     <br>
     <div class="container">
-        <div class="row col-sm-12">
+        <br><button class="btn btn-success" onclick="history.back()">Go Back</button>
+        <div class="row col-sm-12 mt-5" style="width: 200px;">
+
+            <img src="/images/<%=peserta.event%>/<%=peserta.no_peserta%>.png" alt=" <%=peserta.no_peserta%>" />
+        </div>
+
+        <div class="row col-sm-12 mt-5">
             <h2>Detail</h2>
             <div class="col-sm-6">
-                <form>
-                    <div class="form-group">
-                        <label for="">No Peserta</label>
-                        <input type="text" class="form-control" value="<%=peserta.no_peserta%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">No Peserta</label>
+                    <input type="text" class="form-control" value="<%=peserta.no_peserta%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Nama</label>
-                        <input type="text" class="form-control" value="<%=peserta.nama%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Nama</label>
+                    <input type="text" class="form-control" value="<%=peserta.nama%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">No Whatsapp</label>
-                        <input type="text" class="form-control" value="<%=peserta.no_whatsapp%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">No Whatsapp</label>
+                    <input type="text" class="form-control" value="<%=peserta.no_whatsapp%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" value="<%=peserta.email%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" value="<%=peserta.email%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Nik</label>
-                        <input type="text" class="form-control" value="<%=peserta.nik%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Nik</label>
+                    <input type="text" class="form-control" value="<%=peserta.nik%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Ukuran</label>
-                        <input type="text" class="form-control" value="<%=peserta.ukuran%>" readonly>
-                    </div>
-                    <% if(peserta.flag_internal) { %>
-                    <div class="form-group">
-                        <label for="">Nip</label>
-                        <input type="text" class="form-control" value="<%=peserta.nip%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Ukuran</label>
+                    <input type="text" class="form-control" value="<%=peserta.ukuran%>" readonly>
+                </div>
+                <% if(peserta.flag_internal) { %>
+                <div class="form-group">
+                    <label for="">Nip</label>
+                    <input type="text" class="form-control" value="<%=peserta.nip%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Departemen</label>
-                        <input type="text" class="form-control" value="<%=peserta.departement%>" readonly>
-                    </div>
-                    <% } else {%>
-                    <div class="form-group">
-                        <label for="">Alamat</label>
-                        <input type="text" class="form-control" value="<%=peserta.alamat%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Departemen</label>
+                    <input type="text" class="form-control" value="<%=peserta.departement%>" readonly>
+                </div>
+                <% } else {%>
+                <div class="form-group">
+                    <label for="">Alamat</label>
+                    <input type="text" class="form-control" value="<%=peserta.alamat%>" readonly>
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Umur</label>
-                        <input type="text" class="form-control" value="<%=peserta.umur%>" readonly>
-                    </div>
-                    <% }  %>
-
-                    <div class="form-group">
-                        <label for="">Event</label>
-                        <input type="text" class="form-control" value="<%=peserta.event%>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Jenis Kelamin</label>
-                        <input type="text" class="form-control"
-                            value="<% if(peserta.jenkel=='L'){ %>Laki - Laki<% } else{ %>Perempuan<% } %>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Golongan Darah</label>
-                        <input type="text" class="form-control" value="<%=peserta.golongan_darah%>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Nama Darurat</label>
-                        <input type="text" class="form-control" value="<%=peserta.nama_darurat%>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Hubungan</label>
-                        <input type="text" class="form-control" value="<%=peserta.hubungan%>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">No HP Darurat</label>
-                        <input type="text" class="form-control" value="<%=peserta.no_hp_darurat%>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Alamat Darurat</label>
-                        <input type="text" class="form-control" value="<%=peserta.alamat_darurat%>" readonly>
-                    </div>
+                <div class="form-group">
+                    <label for="">Umur</label>
+                    <input type="text" class="form-control" value="<%=peserta.umur%>" readonly>
+                </div>
+                <% }  %>
 
 
-                </form>
-                <br><button class="btn btn-success" onclick="history.back()">Go Back</button>
+
+
 
 
             </div>
 
             <div class="col-sm-6">
-                <img src="/images/<%=peserta.no_peserta%>.png" alt=" Red dot" width="60%" />
+                <div class="form-group">
+                    <label for="">Event</label>
+                    <input type="text" class="form-control" value="<%=peserta.event%>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Jenis Kelamin</label>
+                    <input type="text" class="form-control"
+                        value="<% if(peserta.jenkel=='L'){ %>Laki - Laki<% } else{ %>Perempuan<% } %>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Golongan Darah</label>
+                    <input type="text" class="form-control" value="<%=peserta.golongan_darah%>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Nama Darurat</label>
+                    <input type="text" class="form-control" value="<%=peserta.nama_darurat%>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Hubungan</label>
+                    <input type="text" class="form-control" value="<%=peserta.hubungan%>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">No HP Darurat</label>
+                    <input type="text" class="form-control" value="<%=peserta.no_hp_darurat%>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Alamat Darurat</label>
+                    <input type="text" class="form-control" value="<%=peserta.alamat_darurat%>" readonly>
+                </div>
+
             </div>
+        </div>
+
+        <div class="row col-sm-12 mt-5">
+            <% if(pendamping.length > 0 ){ %>
+
+            <h3>Pendamping</h3>
+
+            <% for(let i = 0; i < pendamping.length; i++){ %>
+            <div class="form-group">
+                <label for="">nama Pendamping <%= i +1 %></label>
+                <input type="text" class="form-control" value="<%=pendamping[i].nama%>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="">Alamat Darurat <%= i +1 %></label>
+                <input type="text" class="form-control" value="<%=pendamping[i].ukuran%>" readonly>
+            </div>
+            <% } %>
+            <% } %>
+
+
         </div>
 
     </div>
