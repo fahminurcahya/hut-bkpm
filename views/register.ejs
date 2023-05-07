@@ -48,14 +48,15 @@
                     </div>
                 </div>
                 <form action="/register" method="POST" class="form-login d-flex flex-column mt-4 mt-md-0 p-30"
-                    onsubmit="submitpass.disabled = true; return true;">
+                    onsubmit="submitpass.disabled = true;">
                     <%- include('message.ejs') %>
 
                     <div class="d-flex flex-column align-items-start">
                         <label id="lbl_event" class="form-label">
                             Event
                         </label>
-                        <select class="form-select" aria-label="Default select example" id="event" name="event" onchange="Event(this.value)">
+                        <select class="form-select" aria-label="Default select example" id="event" name="event"
+                            onchange="Event(this.value)">
                             <option value="" selected>Pilih Event</option>
                             <option value="fr">FUN RUN</option>
                             <option value="fw">FUN WALK</option>
@@ -72,119 +73,164 @@
                             <option value="0">Umum</option>
                         </select>
                     </div>
-                    
-                    <div class="row mt-2" id ="form_register">
-                        <div class="col">
-                    <!-- General -->
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nama" class="form-label">
-                                    Nama Lengkap
-                                </label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" required>
+
+                    <div class="row mt-2" id="form_register">
+                        <!-- General -->
+                        <div class="d-flex flex-column align-items-start">
+                            <label id="lbl_nama" class="form-label">
+                                Nama Lengkap
+                            </label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama"
+                                required>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4" id="vis_nip">
+                            <label id="lbl_nip" class="form-label">
+                                Nip
+                            </label>
+                            <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan Nip">
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_nik" class="form-label">
+                                NIK/KTP
+                            </label>
+                            <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK/KTP"
+                                required>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_alamat" class="form-label">
+                                Alamat
+                            </label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_departement" class="form-label">
+                                Kedeputian
+                            </label>
+                            <select class="form-select" aria-label="Default select example" id="departement"
+                                name="departement" required>
+                                <option value="" selected>Pilih Kedeputian</option>
+                                <option value="Kedeputian Pelayanan Penanaman Modal">Kedeputian Pelayanan Penanaman
+                                    Modal</option>
+                                <option value="Kedeputian Perencanaan Penanaman Modal">Kedeputian Perencanaan
+                                    Penanaman Modal</option>
+                                <option value="Kedeputian Promosi Penanaman Modal">Kedeputian Promosi Penanaman
+                                    Modal</option>
+                                <option value="Kedeputian Kerja Sama Penanaman Modal">Kedeputian Kerja Sama
+                                    Penanaman Modal</option>
+                                <option value="Kedeputian Pengembangan Iklim Penanaman Modal">Kedeputian
+                                    Pengembangan Iklim Penanaman Modal</option>
+                                <option value="Kedeputian Hilirisasi Penanaman Modal">Kedeputian Hilirisasi
+                                    Penanaman Modal</option>
+                                <option value="Kedeputian Teknologi dan Informasi Penanaman Modal">Kedeputian
+                                    Teknologi dan Informasi Penanaman Modal</option>
+                                <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian
+                                    Pengendalian dan Pelaksanaan Penanaman Modal</option>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_email" class="form-label">
+                                Email
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="contoh@gmail.com" required>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_no_whatsapp" class="form-label">
+                                No HP
+                            </label>
+                            <input type="text" class="form-control" id="no_whatsapp" name="no_whatsapp"
+                                placeholder="Masukkan No HP" required>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_jenkel" class="form-label">
+                                Jenis Kelamin
+                            </label>
+                            <select class="form-select" aria-label="Default select example" id="jenkel" name="jenkel"
+                                required>
+                                <option value="" selected>Pilih Jenis Kelamin</option>
+                                <option value="L">Laki - Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_golongan_darah" class="form-label">
+                                Golongan Darah
+                            </label>
+                            <select class="form-select" aria-label="Default select example" id="golongan_darah"
+                                name="golongan_darah" required>
+                                <option value="" selected>Pilih Golongan Darah</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_ukuran" class="form-label">
+                                Ukuran Jersey
+                            </label>
+                            <select class="form-select" aria-label="Default select example" id="ukuran" name="ukuran"
+                                required>
+                                <option value="" selected>Pilih Ukuran Jersey</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_password" class="form-label">
+                                Password
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Type your password" required>
+                        </div>
+                        <div class="d-flex flex-column align-items-start mt-4">
+                            <label id="lbl_password_confirm" class="form-label">
+                                Konfirmasi Password
+                            </label>
+                            <input type="password" class="form-control" id="password_confirm" name="password_confirm"
+                                placeholder="Type your password">
+                        </div>
+                        <div class="field">
+                            <span id="message"></span>
+                        </div>
+                        <div id="addinfo">
+                            <label id="lbl_darurat" class="form-label mt-4">
+                                *Dalam Keadaan Darurat Pihak Yang Dapat Dihubungi ( Yang Tidak Serumah )
+                            </label>
+
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_nama_darurat" class="form-label">
+                                    Nama Lengkap </label>
+                                <input type="text" class="form-control" id="nama_darurat" name="nama_darurat"
+                                    placeholder="Masukan Nama Lengkap" required>
                             </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nip" class="form-label">
-                                    Nip
-                                </label>
-                                <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan Nip" required>
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_hubungan" class="form-label">
+                                    Hubungan </label>
+                                <input type="text" class="form-control" id="hubungan" name="hubungan"
+                                    placeholder="Masukan Hubungan" required>
                             </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_nik" class="form-label">
-                                    NIK/KTP
-                                </label>
-                                <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK/KTP" required>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_alamat" class="form-label">
-                                    Alamat
-                                </label>
-                                <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_departement" class="form-label">
-                                    Kedeputian
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="departement" name="departement" required>
-                                    <option value="" selected>Pilih Kedeputian</option>
-                                    <option value="Kedeputian Pelayanan Penanaman Modal">Kedeputian Pelayanan Penanaman Modal</option>
-                                    <option value="Kedeputian Perencanaan Penanaman Modal">Kedeputian Perencanaan Penanaman Modal</option>
-                                    <option value="Kedeputian Promosi Penanaman Modal">Kedeputian Promosi Penanaman Modal</option>
-                                    <option value="Kedeputian Kerja Sama Penanaman Modal">Kedeputian Kerja Sama Penanaman Modal</option>
-                                    <option value="Kedeputian Pengembangan Iklim Penanaman Modal">Kedeputian Pengembangan Iklim Penanaman Modal</option>
-                                    <option value="Kedeputian Hilirisasi Penanaman Modal">Kedeputian Hilirisasi Penanaman Modal</option>
-                                    <option value="Kedeputian Teknologi dan Informasi Penanaman Modal">Kedeputian Teknologi dan Informasi Penanaman Modal</option>
-                                    <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal</option>
-                                </select>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_email" class="form-label">
-                                    Email
-                                </label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="contoh@gmail.com"
-                                    required>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_no_whatsapp" class="form-label">
-                                    No HP
-                                </label>
-                                <input type="text" class="form-control" id="no_whatsapp" name="no_whatsapp"
-                                    placeholder="Masukkan No HP" required>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_jenkel" class="form-label">
-                                    Jenis Kelamin
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="jenkel" name="jenkel" required>
-                                    <option value="" selected>Pilih Jenis Kelamin</option>
-                                    <option value="L">Laki - Laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_golongan_darah" class="form-label">
-                                    Golongan Darah
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="golongan_darah" name="golongan_darah" required>
-                                    <option value="" selected>Pilih Golongan Darah</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
-                                </select>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_ukuran" class="form-label">
-                                    Ukuran Jersey
-                                </label>
-                                <select class="form-select" aria-label="Default select example" id="ukuran" name="ukuran" required>
-                                    <option value="" selected>Pilih Ukuran Jersey</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_password" class="form-label">
-                                    Password
-                                </label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Type your password" required>
-                            </div>
-                            <div class="d-flex flex-column align-items-start">
-                                <label id="lbl_password_confirm" class="form-label">
-                                    Konfirmasi Password
-                                </label>
-                                <input type="password" class="form-control" id="password_confirm" name="password_confirm"
-                                    placeholder="Type your password">
-                            </div>
-                            <div class="field">
-                                <span id="message"></span>
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_no_hp_darurat" class="form-label">
+                                    Nomor HP </label>
+                                <input type="text" class="form-control" id="no_hp_darurat" name="no_hp_darurat"
+                                    placeholder="Masukan Nama Lengkap" required>
                             </div>
 
-                            <div class="d-flex flex-column align-items-start">
+                            <div class="d-flex flex-column align-items-start mt-4">
+                                <label id="lbl_alamat_darurat" class="form-label">
+                                    Alamat
+                                </label>
+                                <textarea class="form-control" id="alamat_darurat" name="alamat_darurat" rows="3"
+                                    required></textarea>
+                            </div>
+                        </div>
+                        <div id="addpendamping">
+                            <div class="d-flex flex-column align-items-start mt-4">
                                 <table>
-                                    <tbody> 
+                                    <tbody>
                                         <tr>
                                             <label id="lbl_p" class="form-label">
                                                 Apakah Ada Pendamping?
@@ -192,11 +238,13 @@
                                         </tr>
                                         <tr>
                                             <label id="lbl_p1" class="form-label">
-                                                <input type="radio" name="pendamping" id="pendamping" onclick="isPendamping(this);" value="Y" required />
+                                                <input type="radio" name="pendamping" id="pendamping"
+                                                    onclick="isPendamping(this);" value="Y" required />
                                                 Ya
                                             </label>
                                             <label id="lbl_p2" class="form-label">
-                                                <input type="radio" name="pendamping" id="pendamping" onclick="isPendamping(this);" value="N" checked/>
+                                                <input type="radio" name="pendamping" id="pendamping"
+                                                    onclick="isPendamping(this);" value="N" checked />
                                                 Tidak
                                             </label>
                                         </tr>
@@ -204,19 +252,22 @@
                                 </table>
                             </div>
                             <!-- Pendamping -->
-                                <div class="row">
+                            <div id="form_pendamping">
+                                <div class="row mt-4">
                                     <label id="lbl_pendamping_1" class="form-label">
                                         Pendamping 1
                                     </label>
-                                    <div class="d-flex flex-column align-items-start">
+                                    <div class="d-flex flex-column align-items-start mt-4">
                                         <label id="lbl_nama_pendamping_1" class="form-label">
                                             Nama Pendamping
                                         </label>
-                                        <input type="text" class="form-control" id="nama_pendamping_1" name="nama_pendamping_1" placeholder="Type your Name"/>
+                                        <input type="text" class="form-control" id="nama_pendamping_1"
+                                            name="nama_pendamping_1" placeholder="Type your Name" />
                                         <label id="lbl_ukuran_pendamping_1" class="form-label">
                                             Ukuran Jersey
                                         </label>
-                                        <select class="form-select" aria-label="Default select example" id="ukuran_1" name="ukuran_1" required>
+                                        <select class="form-select" aria-label="Default select example" id="ukuran_1"
+                                            name="ukuran_1">
                                             <option value="" selected>Pilih Ukuran Jersey</option>
                                             <option value="M">M</option>
                                             <option value="L">L</option>
@@ -224,18 +275,20 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
-                                    <label id="lbl_pendamping_2" class="form-label">
+                                    <label id="lbl_pendamping_2" class="form-label mt-4">
                                         Pendamping 2
                                     </label>
                                     <div class="d-flex flex-column align-items-start">
                                         <label id="lbl_nama_pendamping_2" class="form-label">
                                             Nama Pendamping
                                         </label>
-                                        <input type="text" class="form-control" id="nama_pendamping_2" name="nama_pendamping_2" placeholder="Type your Name"/>
+                                        <input type="text" class="form-control" id="nama_pendamping_2"
+                                            name="nama_pendamping_2" placeholder="Type your Name" />
                                         <label id="lbl_ukuran_pendamping_2" class="form-label">
                                             Ukuran Jersey
                                         </label>
-                                        <select class="form-select" aria-label="Default select example" id="ukuran_2" name="ukuran_2" required>
+                                        <select class="form-select" aria-label="Default select example" id="ukuran_2"
+                                            name="ukuran_2">
                                             <option value="" selected>Pilih Ukuran Jersey</option>
                                             <option value="M">M</option>
                                             <option value="L">L</option>
@@ -243,18 +296,20 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
-                                    <label id="lbl_pendamping_3" class="form-label">
+                                    <label id="lbl_pendamping_3" class="form-label mt-4">
                                         Pendamping 3
                                     </label>
-                                    <div class="d-flex flex-column align-items-start">
+                                    <div class="d-flex flex-column align-items-start ">
                                         <label id="lbl_nama_pendamping_3" class="form-label">
                                             Nama Pendamping
                                         </label>
-                                        <input type="text" class="form-control" id="nama_pendamping_3" name="nama_pendamping_3" placeholder="Type your Name"/>
+                                        <input type="text" class="form-control" id="nama_pendamping_3"
+                                            name="nama_pendamping_3" placeholder="Type your Name" />
                                         <label id="lbl_ukuran_pendamping_3" class="form-label">
                                             Ukuran Jersey
                                         </label>
-                                        <select class="form-select" aria-label="Default select example" id="ukuran_3" name="ukuran_3" required>
+                                        <select class="form-select" aria-label="Default select example" id="ukuran_3"
+                                            name="ukuran_3">
                                             <option value="" selected>Pilih Ukuran Jersey</option>
                                             <option value="M">M</option>
                                             <option value="L">L</option>
@@ -262,18 +317,20 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
-                                    <label id="lbl_pendamping_4" class="form-label">
+                                    <label id="lbl_pendamping_4" class="form-label mt-4">
                                         Pendamping 4
                                     </label>
                                     <div class="d-flex flex-column align-items-start">
                                         <label id="lbl_nama_pendamping_4" class="form-label">
                                             Nama Pendamping
                                         </label>
-                                        <input type="text" class="form-control" id="nama_pendamping_4" name="nama_pendamping_4" placeholder="Type your Name"/>
+                                        <input type="text" class="form-control" id="nama_pendamping_4"
+                                            name="nama_pendamping_4" placeholder="Type your Name" />
                                         <label id="lbl_ukuran_pendamping_4" class="form-label">
                                             Ukuran Jersey
                                         </label>
-                                        <select class="form-select" aria-label="Default select example" id="ukuran_4" name="ukuran_4" required>
+                                        <select class="form-select" aria-label="Default select example" id="ukuran_4"
+                                            name="ukuran_4">
                                             <option value="" selected>Pilih Ukuran Jersey</option>
                                             <option value="M">M</option>
                                             <option value="L">L</option>
@@ -281,18 +338,20 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
-                                    <label id="lbl_pendamping_5" class="form-label">
+                                    <label id="lbl_pendamping_5" class="form-label mt-4">
                                         Pendamping 5
                                     </label>
                                     <div class="d-flex flex-column align-items-start">
                                         <label id="lbl_nama_pendamping_5" class="form-label">
                                             Nama Pendamping
                                         </label>
-                                        <input type="text" class="form-control" id="nama_pendamping_5" name="nama_pendamping_5" placeholder="Type your Name"/>
+                                        <input type="text" class="form-control" id="nama_pendamping_5"
+                                            name="nama_pendamping_5" placeholder="Type your Name" />
                                         <label id="lbl_ukuran_pendamping_5" class="form-label">
                                             Ukuran Jersey
                                         </label>
-                                        <select class="form-select" aria-label="Default select example" id="ukuran_5" name="ukuran_5" required>
+                                        <select class="form-select" aria-label="Default select example" id="ukuran_5"
+                                            name="ukuran_5">
                                             <option value="" selected>Pilih Ukuran Jersey</option>
                                             <option value="M">M</option>
                                             <option value="L">L</option>
@@ -300,15 +359,16 @@
                                             <option value="XXL">XXL</option>
                                         </select>
                                     </div>
+                                    <!-- Pendamping -->
+                                    <div class="d-flex flex-column align-items-start mt-4">
+                                        <label id="lbl_terms_agree" class="form-label">
+                                            Syarat & Ketentuan
+                                        </label>
+                                        <input type="checkbox" id="terms_agree" name="terms_agree" onclick="Terms()">
+                                    </div>
+                                    <!-- General -->
                                 </div>
-                            <!-- Pendamping -->
-                            <div class="d-flex flex-column align-items-start mt-2">
-                                <label id="lbl_terms_agree" class="form-label">
-                                    Syarat & Ketentuan
-                                </label>
-                                <input type="checkbox" id="terms_agree" name="terms_agree" onclick="Terms()">
                             </div>
-                    <!-- General -->
                         </div>
                     </div>
 
@@ -350,6 +410,10 @@
 
             $('#form_register').hide();
             $('#submitpass').prop('disabled', true);
+            $('#pendamping').hide();
+            $('#form_pendamping').hide();
+
+
 
             $('#lbl_flag_internal').hide();
             $('#lbl_nama').hide();
@@ -366,25 +430,25 @@
             $('#lbl_password_confirm').hide();
             $('#lbl_terms_agree').hide();
 
-            $('#lbl_pendamping_1').hide();
-            $('#lbl_pendamping_2').hide();
-            $('#lbl_pendamping_3').hide();
-            $('#lbl_pendamping_4').hide();
-            $('#lbl_pendamping_5').hide();
-            $('#lbl_nama_pendamping_1').hide();
-            $('#lbl_ukuran_pendamping_1').hide();
-            $('#lbl_nama_pendamping_2').hide();
-            $('#lbl_ukuran_pendamping_2').hide();
-            $('#lbl_nama_pendamping_3').hide();
-            $('#lbl_ukuran_pendamping_3').hide();
-            $('#lbl_nama_pendamping_4').hide();
-            $('#lbl_ukuran_pendamping_4').hide();
-            $('#lbl_nama_pendamping_5').hide();
-            $('#lbl_ukuran_pendamping_5').hide();
+            // $('#lbl_pendamping_1').hide();
+            // $('#lbl_pendamping_2').hide();
+            // $('#lbl_pendamping_3').hide();
+            // $('#lbl_pendamping_4').hide();
+            // $('#lbl_pendamping_5').hide();
+            // $('#lbl_nama_pendamping_1').hide();
+            // $('#lbl_ukuran_pendamping_1').hide();
+            // $('#lbl_nama_pendamping_2').hide();
+            // $('#lbl_ukuran_pendamping_2').hide();
+            // $('#lbl_nama_pendamping_3').hide();
+            // $('#lbl_ukuran_pendamping_3').hide();
+            // $('#lbl_nama_pendamping_4').hide();
+            // $('#lbl_ukuran_pendamping_4').hide();
+            // $('#lbl_nama_pendamping_5').hide();
+            // $('#lbl_ukuran_pendamping_5').hide();
 
-            $('#lbl_p').hide();
-            $('#lbl_p1').hide();
-            $('#lbl_p2').hide();
+            // $('#lbl_p').hide();
+            // $('#lbl_p1').hide();
+            // $('#lbl_p2').hide();
 
             $('#flag_internal').hide();
             $('#nama').hide();
@@ -401,18 +465,17 @@
             $('#password_confirm').hide();
             $('#terms_agree').hide();
 
-            $('#nama_pendamping_1').hide();
-            $('#ukuran_1').hide();
-            $('#nama_pendamping_2').hide();
-            $('#ukuran_2').hide();
-            $('#nama_pendamping_3').hide();
-            $('#ukuran_3').hide();
-            $('#nama_pendamping_4').hide();
-            $('#ukuran_4').hide();
-            $('#nama_pendamping_5').hide();
-            $('#ukuran_5').hide();
+            // $('#nama_pendamping_1').hide();
+            // $('#ukuran_1').hide();
+            // $('#nama_pendamping_2').hide();
+            // $('#ukuran_2').hide();
+            // $('#nama_pendamping_3').hide();
+            // $('#ukuran_3').hide();
+            // $('#nama_pendamping_4').hide();
+            // $('#ukuran_4').hide();
+            // $('#nama_pendamping_5').hide();
+            // $('#ukuran_5').hide();
 
-            $('#pendamping').hide();
 
             $('#password, #password_confirm').on('keyup', function () {
                 if ($('#password').val() == "" && $('#password_confirm').val() == "") {
@@ -430,58 +493,77 @@
         });
 
         function Event(val) {
-                flag_internal.value = '';                
-                $('#lbl_nama').hide();
-                $('#lbl_nip').hide();
-                $('#lbl_nik').hide();
-                $('#lbl_alamat').hide();
-                $('#lbl_departement').hide();
-                $('#lbl_email').hide();
-                $('#lbl_no_whatsapp').hide();
-                $('#lbl_jenkel').hide();
-                $('#lbl_golongan_darah').hide();
-                $('#lbl_ukuran').hide();
-                $('#lbl_password').hide();
-                $('#lbl_password_confirm').hide();
-                $('#lbl_terms_agree').hide();
+            flag_internal.value = '';
 
-                $('#nama').hide();
-                $('#nip').hide();
-                $('#nik').hide();
-                $('#alamat').hide();
-                $('#departement').hide();
-                $('#email').hide();
-                $('#no_whatsapp').hide();
-                $('#jenkel').hide();
-                $('#golongan_darah').hide();
-                $('#ukuran').hide();
-                $('#password').hide();
-                $('#password_confirm').hide();
-                $('#terms_agree').hide();
-            
-                $('#form_register').show();
-                $('#lbl_flag_internal').show();
-                $('#flag_internal').show();
+            $('#addinfo').hide();
+            $('#addpendamping').hide();
+
+            $('#lbl_nama').hide();
+            $('#lbl_nip').hide();
+            $('#vis_nip').hide();
+
+            $('#lbl_nik').hide();
+            $('#lbl_alamat').hide();
+            $('#lbl_departement').hide();
+            $('#lbl_email').hide();
+            $('#lbl_no_whatsapp').hide();
+            $('#lbl_jenkel').hide();
+            $('#lbl_golongan_darah').hide();
+            $('#lbl_ukuran').hide();
+            $('#lbl_password').hide();
+            $('#lbl_password_confirm').hide();
+            $('#lbl_terms_agree').hide();
+
+            $('#nama').hide();
+            $('#nip').hide();
+            $('#nik').hide();
+            $('#alamat').hide();
+            $('#departement').hide();
+            $('#email').hide();
+            $('#no_whatsapp').hide();
+            $('#jenkel').hide();
+            $('#golongan_darah').hide();
+            $('#ukuran').hide();
+            $('#password').hide();
+            $('#password_confirm').hide();
+            $('#terms_agree').hide();
+
+
+
+
+            $('#lbl_flag_internal').show();
+            $('#flag_internal').show();
         }
-        
+
         function Tipe(val) {
             if (val == '') {
-                nama.value              = '';
-                nip.value               = '';
-                nik.value               = '';
-                alamat.value            = '';
-                departement.value       = '';
-                email.value             = '';
-                no_whatsapp.value       = '';
-                jenkel.value            = '';
-                golongan_darah.value    = '';
-                ukuran.value            = '';
-                password.value          = '';
-                password_confirm.value  = '';
+                $('#form_register').hide();
+
+                $('#addinfo').hide();
+
+                nama.value = '';
+                nip.value = '';
+                nik.value = '';
+                alamat.value = '';
+                departement.value = '';
+                email.value = '';
+                no_whatsapp.value = '';
+                jenkel.value = '';
+                golongan_darah.value = '';
+                ukuran.value = '';
+                password.value = '';
+                password_confirm.value = '';
+                nama_darurat.value = '';
+                hubungan.value = '';
+                alamat_darurat.value = '';
+                no_hp_darurat.value = '';
+
                 document.getElementById("terms_agree").checked = false;
 
                 $('#lbl_nama').hide();
                 $('#lbl_nip').hide();
+                $('#vis_nip').hide();
+
                 $('#lbl_nik').hide();
                 $('#lbl_alamat').hide();
                 $('#lbl_departement').hide();
@@ -493,7 +575,7 @@
                 $('#lbl_password').hide();
                 $('#lbl_password_confirm').hide();
                 $('#lbl_terms_agree').hide();
-                
+
                 $('#nama').hide();
                 $('#nip').hide();
                 $('#nik').hide();
@@ -508,22 +590,28 @@
                 $('#password_confirm').hide();
                 $('#terms_agree').hide();
             } else if (val == '1') {
-                nama.value              = '';
-                nip.value               = '';
-                nik.value               = '';
-                alamat.value            = '';
-                departement.value       = '';
-                email.value             = '';
-                no_whatsapp.value       = '';
-                jenkel.value            = '';
-                golongan_darah.value    = '';
-                ukuran.value            = '';
-                password.value          = '';
-                password_confirm.value  = '';
+                $('#form_register').show();
+
+                $('#addinfo').show();
+
+                nama.value = '';
+                nip.value = '';
+                nik.value = '';
+                alamat.value = '';
+                departement.value = '';
+                email.value = '';
+                no_whatsapp.value = '';
+                jenkel.value = '';
+                golongan_darah.value = '';
+                ukuran.value = '';
+                password.value = '';
+                password_confirm.value = '';
                 document.getElementById("terms_agree").checked = false;
 
                 $('#lbl_nama').show();
                 $('#lbl_nip').show();
+                $('#vis_nip').show();
+
                 $('#lbl_nik').show();
                 $('#lbl_alamat').show();
                 $('#lbl_departement').show();
@@ -535,7 +623,7 @@
                 $('#lbl_password').show();
                 $('#lbl_password_confirm').show();
                 $('#lbl_terms_agree').show();
-                
+
                 $('#nama').show();
                 $('#nip').show();
                 $('#nik').show();
@@ -550,22 +638,28 @@
                 $('#password_confirm').show();
                 $('#terms_agree').show();
             } else if (val == '0') {
-                nama.value              = '';
-                nip.value               = '';
-                nik.value               = '';
-                alamat.value            = '';
-                departement.value       = '';
-                email.value             = '';
-                no_whatsapp.value       = '';
-                jenkel.value            = '';
-                golongan_darah.value    = '';
-                ukuran.value            = '';
-                password.value          = '';
-                password_confirm.value  = '';
+                $('#form_register').show();
+
+                $('#addinfo').show();
+
+                nama.value = '';
+                nip.value = '';
+                nik.value = '';
+                alamat.value = '';
+                departement.value = '';
+                email.value = '';
+                no_whatsapp.value = '';
+                jenkel.value = '';
+                golongan_darah.value = '';
+                ukuran.value = '';
+                password.value = '';
+                password_confirm.value = '';
                 document.getElementById("terms_agree").checked = false;
 
                 $('#lbl_nama').show();
                 $('#lbl_nip').hide();
+                $('#vis_nip').hide();
+
                 $('#lbl_nik').show();
                 $('#lbl_alamat').show();
                 $('#lbl_departement').show();
@@ -577,7 +671,7 @@
                 $('#lbl_password').show();
                 $('#lbl_password_confirm').show();
                 $('#lbl_terms_agree').show();
-                
+
                 $('#nama').show();
                 $('#nip').hide();
                 $('#nik').show();
@@ -592,6 +686,7 @@
                 $('#password_confirm').show();
                 $('#terms_agree').show();
             }
+
 
             let event = document.getElementById("event").value;
             getPendamping(event, val);
@@ -630,20 +725,26 @@
         function Terms() {
             let terms = '';
             let id = document.getElementById("terms_agree");
-            
-            if(id.checked == true){
+            console.log(id.checked)
+
+            if (id.checked == true) {
                 terms = 'setuju';
-            }else{
+            } else {
                 terms = 'tidak setuju';
             }
 
             // If the checkbox is checked, display the output text
-            if (terms=='setuju'){
+            if (terms == 'setuju') {
                 if ($('#password').val() == "" && $('#password_confirm').val() == "") {
+                    console.log("belom")
+
                     $('#submitpass').prop('disabled', true);
                 } else if ($('#password').val() == $('#password_confirm').val()) {
+                    console.log("kebuka")
                     $('#submitpass').prop('disabled', false);
                 } else {
+                    console.log("belom")
+
                     $('#submitpass').prop('disabled', true);
                 }
             } else {
@@ -651,13 +752,17 @@
             }
         }
 
-        function getPendamping(event, tipe){
-            if(event=='fw' && tipe=='1'){
+        function getPendamping(event, tipe) {
+            if (event == 'fw' && tipe == '1') {
                 $('#lbl_p').show();
                 $('#lbl_p1').show();
+                $('#addpendamping').show();
+
                 $('#lbl_p2').show();
                 $('#pendamping').show();
             } else {
+                $('#addpendamping').hide();
+
                 $('#lbl_p').hide();
                 $('#lbl_p1').hide();
                 $('#lbl_p2').hide();
@@ -669,59 +774,63 @@
             val = myRadio.value;
 
             if (val == 'N') {
-                $('#lbl_pendamping_1').hide();
-                $('#lbl_pendamping_2').hide();
-                $('#lbl_pendamping_3').hide();
-                $('#lbl_pendamping_4').hide();
-                $('#lbl_pendamping_5').hide();
-                $('#lbl_nama_pendamping_1').hide();
-                $('#lbl_ukuran_pendamping_1').hide();
-                $('#lbl_nama_pendamping_2').hide();
-                $('#lbl_ukuran_pendamping_2').hide();
-                $('#lbl_nama_pendamping_3').hide();
-                $('#lbl_ukuran_pendamping_3').hide();
-                $('#lbl_nama_pendamping_4').hide();
-                $('#lbl_ukuran_pendamping_4').hide();
-                $('#lbl_nama_pendamping_5').hide();
-                $('#lbl_ukuran_pendamping_5').hide();
+                $('#form_pendamping').hide();
 
-                $('#nama_pendamping_1').hide();
-                $('#ukuran_1').hide();
-                $('#nama_pendamping_2').hide();
-                $('#ukuran_2').hide();
-                $('#nama_pendamping_3').hide();
-                $('#ukuran_3').hide();
-                $('#nama_pendamping_4').hide();
-                $('#ukuran_4').hide();
-                $('#nama_pendamping_5').hide();
-                $('#ukuran_5').hide();
+                // $('#lbl_pendamping_1').hide();
+                // $('#lbl_pendamping_2').hide();
+                // $('#lbl_pendamping_3').hide();
+                // $('#lbl_pendamping_4').hide();
+                // $('#lbl_pendamping_5').hide();
+                // $('#lbl_nama_pendamping_1').hide();
+                // $('#lbl_ukuran_pendamping_1').hide();
+                // $('#lbl_nama_pendamping_2').hide();
+                // $('#lbl_ukuran_pendamping_2').hide();
+                // $('#lbl_nama_pendamping_3').hide();
+                // $('#lbl_ukuran_pendamping_3').hide();
+                // $('#lbl_nama_pendamping_4').hide();
+                // $('#lbl_ukuran_pendamping_4').hide();
+                // $('#lbl_nama_pendamping_5').hide();
+                // $('#lbl_ukuran_pendamping_5').hide();
+
+                // $('#nama_pendamping_1').hide();
+                // $('#ukuran_1').hide();
+                // $('#nama_pendamping_2').hide();
+                // $('#ukuran_2').hide();
+                // $('#nama_pendamping_3').hide();
+                // $('#ukuran_3').hide();
+                // $('#nama_pendamping_4').hide();
+                // $('#ukuran_4').hide();
+                // $('#nama_pendamping_5').hide();
+                // $('#ukuran_5').hide();
             } else {
-                $('#lbl_pendamping_1').show();
-                $('#lbl_pendamping_2').show();
-                $('#lbl_pendamping_3').show();
-                $('#lbl_pendamping_4').show();
-                $('#lbl_pendamping_5').show();
-                $('#lbl_nama_pendamping_1').show();
-                $('#lbl_ukuran_pendamping_1').show();
-                $('#lbl_nama_pendamping_2').show();
-                $('#lbl_ukuran_pendamping_2').show();
-                $('#lbl_nama_pendamping_3').show();
-                $('#lbl_ukuran_pendamping_3').show();
-                $('#lbl_nama_pendamping_4').show();
-                $('#lbl_ukuran_pendamping_4').show();
-                $('#lbl_nama_pendamping_5').show();
-                $('#lbl_ukuran_pendamping_5').show();
+                console.log('add')
+                $('#form_pendamping').show();
+                // $('#lbl_pendamping_1').show();
+                // $('#lbl_pendamping_2').show();
+                // $('#lbl_pendamping_3').show();
+                // $('#lbl_pendamping_4').show();
+                // $('#lbl_pendamping_5').show();
+                // $('#lbl_nama_pendamping_1').show();
+                // $('#lbl_ukuran_pendamping_1').show();
+                // $('#lbl_nama_pendamping_2').show();
+                // $('#lbl_ukuran_pendamping_2').show();
+                // $('#lbl_nama_pendamping_3').show();
+                // $('#lbl_ukuran_pendamping_3').show();
+                // $('#lbl_nama_pendamping_4').show();
+                // $('#lbl_ukuran_pendamping_4').show();
+                // $('#lbl_nama_pendamping_5').show();
+                // $('#lbl_ukuran_pendamping_5').show();
 
-                $('#nama_pendamping_1').show();
-                $('#ukuran_1').show();
-                $('#nama_pendamping_2').show();
-                $('#ukuran_2').show();
-                $('#nama_pendamping_3').show();
-                $('#ukuran_3').show();
-                $('#nama_pendamping_4').show();
-                $('#ukuran_4').show();
-                $('#nama_pendamping_5').show();
-                $('#ukuran_5').show();
+                // $('#nama_pendamping_1').show();
+                // $('#ukuran_1').show();
+                // $('#nama_pendamping_2').show();
+                // $('#ukuran_2').show();
+                // $('#nama_pendamping_3').show();
+                // $('#ukuran_3').show();
+                // $('#nama_pendamping_4').show();
+                // $('#ukuran_4').show();
+                // $('#nama_pendamping_5').show();
+                // $('#ukuran_5').show();
             }
         }
 

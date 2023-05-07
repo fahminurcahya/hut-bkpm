@@ -11,6 +11,8 @@ const {
 } = require("../mail");
 const bcrypt = require("bcryptjs");
 const Pendamping = require("../models/Pendamping");
+const sequelize = require("../configs/db");
+
 // const { generatePDF } = require("../utils/generatePDF");
 
 const viewPeserta = async (req, res) => {
@@ -92,7 +94,6 @@ const register = async (req, res) => {
     email,
     password,
     nip,
-    umur,
     jenkel,
     departement,
     alamat,
@@ -104,8 +105,11 @@ const register = async (req, res) => {
     no_hp_darurat,
     nik,
   } = req.body;
+  const t = await sequelize.transaction();
 
   try {
+    console.log(req.body);
+
     let dataPeserta = {
       no_peserta: 101,
       event,
@@ -115,7 +119,6 @@ const register = async (req, res) => {
       email,
       password,
       nip,
-      umur: umur == "" ? null : umur,
       jenkel,
       departement,
       alamat,
@@ -166,6 +169,8 @@ const register = async (req, res) => {
         }
       }
 
+      console.log(namap);
+
       for (let i = 0; i < namap.length; i++) {
         if (
           namap[i].nama != "" &&
@@ -187,6 +192,7 @@ const register = async (req, res) => {
     await generateQRPNG(peserta.no_peserta, peserta.qr_code, peserta.event);
     await generatePDF(email, peserta.no_peserta, peserta.nama, event);
     await sendNotifAdmin(email, peserta.no_peserta, peserta.nama, event);
+    await t.commit();
 
     // if (event === "fw" && flag_internal) {
     //   const {
