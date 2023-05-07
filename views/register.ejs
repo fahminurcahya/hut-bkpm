@@ -689,6 +689,14 @@
         setInputFilter(document.getElementById("nip"), function (value) {
             return /^-?\d*$/.test(value);
         }, "Harus Angka");
+        
+        setInputFilter(document.getElementById("nik"), function (value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus Angka");
+        
+        setInputFilter(document.getElementById("no_hp_darurat"), function (value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus Angka");
 
         function validateTerm(status) {
             if (!status) {
