@@ -50,9 +50,13 @@
             <!-- Card Event -->
             <div class=" flex-column card-event text-center">
                 <!-- Speaker Information -->
-                <h6>Event <%=peserta.event%></h6>
-                <img src="/images/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
-
+                <% if(peserta.event == "fr") { %>
+                <h6>FUN RUN</h6>
+                <img src="/images/fr/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
+                <% }else { %>
+                <h6>FUN WALK</h6>
+                <img src="/images/fw/<%=peserta.no_peserta%>.png" alt=" Red dot" width="150px" />
+                <% } %>
                 <div class="align-items-center mt-3  ">
                     <table class="table table-bordered border border-success text-start flex-wrap">
                         <tbody>
@@ -87,9 +91,9 @@
                             <tr>
                                 <td>
                                     <% if(peserta.flag_internal) { %>
-                                        Departemen
+                                    Departemen
                                     <% } else {%>
-                                        Alamat
+                                    Alamat
                                     <% } %>
                                 </td>
                                 <td>
