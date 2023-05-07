@@ -234,7 +234,7 @@ async function generatePDF(email, no_peserta, nama, event) {
 
     const options = {
       format: "A4",
-      scale: 0.1,
+      scale: 0.4,
       margin: {
         top: "20000mm",
         bottom: "20mm",
