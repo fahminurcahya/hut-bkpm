@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <%- include('./navbar.ejs')  %>
+
+    <br>
+    <div class="container">
+        <h3>Email yang belum terkirim</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">No Peserta</th>
+                    <th scope="col">email</th>
+                    <th scope="col"> Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < peserta.length; i++){ %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= peserta[i].nama%></td>
+                    <td><%= peserta[i].no_peserta%></td>
+                    <td><%= peserta[i].email %></td>
+                    <td>
+                        <button id="sendemailbtn" onclick="sendMail('<%= peserta[i].email %>')"
+                            class="btn btn-success btn-sm">Generate QR Baru</a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</body>
+
+<script>
+    function sendMail(email) {
+        $("#sendemailbtn").attr("disabled", "true");
+        $("#sendemailbtn").text = "Mohon Tunggu"
+
+        const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+        };
+        fetch(`/api/v1/send/${email}`, options)
+            .then(response => response.json())
+            .then(resp => {
+                $("#sendemailbtn").removeAttr("disabled");
+
+                if (resp.error) {
+                    Swal.fire({
+                        title: "Terjadi Kesalahan",
+                        icon: 'danger',
+                        confirmButtonText: 'Kembali',
+                        allowOutsideClick: false,
+                        text: resp.message
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
+
+
+                } else {
+                    Swal.fire({
+                        title: "Email Berhasil terkirim",
+                        icon: 'success',
+                        confirmButtonText: 'Kembali',
+                        allowOutsideClick: false,
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            window.location.reload(true);
+                        }
+                    })
+                }
+            })
+            .catch(error => {
+                $("#sendemailbtn").removeAttr("disabled");
+
+                Swal.fire({
+                    title: "Internal Server Error",
+                    icon: 'danger',
+                    confirmButtonText: 'Kembali',
+                    allowOutsideClick: false,
+                    text: resp.message
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
+            });
+    }
+</script>
+
+</html>

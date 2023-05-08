@@ -65,6 +65,60 @@ const viewInternal = async (req, res) => {
   }
 };
 
+const viewFunRun = async (req, res) => {
+  try {
+    const peserta = await Peserta.findAll({
+      where: {
+        event: "fr",
+      },
+      order: [["no_peserta", "ASC"]],
+    });
+
+    res.render("admin/funrun", {
+      title: "HUT 50 | BKPM",
+      peserta,
+    });
+  } catch (error) {
+    res.redirect("/pageadm/funrun");
+  }
+};
+
+const viewFunWalk = async (req, res) => {
+  try {
+    const peserta = await Peserta.findAll({
+      where: {
+        event: "fw",
+      },
+      order: [["no_peserta", "ASC"]],
+    });
+
+    res.render("admin/funwalk", {
+      title: "HUT 50 | BKPM",
+      peserta,
+    });
+  } catch (error) {
+    res.redirect("/pageadm/funwalk");
+  }
+};
+
+const viewEmail = async (req, res) => {
+  try {
+    const peserta = await Peserta.findAll({
+      where: {
+        flag_email: false,
+      },
+      order: [["no_peserta", "ASC"]],
+    });
+
+    res.render("admin/email", {
+      title: "HUT 50 | BKPM",
+      peserta,
+    });
+  } catch (error) {
+    res.redirect("/pageadm/email");
+  }
+};
+
 const viewRegister = async (req, res) => {
   try {
     const alertMessage = req.flash("alertMessage");
@@ -387,4 +441,7 @@ module.exports = {
   viewSignin,
   actionSignin,
   actionLogout,
+  viewFunRun,
+  viewFunWalk,
+  viewEmail,
 };

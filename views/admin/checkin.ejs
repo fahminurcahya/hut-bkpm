@@ -31,7 +31,7 @@
 
         function onScanSuccess(decodedText, decodedResult) {
             // html5QrcodeScanner.stop();
-            // html5QrcodeScanner.clear()
+            html5QrcodeScanner.clear()
             // document.getElementById('reader').remove();
 
             console.log(`Code matched = ${decodedText}`, decodedResult);
@@ -43,7 +43,7 @@
                 .then(response => response.json())
                 .then(resp => {
                     // Menampilkan hasil response dari API ke dalam elemen HTML.
-                    html5QrcodeScanner.clear()
+                    // html5QrcodeScanner.clear()
 
                     if (resp.error) {
                         if (resp.data != null && resp.data.flag_racepack) {
@@ -78,18 +78,18 @@
                         }
                         // Menutup akses kamera.
                     } else {
-                        if(resp.data.event=='fr'){
+                        if (resp.data.event == 'fr') {
                             Event = 'FUN RUN'
-                        }else{
+                        } else {
                             Event = 'FUN WALK'
                         }
-                        
-                        if(resp.data.flag_racepack){
+
+                        if (resp.data.flag_racepack) {
                             Internal = 'Internal'
-                        }else{
+                        } else {
                             Internal = 'Umum'
                         }
-                        
+
                         Swal.fire({
                             title: resp.message,
                             icon: 'success',

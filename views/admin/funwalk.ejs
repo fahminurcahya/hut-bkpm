@@ -15,14 +15,13 @@
 
     <br>
     <div class="container">
-        <h3>Peserta Internal</h3>
+        <h3>Peserta Fun Walk</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama</th>
                     <th scope="col">No Peserta</th>
-                    <th scope="col">NIP</th>
                     <th scope="col">NIK</th>
                     <th scope="col"> Action
                     </th>
@@ -34,9 +33,7 @@
                     <td><%= i + 1 %></td>
                     <td><%= peserta[i].nama%></td>
                     <td><%= peserta[i].no_peserta%></td>
-                    <td><%= peserta[i].nip %></td>
                     <td><%= peserta[i].nik %></td>
-
                     <td>
                         <a href="/pageadm/detail/<%= peserta[i].id %>" type="button"
                             class="btn btn-primary btn-sm">detail</a>
