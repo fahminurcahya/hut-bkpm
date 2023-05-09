@@ -86,9 +86,9 @@
                         <div id="vis_nip">
                             <div class="d-flex flex-column align-items-start mt-4">
                                 <label id="lbl_nip" class="form-label">
-                                    Nip
+                                    NIP
                                 </label>
-                                <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan Nip">
+                                <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP">
                             </div>
                         </div>
                         <div class="d-flex flex-column align-items-start mt-4">
@@ -107,11 +107,14 @@
                         <div id="vis_departemen">
                             <div class="d-flex flex-column align-items-start mt-4">
                                 <label id="lbl_departement" class="form-label">
-                                    Kedeputian
+                                    Unit Kerja Eselon 1
                                 </label>
                                 <select class="form-select" aria-label="Default select example" id="departement"
                                     name="departement">
-                                    <option value="" selected>Pilih Kedeputian</option>
+                                    <option value="" selected>Pilih Unit Kerja Eselon 1</option>
+                                    <option value="Sekretariat Utama">Sekretariat Utama</option>
+                                    <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian
+                                        Pengendalian dan Pelaksanaan Penanaman Modal</option>
                                     <option value="Kedeputian Pelayanan Penanaman Modal">Kedeputian Pelayanan Penanaman
                                         Modal</option>
                                     <option value="Kedeputian Perencanaan Penanaman Modal">Kedeputian Perencanaan
@@ -126,8 +129,6 @@
                                         Penanaman Modal</option>
                                     <option value="Kedeputian Teknologi dan Informasi Penanaman Modal">Kedeputian
                                         Teknologi dan Informasi Penanaman Modal</option>
-                                    <option value="Kedeputian Pengendalian dan Pelaksanaan Penanaman Modal">Kedeputian
-                                        Pengendalian dan Pelaksanaan Penanaman Modal</option>
                                 </select>
                             </div>
                         </div>
@@ -173,14 +174,15 @@
                             <label id="lbl_ukuran" class="form-label">
                                 Ukuran Jersey
                             </label>
+
+
                             <select class="form-select" aria-label="Default select example" id="ukuran" name="ukuran"
                                 required>
-                                <option value="" selected>Pilih Ukuran Jersey</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
+
                             </select>
+                            <a class="btn btn-success mt-2" onclick="showChart(true)">
+                                Lihat Panduan Ukuran
+                            </a>
                         </div>
                         <div class="d-flex flex-column align-items-start mt-4">
                             <label id="lbl_password" class="form-label">
@@ -188,10 +190,7 @@
                             </label>
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Type your password" required>
-
                         </div>
-
-
                         <div class="d-flex flex-column align-items-start mt-4">
                             <label id="lbl_password_confirm" class="form-label">
                                 Konfirmasi Password
@@ -207,7 +206,7 @@
                         </div>
                         <div id="addinfo">
                             <label id="lbl_darurat" class="form-label mt-4">
-                                *Dalam Keadaan Darurat Pihak Yang Dapat Dihubungi ( Yang Tidak Serumah )
+                                KONTAK DARURAT "Dibutuhkan jika terjadi Force Majeure"
                             </label>
 
                             <div class="d-flex flex-column align-items-start mt-4">
@@ -226,7 +225,7 @@
                                 <label id="lbl_no_hp_darurat" class="form-label">
                                     Nomor HP </label>
                                 <input type="text" class="form-control" id="no_hp_darurat" name="no_hp_darurat"
-                                    placeholder="Masukan No Hp Darurat" required>
+                                    placeholder="Masukan Nomor HP" required>
                             </div>
 
                             <div class="d-flex flex-column align-items-start mt-4">
@@ -420,12 +419,29 @@
                     <h5 class="modal-title">Syarat dan Ketentuan</h5>
                 </div>
                 <div class="modal-body">
-                    <img src="/stylesheets/assets/images/sk.png" alt="img" height="100%" width="50%" />
+                    <img src="/stylesheets/assets/images/sk.png" alt="img" width="100%" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="validateTerm(true)">Setuju</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         onclick="validateTerm(false)">Tidak Setuju</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="chartModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Panduan Ukuran</h5>
+                </div>
+                <div class="modal-body">
+                    <img id="imgChart" src="" alt="img" width="100%" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="showChart(false)">Tutup</button>
                 </div>
             </div>
         </div>
@@ -530,6 +546,7 @@
                 $('#message').hide();
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
+                showSize(true)
 
             } else if (val == '0') {
 
@@ -547,6 +564,8 @@
                 $('#message').hide();
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
+                showSize(false)
+
 
             }
 
@@ -639,6 +658,26 @@
             }
         }
 
+        function showChart(status) {
+            const fi = $("#flag_internal").val();
+            const srcint = "/stylesheets/assets/images/chartjerseyint.jpeg"
+            const srcext = "/stylesheets/assets/images/chartjerseyext.jpeg"
+            if (status) {
+
+                $("#chartModal").modal('show');
+                if (fi == 1) {
+                    document.getElementById("imgChart").src = srcint;
+                } else {
+                    document.getElementById("imgChart").src = srcext;
+
+                }
+
+            } else {
+                $("#chartModal").modal('hide');
+
+            }
+        }
+
         function getPendamping(event, tipe) {
             let rdBtnPendamping = document.getElementById("pendampingn");
             rdBtnPendamping.checked = true
@@ -709,6 +748,42 @@
 
             }
         }
+
+
+        function showSize(internal) {
+            const ukuranJerseyInternal = ["S", "M", "L", "XL", "2L", "3XL", "4XL"];
+            const ukuranJerseyExternal = ["M", "L", "XL"];
+            const element = document.getElementById("ukuran");
+            element.options
+            var i, L = element.options.length - 1;
+            for (i = L; i >= 0; i--) {
+                element.remove(i);
+            }
+            var opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            if (internal) {
+                for (var i = 0; i < ukuranJerseyInternal.length; i++) {
+                    opt = document.createElement("option");
+                    opt.text = ukuranJerseyInternal[i];
+                    opt.value = ukuranJerseyInternal[i];
+                    element.options.add(opt);
+                }
+            } else {
+                for (var i = 0; i < ukuranJerseyExternal.length; i++) {
+                    var opt = document.createElement("option");
+                    opt.text = ukuranJerseyExternal[i];
+                    opt.value = ukuranJerseyExternal[i];
+                    element.options.add(opt);
+                }
+            }
+        }
+
+
+
+
 
     </script>
 </body>
