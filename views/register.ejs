@@ -277,11 +277,7 @@
                                         </label>
                                         <select class="form-select" aria-label="Default select example" id="ukuran_1"
                                             name="ukuran_1">
-                                            <option value="" selected>Pilih Ukuran Jersey</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+
                                         </select>
                                     </div>
                                     <label id="lbl_pendamping_2" class="form-label mt-4">
@@ -298,11 +294,7 @@
                                         </label>
                                         <select class="form-select" aria-label="Default select example" id="ukuran_2"
                                             name="ukuran_2">
-                                            <option value="" selected>Pilih Ukuran Jersey</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+
                                         </select>
                                     </div>
                                     <label id="lbl_pendamping_3" class="form-label mt-4">
@@ -319,11 +311,7 @@
                                         </label>
                                         <select class="form-select" aria-label="Default select example" id="ukuran_3"
                                             name="ukuran_3">
-                                            <option value="" selected>Pilih Ukuran Jersey</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+
                                         </select>
                                     </div>
                                     <label id="lbl_pendamping_4" class="form-label mt-4">
@@ -340,11 +328,7 @@
                                         </label>
                                         <select class="form-select" aria-label="Default select example" id="ukuran_4"
                                             name="ukuran_4">
-                                            <option value="" selected>Pilih Ukuran Jersey</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+
                                         </select>
                                     </div>
                                     <label id="lbl_pendamping_5" class="form-label mt-4">
@@ -361,11 +345,7 @@
                                         </label>
                                         <select class="form-select" aria-label="Default select example" id="ukuran_5"
                                             name="ukuran_5">
-                                            <option value="" selected>Pilih Ukuran Jersey</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -749,38 +729,147 @@
             }
         }
 
-
+        const ukuranJerseyInternal = ["S", "M", "L", "XL", "2L", "3XL", "4XL"];
+        const ukuranJerseyExternal = ["M", "L", "XL"];
         function showSize(internal) {
-            const ukuranJerseyInternal = ["S", "M", "L", "XL", "2L", "3XL", "4XL"];
-            const ukuranJerseyExternal = ["M", "L", "XL"];
+            showSizeMain(internal)
+            showSize1()
+            showSize2()
+            showSize3()
+            showSize4()
+            showSize5()
+        }
+
+        function showSizeMain(internal) {
+            //hapus option ukuran
             const element = document.getElementById("ukuran");
-            element.options
-            var i, L = element.options.length - 1;
-            for (i = L; i >= 0; i--) {
-                element.remove(i);
+
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
             }
-            var opt = document.createElement("option");
+
+            let opt = document.createElement("option");
             opt.text = "Pilih Ukuran Jersey"
             opt.value = ""
             element.options.add(opt);
 
             if (internal) {
-                for (var i = 0; i < ukuranJerseyInternal.length; i++) {
+                for (let i = 0; i < ukuranJerseyInternal.length; i++) {
                     opt = document.createElement("option");
                     opt.text = ukuranJerseyInternal[i];
                     opt.value = ukuranJerseyInternal[i];
                     element.options.add(opt);
                 }
             } else {
-                for (var i = 0; i < ukuranJerseyExternal.length; i++) {
-                    var opt = document.createElement("option");
+                for (let i = 0; i < ukuranJerseyExternal.length; i++) {
+                    opt = document.createElement("option");
                     opt.text = ukuranJerseyExternal[i];
                     opt.value = ukuranJerseyExternal[i];
                     element.options.add(opt);
+
                 }
             }
         }
 
+        function showSize1() {
+            const element = document.getElementById("ukuran_1");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+
+            let opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            for (let i = 0; i < ukuranJerseyInternal.length; i++) {
+                opt = document.createElement("option");
+                opt.text = ukuranJerseyInternal[i];
+                opt.value = ukuranJerseyInternal[i];
+                element.options.add(opt);
+            }
+        }
+
+        function showSize2() {
+            const element = document.getElementById("ukuran_2");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+
+            let opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            for (let i = 0; i < ukuranJerseyInternal.length; i++) {
+                opt = document.createElement("option");
+                opt.text = ukuranJerseyInternal[i];
+                opt.value = ukuranJerseyInternal[i];
+                element.options.add(opt);
+            }
+        }
+
+        function showSize3() {
+            const element = document.getElementById("ukuran_3");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+
+            let opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            for (let i = 0; i < ukuranJerseyInternal.length; i++) {
+                opt = document.createElement("option");
+                opt.text = ukuranJerseyInternal[i];
+                opt.value = ukuranJerseyInternal[i];
+                element.options.add(opt);
+            }
+        }
+
+        function showSize4() {
+            const element = document.getElementById("ukuran_4");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+
+            let opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            for (let i = 0; i < ukuranJerseyInternal.length; i++) {
+                opt = document.createElement("option");
+                opt.text = ukuranJerseyInternal[i];
+                opt.value = ukuranJerseyInternal[i];
+                element.options.add(opt);
+            }
+        }
+        function showSize5() {
+            const element = document.getElementById("ukuran_5");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+
+            let opt = document.createElement("option");
+            opt.text = "Pilih Ukuran Jersey"
+            opt.value = ""
+            element.options.add(opt);
+
+            for (let i = 0; i < ukuranJerseyInternal.length; i++) {
+                opt = document.createElement("option");
+                opt.text = ukuranJerseyInternal[i];
+                opt.value = ukuranJerseyInternal[i];
+                element.options.add(opt);
+            }
+        }
 
 
 
