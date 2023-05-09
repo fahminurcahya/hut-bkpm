@@ -188,13 +188,19 @@
                             </label>
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Type your password" required>
+
                         </div>
+
+
                         <div class="d-flex flex-column align-items-start mt-4">
                             <label id="lbl_password_confirm" class="form-label">
                                 Konfirmasi Password
                             </label>
                             <input type="password" class="form-control" id="password_confirm" name="password_confirm"
                                 placeholder="Type your password">
+                        </div>
+                        <div class="d-flex"> <input type="checkbox" onclick="showPassword()"> <span> *Tampilkan
+                                Password</span>
                         </div>
                         <div class="field">
                             <span id="message"></span>
@@ -672,11 +678,11 @@
         setInputFilter(document.getElementById("nip"), function (value) {
             return /^-?\d*$/.test(value);
         }, "Harus Angka");
-        
+
         setInputFilter(document.getElementById("nik"), function (value) {
             return /^-?\d*$/.test(value);
         }, "Harus Angka");
-        
+
         setInputFilter(document.getElementById("no_hp_darurat"), function (value) {
             return /^-?\d*$/.test(value);
         }, "Harus Angka");
@@ -687,6 +693,21 @@
 
             }
             $('#termModal').modal('hide');
+        }
+
+        function showPassword() {
+            var x = document.getElementById("password");
+            var y = document.getElementById("password_confirm");
+
+            if (x.type === "password") {
+                x.type = "text";
+                y.type = "text";
+
+            } else {
+                x.type = "password";
+                y.type = "password";
+
+            }
         }
 
     </script>
