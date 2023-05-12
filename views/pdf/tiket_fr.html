@@ -12,127 +12,44 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:ital,wght@1,200&display=swap"
         rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body,
-        html {
-            height: 70vh;
-            width: 750px;
-            padding: 20px;
-            display: grid;
-            font-family: "Staatliches", cursive;
-            background: #ffff;
-            color: black;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-        }
-
-        .ticket {
-            margin: auto;
+        .container {
             display: flex;
-            background: white;
-            width: 99%;
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* atau atur ukuran sesuai kebutuhan Anda */
         }
 
-        .left {
-            width: 200px;
-            display: flex;
+        img {
+            max-width: 100%;
+            max-height: 100%;
         }
 
-        .left .ticket-number {
-            color: gray;
-
+        .overlay {
+            position: absolute;
+            top: 71%;
+            left: 12%;
+            transform: translate(-50%, -50%);
+            height: auto;
         }
 
+        .bg {
+            position: absolute;
+            top: 40%;
+            left: 10%;
 
-
-        .right {
-            display: flex;
-            /* border-left: 1px dashed #404040; */
-            width: 600px;
-
-        }
-
-
-
-        /* .left .left-info-container {
-              height: 250px;
-              padding: 30px 10px 10px 35px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-          } */
-
-        .gambar-kiri {
-            padding-top: 10px;
-            width: 100px;
-
-        }
-
-
-        .asean {
-            height: 100px;
-
-            padding-left: 30px;
-
-
-        }
-
-        .asean img {
-            height: 100%;
-
+            transform: translate(-50%, -50%);
+            height: auto;
         }
     </style>
+
 </head>
 
 <body>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-
-    <div class="ticket" style="margin-top: 20px; text-align: center;">
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <div class=" gambar-kiri">
-                        <img src="{{public_url}}/stylesheets/assets/images/50th-min.png" width="72px">
-                    </div>
-                </td>
-                <th rowspan="3">
-                    <div class="right">
-                        <!-- <div class="ticket-info"> -->
-                        <img src="{{public_url}}/stylesheets/assets/images/eticketfr-min.png" alt="" width="100%">
-                        <!-- </div> -->
-                    </div>
-                </th>
-
-            </tr>
-            <tr>
-                <td>
-                    <div class="gambar-kiri">
-                        <img src="{{public_url}}/stylesheets/assets/images/asean2-min.png" width="95px"
-                            style="margin:0">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class=" gambar-kiri">
-                        <img id="img-left" src="{{public_url}}/images/fr/{{no_peserta}}.png" alt="QR code"
-                            width="75px"><br>
-                    </div>
-                </td>
-            </tr>
-
-        </table>
+    <div class="container">
+        <img src="{{public_url}}/stylesheets/assets/images/frfix.png" width="80%" alt="Background Image" class="bg">
+        <img src="{{public_url}}/images/fr/{{no_peserta}}.png" width="120px" alt="Overlay Image" class="overlay">
     </div>
-
-
-
 </body>
 
 </html>
