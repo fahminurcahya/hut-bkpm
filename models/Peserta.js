@@ -137,6 +137,32 @@ Peserta.beforeCreate(async (peserta, options) => {
     throw new UserException("No WA sudah terdaftar.");
   }
 
+  //validate kuota
+  if (peserta.flag_internal == "1") {
+    const countInternal = await Peserta.count({
+      where: { flag_internal: true },
+    });
+    if (countInternal >= 1250) {
+      throw new UserException("Mohon maaf kuota Internal penuh");
+    }
+  } else {
+    const countExternal = await Peserta.count({
+      where: { flag_internal: false },
+    });
+    if (countExternal >= 750) {
+      throw new UserException("Mohon maaf kuota Ekternal penuh");
+    }
+  }
+
+  if (peserta.event == "fr") {
+    const countFR = await Peserta.count({
+      where: { event: "fr" },
+    });
+    if (countFR >= 1500) {
+      throw new UserException("Mohon maaf kuota Fun Run penuh");
+    }
+  }
+
   // generate seq no peserta
   const lastPeserta = await Peserta.findOne({
     order: [["no_peserta", "DESC"]],
@@ -150,9 +176,9 @@ Peserta.beforeCreate(async (peserta, options) => {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
   } else {
     if (peserta.event == "fw") {
-      peserta.no_peserta = 3001;
+      peserta.no_peserta = 300001;
     } else {
-      peserta.no_peserta = 1001;
+      peserta.no_peserta = 100001;
     }
   }
 
