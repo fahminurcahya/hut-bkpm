@@ -119,7 +119,6 @@ const Peserta = sequelize.define(
   }
 );
 
-Peserta.hasMany(Pendamping, {as: "Pendamping", foreignKey: 'id_peserta'});
 // Peserta.hasOne(Tiket, { as: "tiket", foreignKey: "id_peserta" });
 
 Peserta.beforeCreate(async (peserta, options) => {
@@ -157,7 +156,7 @@ Peserta.beforeCreate(async (peserta, options) => {
     const countPendamping = await Pendamping.count();
     const pesertaInternal = countPendamping + countInternal;
 
-    if (pesertaInternal >= 1250) {
+    if (pesertaInternal >= 750) {
       throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
     }
 

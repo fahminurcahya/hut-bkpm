@@ -209,24 +209,35 @@ const register = async (req, res) => {
         for (let x = 1; x <= 5; x++) {
           switch (x) {
             case 1:
-              namap.push({ nama: nama_pendamping_1, ukuran: ukuran_1 });
+              if(nama_pendamping_1!='' && ukuran_1!=''){
+                namap.push({ nama: nama_pendamping_1, ukuran: ukuran_1 });
+              }
               break;
             case 2:
-              namap.push({ nama: nama_pendamping_2, ukuran: ukuran_2 });
+              if(nama_pendamping_2!='' && ukuran_2!=''){
+                namap.push({ nama: nama_pendamping_2, ukuran: ukuran_2 });
+              }
               break;
             case 3:
-              namap.push({ nama: nama_pendamping_3, ukuran: ukuran_3 });
+              if(nama_pendamping_3!='' && ukuran_3!=''){
+                namap.push({ nama: nama_pendamping_3, ukuran: ukuran_3 });
+              }
               break;
             case 4:
-              namap.push({ nama: nama_pendamping_4, ukuran: ukuran_4 });
+              if(nama_pendamping_4!='' && ukuran_4!=''){
+                namap.push({ nama: nama_pendamping_4, ukuran: ukuran_4 });
+              }
               break;
             case 5:
-              namap.push({ nama: nama_pendamping_5, ukuran: ukuran_5 });
+              if(nama_pendamping_5!='' && ukuran_5!=''){
+                namap.push({ nama: nama_pendamping_5, ukuran: ukuran_5 });
+              }
               break;
           }
         }
 
         // console.log(namap);
+        // console.log(namap.length);
 
         for (let i = 0; i < namap.length; i++) {
           if (
@@ -432,7 +443,7 @@ const actionLogout = (req, res) => {
 
 const getKuotaCounter = async (req, res) => {
   try {
-    const Totalfr = await Peserta.count({
+    const Tfr = await Peserta.count({
       where: { event: 'fr' },
     });
     
@@ -444,17 +455,16 @@ const getKuotaCounter = async (req, res) => {
       where: { flag_internal: '1' },
     });
     
-    const Teks = await Peserta.count({
+    const Toeks = await Peserta.count({
       where: { flag_internal: '0' },
     });
 
-    const Totalin   = 750-Tin;
-    const Totaleks  = 1250-Teks;
-    
     const pendamping = await Pendamping.count();
     
-    const Totalfw = Tfw+pendamping;
-    const Counter = {Totalfr, Totalfw, Totalin, Totaleks, Tin, Teks};
+    const Totalin   = pendamping+Tin;
+    const Totalfw   = Tfw+pendamping;
+
+    const Counter = {Totalin, Toeks, Tfr, Totalfw, pendamping, Tin, Tfw};
     
     // console.log(Counter);
 
