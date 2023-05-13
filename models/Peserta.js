@@ -158,7 +158,7 @@ Peserta.beforeCreate(async (peserta, options) => {
     const pesertaInternal = countPendamping + countInternal;
 
     if (pesertaInternal >= 1250) {
-      throw new UserException("Mohon maaf kuota Internal penuh");
+      throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
     }
 
   } else {
