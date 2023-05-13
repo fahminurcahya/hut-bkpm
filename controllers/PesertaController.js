@@ -10,7 +10,7 @@ const {
   generatePDF,
 } = require("../mail");
 const bcrypt = require("bcryptjs");
-const Pendamping = require("../models/Pendamping");
+// const Pendamping = require("../models/Pendamping");
 const sequelize = require("../configs/db");
 
 // const { generatePDF } = require("../utils/generatePDF");
@@ -430,6 +430,44 @@ const actionLogout = (req, res) => {
   res.redirect("/signin");
 };
 
+const getKuotaCounter = async (req, res) => {
+  try {
+    const Totalfr = await Peserta.count({
+      where: { event: 'fr' },
+    });
+    
+    const Tfw = await Peserta.count({
+      where: { event: 'fw' },
+    });
+    
+    const Tin = await Peserta.count({
+      where: { flag_internal: '1' },
+    });
+    
+    const Teks = await Peserta.count({
+      where: { flag_internal: '0' },
+    });
+
+    const Totalin   = 750-Tin;
+    const Totaleks  = 1250-Teks;
+    
+    const pendamping = await Pendamping.count();
+    
+    const Totalfw = Tfw+pendamping;
+    const Counter = {Totalfr, Totalfw, Totalin, Totaleks};
+    
+    // console.log(Counter);
+
+    res.render("index", {
+      title: "HUT 50 | BKPM",
+      Counter,
+    });
+  } catch (error) {
+    // res.redirect("/");
+    console.log(error);
+  }
+};
+
 module.exports = {
   viewPeserta,
   viewExternal,
@@ -444,4 +482,5 @@ module.exports = {
   viewFunRun,
   viewFunWalk,
   viewEmail,
+  getKuotaCounter,
 };

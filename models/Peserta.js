@@ -118,6 +118,7 @@ const Peserta = sequelize.define(
   }
 );
 
+Peserta.hasMany(Pendamping, {as: "Pendamping", foreignKey: 'id_peserta'});
 // Peserta.hasOne(Tiket, { as: "tiket", foreignKey: "id_peserta" });
 
 Peserta.beforeCreate(async (peserta, options) => {
@@ -138,28 +139,45 @@ Peserta.beforeCreate(async (peserta, options) => {
   }
 
   //validate kuota
-  if (peserta.flag_internal == "1") {
-    const countInternal = await Peserta.count({
-      where: { flag_internal: true },
-    });
-    if (countInternal >= 1250) {
-      throw new UserException("Mohon maaf kuota Internal penuh");
-    }
-  } else {
-    const countExternal = await Peserta.count({
-      where: { flag_internal: false },
-    });
-    if (countExternal >= 750) {
-      throw new UserException("Mohon maaf kuota Ekternal penuh");
-    }
-  }
-
   if (peserta.event == "fr") {
     const countFR = await Peserta.count({
       where: { event: "fr" },
     });
     if (countFR >= 1500) {
-      throw new UserException("Mohon maaf kuota Fun Run penuh");
+      throw new UserException("Mohon maaf kuota Fun Run penuh.");
+    }
+  } else {
+    const countFwInternal = await Peserta.count({
+      include: [
+        {
+          model: Pendamping, as: "Pendamping"
+        }
+      ],
+      where: {
+        flag_internal: true,
+        event: 'fw',
+      },
+    });
+
+    console.log(countFwInternal)
+    if (countFwInternal >= 750) {
+      throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
+    }
+  }
+
+  if (peserta.flag_internal == "1") {
+    const countInternal = await Peserta.count({
+      where: { flag_internal: true },
+    });
+    if (countInternal >= 750) {
+      throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
+    }
+  } else {
+    const countExternal = await Peserta.count({
+      where: { flag_internal: false },
+    });
+    if (countExternal >= 1250) {
+      throw new UserException("Mohon maaf kuota Ekternal penuh.");
     }
   }
 
@@ -176,9 +194,9 @@ Peserta.beforeCreate(async (peserta, options) => {
     peserta.no_peserta = lastPeserta.no_peserta + 1;
   } else {
     if (peserta.event == "fw") {
-      peserta.no_peserta = 300001;
+      peserta.no_peserta = 30001;
     } else {
-      peserta.no_peserta = 100001;
+      peserta.no_peserta = 10001;
     }
   }
 

@@ -4,9 +4,7 @@ var router = express.Router();
 const { isLoginPeserta } = require("../middlewares/auth");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "HUT 50 | BKPM" });
-});
+router.get("/", pesertaController.getKuotaCounter);
 
 router.get("/tiket", function (req, res, next) {
   res.render("pdf/tiket_fr", { title: "HUT 50 | BKPM" });

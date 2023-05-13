@@ -1,229 +1,346 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/stylesheets/assets/scss/main.css" />
-</head>
-
-<body>
-
-  <header class="header bg-img">
-    <!-- START: NAVBAR -->
-    <nav class="container navbar navbar-expand-lg navbar-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-          <img src="/stylesheets/assets/images/logo.webp" alt="img" height="50" />
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav mx-auto my-3 my-lg-0">
-          </div>
-          <div class="d-grid">
-            <a class="btn-green" href="/signin">
-              Masuk
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- END: NAVBAR -->
-
-    <div class="hero">
-      <div class="hero-headline">
-        <span class="text-rale">HUT 50th</span> <br class="d-none d-lg-block" />
-        <br>
-        <span class="text-poopins">Kementerian Investasi /</span>
-        <span class="text-poopins">BKPM</span>
-
-      </div>
-      <p class="hero-paragraph">
-        <span class="text-green">FUN RUN 7K & JALAN SEHAT 3,6K</span>
-        <br class="d-none d-lg-block" />
-        <br class="d-none d-lg-block" />
-        <span class="text-green">MINGGU, 21 MEI 2023</span>
-        <br class="d-none d-lg-block" />
-        <br class="d-none d-lg-block" />
-        <span class="text-black">VENUE : GATE 5 GBK (PATUNG BUNG KARNO)</span>
-        <br class="d-none d-lg-block" />
-        <br class="d-none d-lg-block" />
-        <span class="text-blue">TOTAL HADIAH & DOORPRIZE : RP 200.000.000</span>
-      </p>
-      <a href="/register" class="btn-green">
-        Daftar Sekarang </a>
-    </div>
-    <div class="d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 header-image">
-      <img src="/stylesheets/assets/images/maraton.jpg" alt="img" / class="img-1">
-      <img src="/stylesheets/assets/images/maraton.jpg" alt="img" / class="img-2">
-      <img src="/stylesheets/assets/images/maraton.jpg" alt="img" / class="img-1">
-    </div>
-  </header>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title><%= title %></title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,700,800%7COswald:300,400,500">
+    <link rel="stylesheet" href="/stylesheets/assets/css/css/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/assets/css/css/fonts.css">
+    <link rel="stylesheet" href="/stylesheets/assets/css/css/style.css">
+    <style>
+      #clockdiv{
+        font-family: sans-serif;
+        color: #fff;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center;
+        font-size: 25px;
+      }
 
 
+      #clockdiv > div{
+        padding: 10px;
+        border-radius: 3px;
+        background: #00BF96;
+        display: inline-block;
+      }
 
-  <section class="race-pack bg-navy">
-    <div class="container-fluid">
-      <!-- <hr style="height:4px;border-width:0;color:gray;background-color:gray"> -->
-      <div class="checkout-title mb-1" id="race-pack">
-        <span class="h3 text-white" style="background-color: #208e4e;">&nbsp;Race Pack / KIT&nbsp;</span>
-      </div>
-      <div class="title">
-        Reasons to run with us! </div>
-      <div class="mt-5 row gap">
-        <!-- CARD 1 -->
-        <div class="col-lg-2 col-md-6 col-12 mx-auto">
-          <div class="card-grow h-100">
-            <img src="/stylesheets/assets/images/racekit-3.jpeg" alt="img" />
-            <div class="card-content">
-              <div class="desc-green">
-                NOMOR BIB
+      #clockdiv div > span{
+        padding: 15px;
+        border-radius: 3px;
+        background: #00816A;
+        display: inline-block;
+      }
+
+      .smalltext{
+        padding-top: 5px;
+        font-size: 20px;
+      }
+
+      .bg-blue{
+          padding: 15px;
+          background-color: #002bd1;
+      }
+
+      .bg-sk{
+          background-image: url('/stylesheets/assets/images/S&Q.png');
+      }
+
+      .check {
+        display: inline-block;
+        transform: rotate(45deg);
+        height: 24px;
+        width: 12px;
+        border-bottom: 7px solid #ffffff;
+        border-right: 7px solid #ffffff;
+        vertical-align:top;
+      }
+
+      hr {
+        height: 4px;
+        width: 50%;
+      }
+
+      .hr-warning{
+        background-image: -webkit-linear-gradient(left, rgba(210,105,30,.8), rgba(210,105,30,.6), rgba(0,0,0,0));
+      }
+      .hr-success{
+        background-color: #01c123;
+      }
+      .hr-primary{
+        background-color: #ffffff;
+      }
+      .hr-danger{
+        background-image: -webkit-linear-gradient(left, rgba(244,67,54,.8), rgba(244,67,54,.6), rgba(0,0,0,0));
+      }
+    </style>
+    <!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header" data-type="anchor">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-minimal" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-fixed" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!-- RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle="#rd-navbar-nav-wrap-1"><span></span></button>
+                  <!-- RD Navbar Brand--><a class="rd-navbar-brand" href="/"><img src="/stylesheets/assets/images/logo-front.png" width="400" height="50" alt=""></a>
+                </div>
+                <div class="rd-navbar-main-element">
+                  <div class="rd-navbar-nav-wrap" id="rd-navbar-nav-wrap-1">
+                    <!-- RD Navbar Nav-->
+                    <ul class="rd-navbar-nav">
+                      <li class="rd-nav-item active"><a class="rd-nav-link" href="#home">Home</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#event">Event</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#racepack">Racepack</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="#ketentuanumum">Ketentuan Umum</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/pdf/SYARAT-DAN-KETENTUAN-LENGKAP.pdf" target="_blank">S&K Lengkap</a>
+<!--                       </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="/signin">Masuk</a> -->
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <a href="/stylesheets/assets/images/racekit-3.jpeg" class="stretched-link" target="_blank"></a>
             </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Slider -->
+      <div class="swiper-container swiper-slider swiper-slider-minimal" id="home" data-loop="true" data-slide-effect="fade" data-autoplay="3500" data-simulate-touch="true">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" data-slide-bg="/stylesheets/assets/css/images/slider-minimal-slide-1-1920x888.png">
+          </div>
+          <div class="swiper-slide" data-slide-bg="/stylesheets/assets/css/images/racepack.png">
           </div>
         </div>
-        <!-- CARD 2 -->
-        <div class="col-lg-2 col-md-6 col-12 mx-auto">
-          <div class="card-grow h-100">
-            <img src="/stylesheets/assets/images/racekit-1.jpeg" alt="img" />
-            <div class="card-content">
-              <div class="desc-green">
-                JERSEY
-              </div>
-              <a href=" /stylesheets/assets/images/racekit-1.jpeg" class="stretched-link" target="_blank"></a>
-            </div>
-          </div>
-        </div>
-        <!-- CARD 3 -->
-        <div class="col-lg-2 col-md-6 col-12 mx-auto">
-          <div class="card-grow h-100">
-            <img src="/stylesheets/assets/images/racekit-2.jpeg" alt="img" />
-            <div class="card-content">
-              <div class="desc-green">
-                TAS SERUT
-              </div>
-              <a href=" /stylesheets/assets/images/racekit-2.jpeg" class="stretched-link" target="_blank"></a>
-            </div>
-          </div>
-        </div>
-        <!-- CARD 4 -->
-        <div class="col-lg-2 col-md-6 col-12 mx-auto">
-          <div class="card-grow h-100">
-            <img src="/stylesheets/assets/images/racekit-5.jpeg" alt="img" />
-            <div class="card-content">
-              <div class="desc-green">
-                HANDUK
-              </div>
-              <a href=" /stylesheets/assets/images/racekit-5.jpeg" class="stretched-link" target="_blank"></a>
-            </div>
-          </div>
-        </div>
-        <!-- CARD 5 -->
-        <div class="col-lg-2 col-md-6 col-12 mx-auto">
-          <div class="card-grow h-100">
-            <img src="/stylesheets/assets/images/racekit-6.png" alt="img" />
-            <div class="card-content">
-              <div class="desc-green">
-                MEDALI 20 FINISHER
-              </div>
-              <a href=" /stylesheets/assets/images/racekit-6.png" class="stretched-link" target="_blank"></a>
-            </div>
-          </div>
-        </div>
-  </section>
-  <section class="bg-navy">
-    <div class="checkout container">
-      <div class="text-center checkout-title">
-        Jadwal Acara </div>
-
-      <div
-        class="event-details container d-flex flex-row justify-content-lg-center align-items-center card bg-transparent">
-        <div class="card-header border-0">
-          <img src="/stylesheets/assets/images/ricepack.png" class="event-image" alt="" />
-        </div>
-        <div class="d-flex flex-column gap-3 text-card">
-          <h5>Pengambilan Racepack
-          </h5>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-calendar-white.svg" alt="">
-            <span>Jumat, 19 Mei 2023</span>
-          </div>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-time-white.svg" alt="">
-            <span>09.00 - 17.00</span>
-          </div>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-marker-white.svg" alt="">
-            <span>Ruang Nusantara<br class="d-none d-md-block">
-              Kementrian Investasi/BKBM</span>
-          </div>
+        <div class="swiper-pagination-outer container">
+          <div class="swiper-pagination swiper-pagination-modern swiper-pagination-marked"></div>
         </div>
       </div>
-      <div
-        class="event-details container d-flex flex-row justify-content-lg-center align-items-center card bg-transparent">
-        <div class="card-header border-0">
-          <img src="/stylesheets/assets/images/start.png" class="event-image" alt="" />
+      <!-- Daftar Sekarang -->
+      <section class="section section-md bg-primary-gradient text-center">
+        <div class="container">
+          <div id="clockdiv" class="wow slideInUp">
+            <div><span class="days wow slideInDown font-weight-bold"></span><div class="smalltext">Hari</div></div>
+            <div><span class="hours wow slideInDown font-weight-bold"></span><div class="smalltext">Jam</div></div>
+            <div><span class="minutes wow slideInDown font-weight-bold"></span><div class="smalltext">Menit</div></div>
+            <div><span class="seconds wow slideInDown font-weight-bold"></span><div class="smalltext">Detik</div></div>
+          </div>
+          <br>
+          <div id="clockdiv" class="wow slideInUp mt-3">
+            <div><span class="wow slideInRight"><div class="smalltext">Peserta Internal <%= Counter.Tin %></div></div>
+            <div><span class="wow slideInRight"><div class="smalltext">Peserta Eksternal <%= Counter.Teks %></div></div>
+            <div><span class="wow slideInRight"><div class="smalltext">Kuota Internal <%= Counter.Totalin %></div></div>
+            <div><span class="wow slideInRight"><div class="smalltext">Kuota Eksternal <%= Counter.Totaleks %></div></div>
+            <div><span class="wow slideInRight"><div class="smalltext">Peserta Fun Run <%= Counter.Totalfr %></div></div>
+            <div><span class="wow slideInRight"><div class="smalltext">Peserta Fun Walk <%= Counter.Totalfw %></div></div>
+          </div>
+          <div class="box-cta-1 button-outer">
+            <h4 class="wow-outer"><span class="wow slideInRight">Ayo Ikut Meriahkan HUT ke-50 <span class="font-weight-bold">Kementerian Investasi/BKPM</span></span></h4>
+            <br>
+            <% if( Counter.Totalin > 0 || Counter.Totaleks > 0 ){ %>
+              <div class="wow-outer button-outer"><a class="button button-primary-outline button-icon button-icon-left button-winona wow slideInLeft" href="/register">DAFTAR SEKARANG</a></div>
+            <% } else { %>
+              <div class="wow-outer button-outer"><span class="button button-primary-outline button-icon button-icon-left button-winona wow slideInLeft">Kuota Habis</span></div>
+            <% } %>
+          </div>
+          <div class="col col-md-6">
+          </div>
         </div>
-        <div class="d-flex flex-column gap-3 text-card">
-          <h5>Waktu Start
-          </h5>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-calendar-white.svg" alt="">
-            <span>Minggu, 21 Mei 2023</span>
+      </section>
+      <!-- Event-->
+      <section class="section section-lg text-center bg-blue" id="event" data-type="anchor">
+        <div class="container">
+          <!-- <div class="row row-50">
+            <div class="col-sm-6 col-lg-4 wow-outer">
+              <article class="profile-minimal wow slideInLeft">
+                <div class="box-light-icon fl-bigmug-line-event6"></div>
+                <h4 class="wow-outern font-weight-bold text-white">TANGGAL</h4>
+                <p>28 MEI 2023</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4 wow-outer">
+              <article class="profile-minimal wow slideInLeft" data-wow-delay=".05s">
+                <div class="box-light-icon fl-bigmug-line-nine16"></div>
+                <h4 class="wow-outern font-weight-bold text-white">JAM</h4>
+                <p>06:00 WIB</p>
+              </article>
+            </div>
+            <div class="col-sm-6 col-lg-4 wow-outer">
+              <article class="profile-minimal wow slideInLeft" data-wow-delay=".05s">
+                <div class="box-light-icon fl-bigmug-line-nine16"></div>
+                <h4 class="wow-outern font-weight-bold text-white">LOKASI</h4>
+                <p>Gedung Kementerian Investasi/BKPM, Jl. Jend. Gatot Subroto No. 44, Senayan, Kebayoran Baru, Jakarta Selatan</p>
+              </article>
+            </div>
+          </div> -->
+          <br>
+          <span class="wow slideInRight"><a class="button-venue button-winona wow slideInLeft" href="https://goo.gl/maps/XDq8PSsxcqYMHhqg8" target="_blank"><img src="/stylesheets/assets/images/venue.png" alt="" width="700" height="63"/></a></span>
+          <hr class="hr-primary mt-4 mb-3" />
+          <div class="row row-50 justify-content-center justify-content-lg-between">
+            <div class="col-md-8 col-lg-5 wow-outer">
+              <h3 class="wow-outern mb-1"><span class="wow slideInRight text-white">RUTE <span class="font-weight-bold">FUN RUN 7K</span></span></h3>
+              <img class="img-responsive wow slideInLeft mt-1" src="/stylesheets/assets/images/FUN-RUN-ROUTE.png" alt="Fun Run Route" width="300" height="300"/>
+            </div>
+            <div class="col-md-8 col-lg-5 wow-outer">
+              <h3 class="wow-outer mb-1"><span class="wow slideInRight text-white">RUTE <span class="font-weight-bold">FUN WALK 2,5K</span></span></h3>
+              <img class="img-responsive wow slideInRight mt-1 mb-5" src="/stylesheets/assets/images/FUN-WALK-ROUTE.png" alt="Fun Walk Route" width="300" height="300"/>
+            </div>
+          </div>          
+        </div>
+      </section>
+      <!-- Racepack-->
+      <section class="section section-lg bg-gray-100 text-center align-item-center" id="racepack" data-type="anchor">
+        <div class="container">
+          <h3 class="wow-outer"><span class="wow slideInRight">Race<span class="font-weight-bold"> Pack</span></span></h3>
+          <hr class="wow slideInRight hr-success mt-3 mb-3" />
+          <span class="wow-outer text-black"><span class="wow slideInRight">Dapatkan Koleksi Race Pack Menarik </span></h6>
+          <div class="pricing-group-modern wow-outer">
+            <!-- Pricing Modern-->
+            <article class="pricing-modern wow fadeInLeft">
+              <p class="pricing-modern-price">
+                <img src="/stylesheets/assets/images/jersey.png" alt="Jersey"/><p class="pricing-modern-price">
+              </p>
+              <h5 class="pricing-modern-title"><span class="button button-primary button-winona">Jersey</span></h5>
+            </article>
+            <!-- Pricing Modern-->
+            <article class="pricing-modern wow fadeInLeft" data-wow-delay=".05s">
+              <p class="pricing-modern-price">
+                <img src="/stylesheets/assets/images/towel.png" alt="Handuk"/><p class="pricing-modern-price">
+              </p>
+              <h5 class="pricing-modern-title"><span class="button button-primary button-winona">Handuk</span></h5>
+            </article>
+            <!-- Pricing Modern-->
+            <article class="pricing-modern wow fadeInLeft" data-wow-delay=".1s">
+              <p class="pricing-modern-price">
+                <img src="/stylesheets/assets/images/bib.png" alt="BIB"/><p class="pricing-modern-price">
+              </p>
+              <h5 class="pricing-modern-title"><span class="button button-primary button-winona">Bib</span></h5>
+            </article>
+            <!-- Pricing Modern-->
+            <article class="pricing-modern wow fadeInLeft" data-wow-delay=".15s">
+              <p class="pricing-modern-price">
+                <img src="/stylesheets/assets/images/tas.png" alt="Tas"/><p class="pricing-modern-price">
+              </p>
+              <h5 class="pricing-modern-title"><span class="button button-primary button-winona">Tas</span></h5>
+            </article>
           </div>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-time-white.svg" alt="">
-            <span>7KM : 06.30</span>
+        </div>
+      </section>
+      <!-- Ketentuan Umum-->
+      <section class="section section-md bg-primary-gradient text-center align-item-center" id="ketentuanumum" data-type="anchor">
+        <div class="container">
+          <h3 class="wow-outer"><span class="wow slideInRight">Ketentuan Umum <span class="font-weight-bold">Peserta</span></span></h3>
+          <hr class="wow slideInRight hr-primary mt-3 mb-3" />
+          <span class="wow-outer text-white"><span class="wow slideInRight">Dengan melakukan registrasi untuk Fun Run & Fun Walk dalam rangka HUT ke-50 Kementerian Investasi/BKPM, maka Anda telah setuju dan menerima Syarat dan Ketentuan yang berlaku pada kegiatan ini.</span></h6>
+          <!-- Pricing Modern-->
+          <article class="pricing-modern wow fadeInLeft mt-5" data-wow-delay=".1s">
+            <table class="pricing-modern-table">
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Merupakan Warga Negara Indonesia dan memiliki KTP</span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Berusia minimal 17 tahun dan maksimal 75 tahun</span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Fun Walk: Peserta dapat mendaftarkan keluarga/pendamping (usia 0-75 tahun) maksimal 5 orang pada saat pendaftaran dengan mencantumkan nama dan usia pendamping</span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Penerima medali untuk 10 finisher pelari pertama Fun Run</span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Sehat jasmani dan rohani</span></td>
+              </tr>
+              <tr>
+                <td style="vertical-align:top"><div class="check"></div></td>
+                <td><span class="text-white font-weight-bold">Tidak dalam keadaan hamil untuk peserta Fun Run & Fun Walk</span></td>
+              </tr>
+            </table>
+          </article>
+            <div class="wow-outer mt-3"><a class="button button-primary button-winona" onclick="window.open('/pdf/SYARAT-DAN-KETENTUAN-LENGKAP.pdf', '_blank')"></span>Syarat & Ketentuan Lengkap</a></div>
+        </div>
+      </section>
+      <!-- Page Footer-->
+      <footer class="section footer-linked bg-gray-700">
+        <div class="footer-linked-aside">
+          <div class="container">
+            <!-- Rights-->
+            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved</span></p>
           </div>
-          <div class="d-flex align-items-center gap-3">
-            <img src="/stylesheets/assets/icons/ic-marker-white.svg" alt="">
-            <span>Patung Bung Karno (Gate 5) <br class="d-none d-md-block">GBK</span>
-          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="preloader"> 
+      <div class="preloader-logo"><img src="/stylesheets/assets/images/logo-front.png" width="400" height="50" alt=""></div>
+      <div class="preloader-body">
+        <div id="loadingProgressG">
+          <div class="loadingProgressG" id="loadingProgressG_1"></div>
         </div>
       </div>
     </div>
-  </section>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="/stylesheets/assets/css/js/core.min.js"></script>
+    <script src="/stylesheets/assets/css/js/script.js"></script>
+    <!-- coded by ragnar-->
+    <script>
+      var deadline = 'May 28, 2023 06:00:00';
+      function time_remaining(endtime){
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        var hours = Math.floor( (t/(1000*60*60)) % 24 );
+        var days = Math.floor( t/(1000*60*60*24) );
+        return {'total':t, 'days':days, 'hours':hours, 'minutes':minutes, 'seconds':seconds};
+      }
+      function run_clock(id,endtime){
+        var clock = document.getElementById(id);
+        
+        // get spans where our clock numbers are held
+        var days_span = clock.querySelector('.days');
+        var hours_span = clock.querySelector('.hours');
+        var minutes_span = clock.querySelector('.minutes');
+        var seconds_span = clock.querySelector('.seconds');
 
-  <section class="bg-white">
-    <div class="event-details container d-flex flex-row justify-content-lg-center align-items-center mt-5">
-      <span class="text-green-rute">RUTE JALAN SEHAT 3,6KM</span>
-    </div>
-    <div class="event-details container d-flex flex-row justify-content-lg-center align-items-center mt-3">
-      <img src="/stylesheets/assets/images/map-jalan.jpeg" height="25%" width="100%">
-    </div>
-
-    <div class="event-details container d-flex flex-row justify-content-lg-center align-items-center mt-5">
-      <span class="text-green-rute">RUTE FUN RUN 7KM</span>
-    </div>
-    <div class="event-details container d-flex flex-row justify-content-lg-center align-items-center mt-3">
-      <img src="/stylesheets/assets/images/map-lari.jpeg" height="25%" width="100%">
-    </div>
-    <br>
-  </section>
-
-  <footer class="footer bg-navy">
-    <div class="container">
-      <div class="d-flex justify-content-center paragraph all-rights">
-        Copyright &copy; 2023 Middleearth Dev. All Rights Reserved.
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
-    </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
-    </script>
-</body>
-
+        function update_clock(){
+          var t = time_remaining(endtime);
+          
+          // update the numbers in each part of the clock
+          days_span.innerHTML = t.days;
+          hours_span.innerHTML = ('0' + t.hours).slice(-2);
+          minutes_span.innerHTML = ('0' + t.minutes).slice(-2);
+          seconds_span.innerHTML = ('0' + t.seconds).slice(-2);
+          
+          if(t.total<=0){ clearInterval(timeinterval); }
+        }
+        update_clock();
+        var timeinterval = setInterval(update_clock,1000);
+      }
+      run_clock('clockdiv',deadline);
+      </script>
+  </body>
 </html>
