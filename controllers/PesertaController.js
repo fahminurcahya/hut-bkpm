@@ -10,7 +10,7 @@ const {
   generatePDF,
 } = require("../mail");
 const bcrypt = require("bcryptjs");
-// const Pendamping = require("../models/Pendamping");
+const Pendamping = require("../models/Pendamping");
 const sequelize = require("../configs/db");
 
 // const { generatePDF } = require("../utils/generatePDF");
