@@ -1,6 +1,7 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../configs/db");
 const bcrypt = require("bcryptjs");
+const Pendamping = require("./Pendamping");
 
 const Peserta = sequelize.define(
   "peserta",
@@ -146,23 +147,6 @@ Peserta.beforeCreate(async (peserta, options) => {
     if (countFR >= 1500) {
       throw new UserException("Mohon maaf kuota Fun Run penuh.");
     }
-  } else {
-    const countFwInternal = await Peserta.count({
-      include: [
-        {
-          model: Pendamping, as: "Pendamping"
-        }
-      ],
-      where: {
-        flag_internal: true,
-        event: 'fw',
-      },
-    });
-
-    console.log(countFwInternal)
-    if (countFwInternal >= 750) {
-      throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
-    }
   }
 
   if (peserta.flag_internal == "1") {
@@ -172,6 +156,14 @@ Peserta.beforeCreate(async (peserta, options) => {
     if (countInternal >= 750) {
       throw new UserException("Mohon maaf kuota Internal Kementerian Investasi/BKPM penuh.");
     }
+
+    const countPendamping = await Pendamping.count();
+    const pesertaInternal = countPendamping + countInternal;
+
+    if (pesertaInternal >= 1250) {
+      throw new UserException("Mohon maaf kuota Internal penuh");
+    }
+
   } else {
     const countExternal = await Peserta.count({
       where: { flag_internal: false },
