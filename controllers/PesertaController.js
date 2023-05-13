@@ -454,7 +454,7 @@ const getKuotaCounter = async (req, res) => {
     const pendamping = await Pendamping.count();
     
     const Totalfw = Tfw+pendamping;
-    const Counter = {Totalfr, Totalfw, Totalin, Totaleks};
+    const Counter = {Totalfr, Totalfw, Totalin, Totaleks, Tin, Teks};
     
     // console.log(Counter);
 
