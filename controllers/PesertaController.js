@@ -209,27 +209,52 @@ const register = async (req, res) => {
         for (let x = 1; x <= 5; x++) {
           switch (x) {
             case 1:
-              if(nama_pendamping_1!='' && ukuran_1!=''){
+              if (
+                nama_pendamping_1 != "" &&
+                nama_pendamping_1 != undefined &&
+                ukuran_1 != "" &&
+                ukuran_1 != undefined
+              ) {
                 namap.push({ nama: nama_pendamping_1, ukuran: ukuran_1 });
               }
               break;
             case 2:
-              if(nama_pendamping_2!='' && ukuran_2!=''){
+              if (
+                nama_pendamping_2 != "" &&
+                nama_pendamping_2 != undefined &&
+                ukuran_2 != "" &&
+                ukuran_2 != undefined
+              ) {
                 namap.push({ nama: nama_pendamping_2, ukuran: ukuran_2 });
               }
               break;
             case 3:
-              if(nama_pendamping_3!='' && ukuran_3!=''){
+              if (
+                nama_pendamping_3 != "" &&
+                nama_pendamping_3 != undefined &&
+                ukuran_3 != "" &&
+                ukuran_3 != undefined
+              ) {
                 namap.push({ nama: nama_pendamping_3, ukuran: ukuran_3 });
               }
               break;
             case 4:
-              if(nama_pendamping_4!='' && ukuran_4!=''){
+              if (
+                nama_pendamping_4 != "" &&
+                nama_pendamping_4 != undefined &&
+                ukuran_4 != "" &&
+                ukuran_4 != undefined
+              ) {
                 namap.push({ nama: nama_pendamping_4, ukuran: ukuran_4 });
               }
               break;
             case 5:
-              if(nama_pendamping_5!='' && ukuran_5!=''){
+              if (
+                nama_pendamping_5 != "" &&
+                nama_pendamping_5 != undefined &&
+                ukuran_5 != "" &&
+                ukuran_5 != undefined
+              ) {
                 namap.push({ nama: nama_pendamping_5, ukuran: ukuran_5 });
               }
               break;
@@ -238,6 +263,18 @@ const register = async (req, res) => {
 
         // console.log(namap);
         // console.log(namap.length);
+        const countInternal = await Peserta.count({
+          where: { flag_internal: true },
+        });
+        const countPendamping = await Pendamping.count();
+        const pesertaInternalTerdaftar = countPendamping + countInternal;
+        const pesertaInternalBaru = 1 + namap.length;
+        const sisa = 750 - pesertaInternalTerdaftar;
+        if (pesertaInternalBaru > sisa) {
+          throw new UserException(
+            `Mohon maaf kuota Internal Kementerian Investasi/BKPM tersisa ${sisa}. orang`
+          );
+        }
 
         for (let i = 0; i < namap.length; i++) {
           if (
@@ -444,28 +481,28 @@ const actionLogout = (req, res) => {
 const getKuotaCounter = async (req, res) => {
   try {
     const Tfr = await Peserta.count({
-      where: { event: 'fr' },
+      where: { event: "fr" },
     });
-    
+
     const Tfw = await Peserta.count({
-      where: { event: 'fw' },
+      where: { event: "fw" },
     });
-    
+
     const Tin = await Peserta.count({
-      where: { flag_internal: '1' },
+      where: { flag_internal: "1" },
     });
-    
+
     const Toeks = await Peserta.count({
-      where: { flag_internal: '0' },
+      where: { flag_internal: "0" },
     });
 
     const pendamping = await Pendamping.count();
-    
-    const Totalin   = pendamping+Tin;
-    const Totalfw   = Tfw+pendamping;
 
-    const Counter = {Totalin, Toeks, Tfr, Totalfw, pendamping, Tin, Tfw};
-    
+    const Totalin = pendamping + Tin;
+    const Totalfw = Tfw + pendamping;
+
+    const Counter = { Totalin, Toeks, Tfr, Totalfw, pendamping, Tin, Tfw };
+
     // console.log(Counter);
 
     res.render("index", {
@@ -477,6 +514,11 @@ const getKuotaCounter = async (req, res) => {
     console.log(error);
   }
 };
+
+function UserException(message) {
+  this.message = message;
+  this.name = "validation";
+}
 
 module.exports = {
   viewPeserta,
