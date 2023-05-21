@@ -1,4 +1,5 @@
 const { generatePDF } = require("../../mail");
+const Pendamping = require("../../models/Pendamping");
 const Peserta = require("../../models/Peserta");
 const { generateQRPNG } = require("../../utils/generateQRPNG");
 const {
@@ -53,20 +54,6 @@ const claimRacePack = async (req, res) => {
   const { qr_code } = req.params;
 
   try {
-    const peserta = await Peserta.findOne({
-      where: { qr_code },
-    });
-
-    if (!peserta) {
-      return res.status(200).json(responseReject("Data tidak ditemukan"));
-    }
-
-    if (peserta.flag_racepack) {
-      return res
-        .status(200)
-        .json(responseReject("Peserta telah mengambil starterkit", peserta));
-    }
-
     await Peserta.update(
       { flag_racepack: true },
       {
@@ -76,7 +63,7 @@ const claimRacePack = async (req, res) => {
       }
     );
 
-    res.status(200).json(responseSukses(peserta));
+    res.status(200).json(responseSukses());
   } catch (err) {
     console.log(err);
     res.status(500).json(responseException(err.message));
@@ -87,20 +74,6 @@ const checkin = async (req, res) => {
   const { qr_code } = req.params;
 
   try {
-    const peserta = await Peserta.findOne({
-      where: { qr_code },
-    });
-
-    if (!peserta) {
-      return res.status(200).json(responseReject("Data tidak ditemukan"));
-    }
-
-    if (peserta.flag_checkin) {
-      return res
-        .status(200)
-        .json(responseReject("Peserta telah checkin sebelumnya", peserta));
-    }
-
     await Peserta.update(
       { flag_checkin: true },
       {
@@ -110,7 +83,32 @@ const checkin = async (req, res) => {
       }
     );
 
-    res.status(200).json(responseSukses(peserta));
+    res.status(200).json(responseSukses());
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(responseException(err.message));
+  }
+};
+
+const scan = async (req, res) => {
+  const { qr_code } = req.params;
+
+  try {
+    const peserta = await Peserta.findOne({
+      where: { qr_code },
+    });
+
+    if (!peserta) {
+      return res.status(200).json(responseReject("Data tidak ditemukan"));
+    }
+    const pendamping = await Pendamping.findAll({
+      where: { id_peserta: peserta.id },
+    });
+    let data = {
+      peserta,
+      pendamping,
+    };
+    res.status(200).json(responseSukses(data));
   } catch (err) {
     console.log(err);
     res.status(500).json(responseException(err.message));
@@ -121,4 +119,5 @@ module.exports = {
   claimRacePack,
   checkin,
   sendMail,
+  scan,
 };

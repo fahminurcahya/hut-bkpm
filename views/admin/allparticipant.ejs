@@ -66,22 +66,14 @@
     <br>
     <div class="container">
         <h3>Data Peserta</h3>
-        <p>*Hanya Peserta yang mempunyai nomor peserta</p>
-
+        <p>*Total Peserta + pendamping</p>
         <div>
             <table id="data_rst" class="table table-display" style="width:100%">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">NIK</th>
-
-                        <th scope="col">No Peserta</th>
-                        <th scope="col">Event</th>
-                        <th scope="col">Tipe Peserta</th>
-                        <th scope="col">Status Starterkit</th>
-                        <th scope="col">Status Checkin</th>
-                        <th scope="col"> Action
+                        <th scope="col">Ukuran Baju</th>
                         </th>
                     </tr>
                 </thead>
@@ -90,33 +82,7 @@
                     <tr>
                         <td><%= i + 1 %></td>
                         <td><%= peserta[i].nama%></td>
-                        <td><%= peserta[i].nik%></td>
-
-                        <td><%= peserta[i].no_peserta%></td>
-                        <td><% if (peserta[i].event == "fw") {%>
-                            Fun Walk
-                            <%} else {%>
-                            Fun Run
-                            <%}%>
-                        </td>
-                        <td><% if (peserta[i].flag_internal) {%>
-                            Internal
-                            <%} else {%>
-                            Ekternal
-                            <%}%>
-                        </td>
-                        <td><% if (peserta[i].flag_racepack) {%>
-                            Racepack telah diambil
-                            <%}%>
-                        </td>
-                        <td><% if (peserta[i].flag_checkin) {%>
-                            Peserta Telah Checkin
-                            <%}%>
-                        </td>
-                        <td>
-                            <a href="/pageadm/detail/<%= peserta[i].id %>" type="button"
-                            class="btn btn-primary btn-sm">detail</a>
-                        </td>
+                        <td><%= peserta[i].ukuran%></td>
                     </tr>
                     <% } %>
                 </tbody>

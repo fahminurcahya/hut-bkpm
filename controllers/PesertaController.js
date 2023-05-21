@@ -30,6 +30,23 @@ const viewPeserta = async (req, res) => {
   }
 };
 
+const viewAllPeserta = async (req, res) => {
+  try {
+    const peserta = await Peserta.findAll({ attributes: ["nama", "ukuran"] });
+    const pendamping = await Pendamping.findAll({
+      attributes: ["nama", "ukuran"],
+    });
+    peserta.push(...pendamping);
+    res.render("admin/allparticipant", {
+      title: "HUT 50 | BKPM",
+      peserta,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/pageadm/allparticipant");
+  }
+};
+
 const viewExternal = async (req, res) => {
   try {
     const peserta = await Peserta.findAll({
@@ -535,4 +552,5 @@ module.exports = {
   viewFunWalk,
   viewEmail,
   getKuotaCounter,
+  viewAllPeserta,
 };

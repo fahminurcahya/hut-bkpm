@@ -30,52 +30,45 @@
 
 
         function onScanSuccess(decodedText, decodedResult) {
-            // html5QrcodeScanner.stop();
             html5QrcodeScanner.clear()
-            // document.getElementById('reader').remove();
-
             console.log(`Code matched = ${decodedText}`, decodedResult);
+            showData(decodedText)
+        }
+
+        function onScanFailure(error) {
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            {
+                fps: 10, qrbox: { width: 500, height: 500 },
+            },
+
+  /* verbose= */ false);
+
+        function showData(barcode) {
             const options = {
-                method: "POST",
+                method: "GET",
                 headers: { "Content-Type": "application/json" },
-            };
-            fetch(`/api/v1/checkin/${decodedText}`, options)
+            }
+            fetch(`/api/v1/scan/${barcode}`, options)
                 .then(response => response.json())
                 .then(resp => {
-                    // Menampilkan hasil response dari API ke dalam elemen HTML.
-                    // html5QrcodeScanner.clear()
-
                     if (resp.error) {
-                        if (resp.data != null && resp.data.flag_racepack) {
-                            Swal.fire({
-                                title: resp.message,
-                                icon: 'info',
-                                showDenyButton: false,
-                                showCancelButton: false,
-                                confirmButtonText: 'Kembali',
-                                allowOutsideClick: false,
-                                text: resp.data.nama + ' | ' + resp.data.no_peserta,
+                        Swal.fire({
+                            title: resp.message,
+                            icon: 'info',
+                            confirmButtonText: 'Kembali',
+                            allowOutsideClick: false,
 
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    window.location.reload(true);
-                                }
-                            })
-                        } else {
-                            Swal.fire({
-                                title: resp.message,
-                                icon: 'info',
-                                confirmButtonText: 'Kembali',
-                                allowOutsideClick: false,
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                window.location.reload(true);
+                            }
+                        })
 
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    window.location.reload(true);
-                                }
-                            })
-                        }
                         // Menutup akses kamera.
                     } else {
                         if (resp.data.event == 'fr') {
@@ -90,31 +83,99 @@
                             Internal = 'Umum'
                         }
 
+                        let nipStr = ''
+                        if (resp.data.peserta.flag_internal) {
+                            nipStr = `<label id="" class="form-label mt-1">Nip</label>
+                                <input readonly value="${resp.data.peserta.nip}" type="text" class="form-control" />`
+                        }
+
+                        let checkinStr = ''
+                        let confirmButton = true
+                        if (resp.data.peserta.flag_checkin) {
+                            checkinStr = '<span style="color: red;">*Barcode ini sudah pernah di scan sebelumnya</span>'
+                            confirmButton = false
+                        }
+
+                        let pendampingStr = ''
+
+                        if (resp.data.peserta.event == "fw" && resp.data.peserta.flag_internal) {
+                            pendampingStr = `<br><details><summary>Lihat Pendamping</summary>`
+                            for (let i = 0; i < resp.data.pendamping.length; i++) {
+                                pendampingStr = pendampingStr + `
+                                <div class="row mt-4">
+                                    <label id="lbl_pendamping_1" class="form-label">
+                                        Pendamping ${i + 1}
+                                    </label>
+                                    <div class="d-flex flex-column align-items-start mt-4">
+                                    <label id="lbl_nama_pendamping_1" class="form-label">
+                                        Nama Pendamping
+                                    </label>
+                                    <input readonly value="${resp.data.pendamping[i].nama}" type="text" class="form-control" />
+                                    <label id="lbl_nama_pendamping_1" class="form-label">
+                                        Ukuran
+                                    </label>
+                                    <input readonly value="${resp.data.pendamping[i].ukuran}" type="text" class="form-control" />
+                                    </div>
+                                </div>`
+                            } + '</details > '
+                        }
+
+                        let htmlStr = `<h6 class="price my-3">${Event} </h6> ${checkinStr}
+                        <div class="price my-3">Nomor Peserta</div>
+                        <div class="price my-3" > ${resp.data.peserta.no_peserta}</div> 
+                        <div class="row mt-4" style="text-align: left;">
+                            <div class="flex-column align-items-start mt-4">
+                                <label id="" class="form-label mt-1">Nama</label>
+                                <input readonly value="${resp.data.peserta.nama}" type="text" class="form-control" />
+                                <label id="" class="form-label mt-1">NIK</label>
+                                <input readonly value="${resp.data.peserta.nik}" type="text" class="form-control" />
+                                ${nipStr}
+                                <label id="" class="form-label mt-1">Ukuran</label>
+                                <input readonly value="${resp.data.peserta.ukuran}" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        ${pendampingStr}`
+
+
                         Swal.fire({
                             title: resp.message,
                             icon: 'success',
-                            confirmButtonText: 'Kembali',
                             allowOutsideClick: false,
-                            html:
-                                'Event | ' + Event + ' <br>' +
-                                'Tipe Peserta | ' + Internal + ' <br>' +
-                                'No Peserta | ' + resp.data.no_peserta + ' <br>' +
-                                'Nama | ' + resp.data.nama + ' <br>' +
-                                'No HP | ' + resp.data.no_whatsapp + ' <br>' +
-                                'Ukuran Jersey | ' + resp.data.ukuran
+                            confirmButtonText: 'Konfirmasi Data',
+                            showCancelButton: true,
+                            showConfirmButton: confirmButton,
+                            cancelButtonColor: '#d33',
+                            cancelButtonText: 'Kembali',
+                            html: htmlStr
+
+
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
+                                fetch(`/api/v1/checkin/${barcode}`, options)
+                                    .then(response => response.json())
+                                    .then(resp => {
+                                        window.location.reload(true);
+
+                                    })
+                                    .catch(error => {
+                                        window.location.reload(true);
+
+                                    });
+                            } else if (
+                                /* Read more about handling dismissals below */
+                                result.dismiss === Swal.DismissReason.cancel
+                            ) {
                                 window.location.reload(true);
                             }
                         })
                     }
                 })
                 .catch(error => {
-                    html5QrcodeScanner.clear()
+                    console.log(error)
                     Swal.fire({
                         title: "Terjadi Kesalahan",
-                        icon: 'danger',
+                        icon: 'info',
                         confirmButtonText: 'Kembali',
                         allowOutsideClick: false,
                     }).then((result) => {
@@ -125,20 +186,6 @@
                     })
                 });
         }
-
-        function onScanFailure(error) {
-            // handle scan failure, usually better to ignore and keep scanning.
-            // for example:
-            console.warn(`Code scan error = ${error}`);
-        }
-
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader",
-            {
-                fps: 10, qrbox: { width: 500, height: 500 },
-            },
-
-  /* verbose= */ false);
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);    </script>
 </body>
 
