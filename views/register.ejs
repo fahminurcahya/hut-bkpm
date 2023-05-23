@@ -52,17 +52,6 @@
                     <%- include('message.ejs') %>
 
                     <div class="d-flex flex-column align-items-start">
-                        <label id="lbl_event" class="form-label">
-                            Event
-                        </label>
-                        <select class="form-select" aria-label="Default select example" id="event" name="event"
-                            onchange="Event(this.value)">
-                            <option value="" selected>Pilih Event</option>
-                            <option value="fr">FUN RUN</option>
-                            <option value="fw">FUN WALK</option>
-                        </select>
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
                         <label id="lbl_flag_internal" class="for ">
                             Tipe Peserta
                         </label>
@@ -71,6 +60,15 @@
                             <option value="" selected>Pilih Tipe Peserta</option>
                             <option value="1">Internal Kementerian/BKPM</option>
                             <option value="0">Umum</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column align-items-start">
+                        <label id="lbl_event" class="form-label">
+                            Event
+                        </label>
+                        <select class="form-select" aria-label="Default select example" id="event" name="event"
+                            onchange="Event(this.value)" required>
+                            
                         </select>
                     </div>
 
@@ -443,8 +441,10 @@
             $('#submitpass').prop('disabled', true);
             $('#pendamping').hide();
             $('#form_pendamping').hide();
-            $('#lbl_flag_internal').hide();
-            $('#flag_internal').hide();
+            // $('#lbl_flag_internal').hide();
+            // $('#flag_internal').hide();
+            $('#lbl_event').hide();
+            $('#event').hide();
 
 
             $('#password, #password_confirm').on('keyup', function () {
@@ -463,20 +463,9 @@
         });
 
         function Event(val) {
-            $('#addpendamping').hide();
 
-            if (val == '') {
-                $('#lbl_flag_internal').hide();
-                $('#flag_internal').hide();
-                $('#form_register').hide();
-                $('#submitpass').prop('disabled', true);
-                password.value = '';
-                password_confirm.value = '';
-                $('#message').hide();
-                document.getElementById("terms_agree").checked = false;
-
-            } else {
-                flag_internal.value = '';
+            if (val != '') {
+                // flag_internal.value = '';
                 $('#lbl_flag_internal').show();
                 $('#flag_internal').show();
                 password.value = '';
@@ -487,10 +476,15 @@
 
             }
 
+            let tipe = document.getElementById("flag_internal").value;
+            getPendamping(val, tipe);
         }
 
         function Tipe(val) {
+            $('#addpendamping').hide();
+
             if (val == '') {
+                document.getElementById("event").value = '';
                 nama.value = '';
                 nip.value = '';
                 nik.value = '';
@@ -514,7 +508,11 @@
                 $('#terms_agree').hide();
                 $('#submitpass').prop('disabled', true);
 
+                $('#lbl_event').hide();
+                $('#event').hide();
+
             } else if (val == '1') {
+                document.getElementById("event").value = '';
                 $("#nip").attr("required", "true");
                 $("#departement").attr("required", "true");
                 $('#form_register').show();
@@ -527,10 +525,15 @@
                 $('#message').hide();
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
-                showSize(true)
+                
+                $('#lbl_event').show();
+                $('#event').show();
+                
+                showSize(true);
+                showEvent(true);
 
             } else if (val == '0') {
-
+                document.getElementById("event").value = '';
                 $("#nip").removeAttr("required");
                 $("#departement").removeAttr("required");
                 $('#form_register').show();
@@ -545,13 +548,14 @@
                 $('#message').hide();
                 document.getElementById("terms_agree").checked = false;
                 $('#submitpass').prop('disabled', true);
-                showSize(false)
 
-
+                $('#lbl_event').show();
+                $('#event').show();
+                
+                showSize(false);
+                showEvent(false);
             }
 
-            let event = document.getElementById("event").value;
-            getPendamping(event, val);
         }
 
         function setInputFilter(textbox, inputFilter, errMsg) {
@@ -602,7 +606,7 @@
                 } else if ($('#password').val() == $('#password_confirm').val()) {
                     $('#submitpass').prop('disabled', false);
                 } else {
-                    console.log("belom")
+                    // console.log("belom")
 
                     $('#submitpass').prop('disabled', true);
                 }
@@ -630,7 +634,7 @@
                 } else if ($('#password').val() == $('#password_confirm').val()) {
                     $('#submitpass').prop('disabled', false);
                 } else {
-                    console.log("belom")
+                    // console.log("belom")
 
                     $('#submitpass').prop('disabled', true);
                 }
@@ -872,9 +876,33 @@
             }
         }
 
+        const EventV = ["fr", "fw"];
+        const EventT = ["Fun Run", "Fun Walk"];
+        function showEvent(internal) {
+            const element = document.getElementById("event");
+            var idx, L = element.options.length - 1;
+            for (idx = L; idx >= 0; idx--) {
+                element.remove(idx);
+            }
+            let opt = document.createElement("option");
+            opt.text = "Pilih Event"
+            opt.value = ""
+            element.options.add(opt);
 
-
-
+            let pilihan = 1;
+            if(internal){
+                pilihan = 2;
+            }else{
+                pilihan = 1;
+            }
+            
+            for (let i = 0; i < pilihan; i++) {
+                opt = document.createElement("option");
+                opt.text = EventT[i];
+                opt.value = EventV[i];
+                element.options.add(opt);
+            }
+        }
     </script>
 </body>
 
